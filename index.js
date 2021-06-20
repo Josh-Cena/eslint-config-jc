@@ -39,7 +39,7 @@ module.exports = {
     "func-style": ["warn", "declaration"],
     "function-call-argument-newline": ["error", "consistent"],
     "function-paren-newline": ["error", "consistent"],
-    "grouped-accessor-pairs": ["error", { getBeforeSet: true }],
+    "grouped-accessor-pairs": ["error", "getBeforeSet"],
     "implicit-arrow-linebreak": "error",
     "indent": ["error", 2],
     "init-declarations": "warn",
