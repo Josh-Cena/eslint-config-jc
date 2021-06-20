@@ -1,6 +1,6 @@
 {
   "name": "eslint-config-jc",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "My personal coding style",
   "main": "index.js",
   "scripts": {
