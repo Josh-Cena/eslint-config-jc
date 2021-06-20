@@ -120,13 +120,6 @@ module.exports = {
     "semi": "error",
     "semi-spacing": "error",
     "semi-style": "error",
-    "sort-imports": ["warn", {
-      ignoreCase: false,
-      ignoreDeclarationSort: false,
-      ignoreMemberSort: false,
-      memberSyntaxSortOrder: ["none", "all", "multiple", "single"],
-      allowSeparatedGroups: true,
-    }],
     "space-before-blocks": "error",
     "space-before-function-paren": ["error", {
       anonymous: "never",
