@@ -15,7 +15,7 @@ module.exports = {
     "eslint:recommended",
   ],
   rules: {
-    "array-bracket-newline": ["error", { multiline: true }],
+    "array-bracket-newline": ["error", "consistent"],
     "array-bracket-spacing": "error",
     "array-element-newline": ["error", "consistent"],
     "array-callback-return": ["error", { checkForEach: true }],
@@ -50,7 +50,6 @@ module.exports = {
     "lines-between-class-members": ["error", "always", { exceptAfterSingleLine: true }],
     "max-len": ["warn", { code: 120 }],
     "multiline-comment-style": "warn",
-    "new-cap": "warn",
     "new-parens": "warn",
     "no-alert": "error",
     "no-array-constructor": "error",
