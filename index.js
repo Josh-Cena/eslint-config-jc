@@ -17,7 +17,7 @@ module.exports = {
   rules: {
     "array-bracket-newline": ["error", { multiline: true }],
     "array-bracket-spacing": "error",
-    "array-element-newline": ["error", { multiline: true }],
+    "array-element-newline": ["error", "consistent"],
     "array-callback-return": ["error", { checkForEach: true }],
     "arrow-body-style": ["warn", "as-needed"],
     "arrow-parens": "error",
@@ -98,7 +98,7 @@ module.exports = {
     "no-void": "error",
     "no-whitespace-before-property": "error",
     "nonblock-statement-body-position": ["error", "below"],
-    "object-curly-newline": ["error", { multiline: true }],
+    "object-curly-newline": ["error", { consistent: true }],
     "object-curly-spacing": ["error", "always"],
     "object-property-newline": ["error", { allowAllPropertiesOnSameLine: true }],
     "object-shorthand": "warn",
