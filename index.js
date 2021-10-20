@@ -36,7 +36,7 @@ module.exports = {
     "eol-last": "error",
     "eqeqeq": "error",
     "func-call-spacing": "error",
-    "func-style": ["warn", "declaration"],
+    "func-style": ["warn", "declaration",  { allowArrowFunctions: true }],
     "function-call-argument-newline": ["error", "consistent"],
     "function-paren-newline": ["error", "consistent"],
     "grouped-accessor-pairs": ["error", "getBeforeSet"],
