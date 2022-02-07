@@ -8,6 +8,6 @@ module.exports = {
     "./rules/typescript-typecheck.js",
     "./rules/import.js",
     "./rules/react.js",
-    "./rules/jsx-a11y.js",
+    "./rules/jsx.js",
   ],
 };
