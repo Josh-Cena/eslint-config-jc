@@ -43,7 +43,8 @@ module.exports = {
     "consistent-return": "error",
 
     // Enforces consistent naming when capturing the current execution context.
-    // We forbid aliasing `this` altogether.
+    // We warn against aliasing `this` altogether, but when we do, the name
+    // doesn't matter
     "consistent-this": "off",
 
     // Verifies calls of super() in constructors.
@@ -59,7 +60,8 @@ module.exports = {
 
     "default-case-last": "error",
 
-    "default-param-last": "error",
+    // Shadowed by TS-ESLint rule
+    "default-param-last": "off",
 
     // e.g. `foo.bar` instead of `foo["bar"]`
     "dot-notation": "error",
@@ -85,8 +87,8 @@ module.exports = {
     // We disallow using for-in altogether.
     "guard-for-in": "error",
 
-    // Otherwise one can write `let a: string;` which can be problematic.
-    "init-declarations": ["error", "always"],
+    // Shadowed by TS-ESLint rule
+    "init-declarations": "off",
 
     // Too stylistic: doesn't matter
     "lines-between-class-members": "off",
@@ -131,7 +133,8 @@ module.exports = {
 
     "no-alert": "error",
 
-    "no-array-constructor": "error",
+    // Shadowed by TS-ESLint rule
+    "no-array-constructor": "off",
 
     "no-async-promise-executor": "error",
 
@@ -182,7 +185,8 @@ module.exports = {
 
     "no-dupe-args": "error",
 
-    "no-dupe-class-members": "error",
+    // Shadowed by TS-ESLint rule
+    "no-dupe-class-members": "off",
 
     "no-dupe-else-if": "error",
 
@@ -190,8 +194,9 @@ module.exports = {
 
     "no-duplicate-case": "error",
 
+    // Shadowed by TS-ESLint rule
     // This rule is also in plugin-imports
-    "no-duplicate-imports": "error",
+    "no-duplicate-imports": "off",
 
     // else-if is able to save one line, and also makes the flow more natural.
     "no-else-return": ["error", { allowElseIf: true }],
@@ -236,7 +241,8 @@ module.exports = {
 
     "no-invalid-regexp": "error",
 
-    "no-invalid-this": "error",
+    // Shadowed by TS-ESLint rule
+    "no-invalid-this": "off",
 
     "no-irregular-whitespace": "error",
 
@@ -250,11 +256,13 @@ module.exports = {
 
     "no-lonely-if": "error",
 
-    "no-loop-func": "warn",
+    // Shadowed by TS-ESLint rule
+    "no-loop-func": "off",
 
-    "no-loss-of-precision": "error",
+    // Shadowed by TS-ESLint rule
+    "no-loss-of-precision": "off",
 
-    // We prefer using comments in case the code is not self-explanatory
+    // Shadowed by TS-ESLint rule
     "no-magic-numbers": "off",
 
     "no-misleading-character-class": "error",
@@ -304,7 +312,8 @@ module.exports = {
 
     "no-prototype-builtins": "error",
 
-    "no-redeclare": "error",
+    // Shadowed by TS-ESLint rule
+    "no-redeclare": "off",
 
     // Multiple spaces can resemble constructs that readers are familiar with
     "no-regex-spaces": "off",
@@ -422,7 +431,8 @@ module.exports = {
 
     "no-setter-return": "error",
 
-    "no-shadow": "error",
+    // Shadowed by TS-ESLint rule
+    "no-shadow": "off",
 
     "no-shadow-restricted-names": "error",
 
@@ -469,19 +479,18 @@ module.exports = {
 
     "no-unsafe-optional-chaining": "error",
 
-    // Tagged templates can have side effects, e.g. logging
-    "no-unused-expressions": ["error", { allowTaggedTemplates: true }],
+    // Shadowed by TS-ESLint rule
+    "no-unused-expressions": "off",
 
     "no-unused-labels": "error",
 
     // Also checked by TypeScript
     "no-unused-private-class-members": "error",
 
-    // Also checked by TypeScript
-    "no-unused-vars": "error",
+    // Shadowed by TS-ESLint rule
+    "no-unused-vars": "off",
 
-    // This reports a lot of valid cases, e.g. function declarations
-    // TypeScript does a much better job
+    // Shadowed by TS-ESLint rule
     "no-use-before-define": "off",
 
     "no-useless-backreference": "warn",
@@ -494,7 +503,8 @@ module.exports = {
 
     "no-useless-concat": "error",
 
-    "no-useless-constructor": "error",
+    // Shadowed by TS-ESLint rule
+    "no-useless-constructor": "off",
 
     "no-useless-escape": "error",
 
