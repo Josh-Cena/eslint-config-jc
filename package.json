@@ -1,26 +1,53 @@
 {
   "name": "eslint-config-jc",
-  "version": "1.0.7",
-  "description": "My personal coding style",
+  "version": "2.0.0",
+  "description": "Josh-Cena's personal coding style",
   "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Josh-Cena/eslint-config-jc.git"
+    "url": "git+https://github.com/jc-verse/eslint-config-jc.git"
   },
   "keywords": [
     "eslint",
     "eslint-config"
   ],
-  "author": "Josh-Cena",
+  "author": "Joshua Chen",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/Josh-Cena/eslint-config-jc/issues"
+    "url": "https://github.com/jc-verse/eslint-config-jc/issues"
   },
-  "homepage": "https://github.com/Josh-Cena/eslint-config-jc#readme",
+  "homepage": "https://github.com/jc-verse/eslint-config-jc#readme",
+  "scripts": {
+    "format": "prettier -w .",
+    "lint": "eslint \"**/*.{js,ts,jsx,tsx}\"",
+    "prepare": "husky install"
+  },
   "peerDependencies": {
-    "eslint": ">= 3"
-  }
+    "@typescript-eslint/eslint-plugin": "^5.10.2",
+    "@typescript-eslint/parser": "^5.10.2",
+    "eslint": "^8.2.0",
+    "eslint-plugin-header": "^3.1.1",
+    "eslint-plugin-import": "^2.25.3",
+    "eslint-plugin-jsx-a11y": "^6.5.1",
+    "eslint-plugin-react": "^7.27.0",
+    "eslint-plugin-react-hooks": "^4.3.0"
+  },
+  "dependencies": {
+    "eslint-config-prettier": "^8.3.0"
+  },
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^5.10.2",
+    "@typescript-eslint/parser": "^5.10.2",
+    "eslint": "^8.8.0",
+    "eslint-plugin-header": "^3.1.1",
+    "eslint-plugin-import": "^2.25.3",
+    "eslint-plugin-jsx-a11y": "^6.5.1",
+    "eslint-plugin-react": "^7.27.0",
+    "eslint-plugin-react-hooks": "^4.3.0",
+    "husky": "^7.0.4",
+    "lint-staged": "^12.1.7",
+    "prettier": "^2.5.1",
+    "typescript": "^4.5.2"
+  },
+  "packageManager": "yarn@3.1.1"
 }
