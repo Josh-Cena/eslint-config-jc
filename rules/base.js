@@ -52,7 +52,7 @@ module.exports = {
 
     // Enforces curly braces only when the body of if/while/for/etc. gets
     // complicated enough.
-    curly: ["warn", "multi-or-nest"],
+    curly: ["warn", "multi-or-nest", "consistent"],
 
     // TypeScript is able to capture most cases about forgotten default
     // behaviors.
