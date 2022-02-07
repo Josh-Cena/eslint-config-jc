@@ -1,8 +1,8 @@
 {
-  "extends": ["./index.js"],
+  "extends": ["jc"],
   "overrides": [
     {
-      "files": ["rules/**.js"],
+      "files": ["**/rules/**.js"],
       "rules": {
         "sort-keys": "warn"
       }
