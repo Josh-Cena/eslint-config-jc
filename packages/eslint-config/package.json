@@ -17,6 +17,15 @@
     "url": "https://github.com/jc-verse/eslint-config-jc/issues"
   },
   "homepage": "https://github.com/jc-verse/eslint-config-jc#readme",
+  "exports": {
+    ".": "./index.js",
+    "./base": "./rules/base.js",
+    "./import": "./rules/import.js",
+    "./jsx": "./rules/jsx.js",
+    "./react": "./rules/react.js",
+    "./typescript": "./rules/typescript.js",
+    "./typescript-typecheck": "./rules/typescript-typecheck.js"
+  },
   "peerDependencies": {
     "@typescript-eslint/eslint-plugin": "^5.10.2",
     "@typescript-eslint/parser": "^5.10.2",
