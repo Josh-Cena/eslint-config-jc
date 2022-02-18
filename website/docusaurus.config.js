@@ -1,5 +1,4 @@
 // @ts-check
-// Note: type annotations allow type checking and IDEs autocompletion
 
 const lightCodeTheme = require("prism-react-renderer/themes/github");
 const darkCodeTheme = require("prism-react-renderer/themes/dracula");
@@ -15,10 +14,11 @@ const config = {
 
   presets: [
     [
-      "classic",
+      "@docusaurus/preset-classic",
       /** @type {import('@docusaurus/preset-classic').Options} */
       ({
         docs: {
+          path: "../docs",
           routeBasePath: "/",
         },
         blog: false,
@@ -26,6 +26,16 @@ const config = {
           customCss: require.resolve("./src/css/custom.css"),
         },
       }),
+    ],
+    [
+      "docusaurus-preset-shiki-twoslash",
+      {
+        vfsRoot: process.cwd(),
+        themes: ["github-light", "github-dark"],
+        defaultCompilerOptions: {
+          types: ["node"],
+        },
+      },
     ],
   ],
 
@@ -59,6 +69,9 @@ const config = {
       prism: {
         theme: lightCodeTheme,
         darkTheme: darkCodeTheme,
+      },
+      tableOfContents: {
+        maxHeadingLevel: 4,
       },
     }),
 };

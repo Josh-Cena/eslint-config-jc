@@ -51,3 +51,5 @@ A rule will _not_ be off solely because:
 - It enforces a practice concerning a construct that we never use in the first place
 
 Instead, in such case, we'd rather have multiple errors.
+
+All rules are considered as `error` by default, unless there are enough justifications to turn it into a warning or turn it off, as outlined above.

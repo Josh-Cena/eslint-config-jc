@@ -5,8 +5,14 @@ module.exports = {
     node: true,
   },
   rules: {
-    // Only warn if there's a set but not a get. Allows readonly members.
-    "accessor-pairs": "warn",
+    "accessor-pairs": [
+      "error",
+      {
+        enforceForClassMembers: true,
+        getWithoutSet: true,
+        setWithoutGet: true,
+      },
+    ],
 
     "array-callback-return": [
       "error",
@@ -40,7 +46,7 @@ module.exports = {
 
     // Requires return statements to either always or never specify values.
     // TypeScript sometimes enforces this, but it can be stylistic as well.
-    "consistent-return": "error",
+    "consistent-return": ["error", { treatUndefinedAsUnspecified: false }],
 
     // Enforces consistent naming when capturing the current execution context.
     // We warn against aliasing `this` altogether, but when we do, the name
@@ -64,22 +70,21 @@ module.exports = {
     "default-param-last": "off",
 
     // e.g. `foo.bar` instead of `foo["bar"]`
-    "dot-notation": "error",
+    "dot-notation": ["error", { allowKeywords: true }],
 
-    // Requires the use of === and !==.
-    eqeqeq: "error",
+    eqeqeq: ["error", "always", { null: "ignore" }],
 
     "for-direction": "error",
 
     // We rarely use function expressions.
-    "func-name-matching": "warn",
+    "func-name-matching": ["warn", "always"],
 
     // We rarely use function expressions.
     "func-names": "warn",
 
     "func-style": ["warn", "declaration", { allowArrowFunctions: true }],
 
-    "getter-return": "error",
+    "getter-return": ["error", { allowImplicit: false }],
 
     // It's also common to have all getters in one place and setters in another.
     "grouped-accessor-pairs": "off",
