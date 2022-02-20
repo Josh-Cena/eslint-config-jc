@@ -5089,14 +5089,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"docusaurus-preset-shiki-twoslash@npm:^1.1.34":
-  version: 1.1.34
-  resolution: "docusaurus-preset-shiki-twoslash@npm:1.1.34"
+"docusaurus-preset-shiki-twoslash@npm:^1.1.35":
+  version: 1.1.35
+  resolution: "docusaurus-preset-shiki-twoslash@npm:1.1.35"
   dependencies:
     copy-text-to-clipboard: ^3.0.1
     remark-shiki-twoslash: 3.0.7
     typescript: ">3"
-  checksum: f8839a4d26c27216ef2fd6f91afe3b3859f23305d0861c5b33af0baba7b17c7e0b16dee8fd6bca1e8b7b6d227866884516684e03d7d1ef54525121ee51078369
+  checksum: 1cf3558e3d901eefcf636c88ee4deccab1c83a365c98b75cfdb023a7a1fcd008364272e6e0fd1d1d8037f90c9441eb7d65e21bbc6b51e0fb36ae91e76b2100dd
   languageName: node
   linkType: hard
 
@@ -12547,7 +12547,7 @@ __metadata:
     "@mdx-js/react": ^1.6.21
     "@tsconfig/docusaurus": ^1.0.4
     clsx: ^1.1.1
-    docusaurus-preset-shiki-twoslash: ^1.1.34
+    docusaurus-preset-shiki-twoslash: ^1.1.35
     prism-react-renderer: ^1.2.1
     react: ^17.0.1
     react-dom: ^17.0.1

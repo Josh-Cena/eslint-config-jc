@@ -8,13 +8,42 @@ This is designed to be a replacement for `eslint:recommended`, `plugin:react-hoo
 
 It requires the following plugins:
 
-- `eslint-plugin-react-hooks`
-- `@typescript-eslint/eslint-plugin`
-- `eslint-plugin-import`
-- `eslint-plugin-jsx-a11y`
-- `eslint-plugin-react`
+```json
+{
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^5.10.2",
+    "@typescript-eslint/parser": "^5.10.2",
+    "eslint": "^8.8.0",
+    "eslint-plugin-header": "^3.1.1",
+    "eslint-plugin-import": "^2.25.3",
+    "eslint-plugin-jsx-a11y": "^6.5.1",
+    "eslint-plugin-react": "^7.27.0",
+    "eslint-plugin-react-hooks": "^4.3.0"
+  }
+}
+```
 
 Although peer dependencies are evil, we can't self-install these plugins if the downstream user depends on a different version—the wrong one will be resolved.
+
+## Configuration
+
+ESLint config:
+
+```json
+{
+  "root": true,
+  "extends": ["jc"]
+}
+```
+
+Prettier config:
+
+```json
+{
+  "bracketSameLine": true,
+  "trailingComma": "all"
+}
+```
 
 ## Configuration philosophy
 
