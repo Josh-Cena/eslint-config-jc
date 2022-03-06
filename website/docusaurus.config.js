@@ -1,8 +1,5 @@
 // @ts-check
 
-const lightCodeTheme = require("prism-react-renderer/themes/github");
-const darkCodeTheme = require("prism-react-renderer/themes/dracula");
-
 /** @type {import('@docusaurus/types').Config} */
 const config = {
   title: "JC-verse style guide",
@@ -65,10 +62,6 @@ const config = {
       footer: {
         style: "dark",
         copyright: `Copyright © ${new Date().getFullYear()} JC-verse. Built with Docusaurus.`,
-      },
-      prism: {
-        theme: lightCodeTheme,
-        darkTheme: darkCodeTheme,
       },
       tableOfContents: {
         maxHeadingLevel: 4,
