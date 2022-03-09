@@ -227,11 +227,66 @@ From the ESLint docs:
 
 #### [`no-cond-assign`](https://eslint.org/docs/rules/no-cond-assign)
 
-TODO
+- Severity: error
+- Configuration:
+  - Always disallow assignments in conditions (`"always"`)
+
+Assignments in conditionals are a common source of mistakes.
+
+```ts
+if ((res.status = 404)) {
+  return "Not found";
+}
+// res.status becomes 404
+```
+
+There is never a case where putting assignments in conditionals does not significantly subtract from readability.
+
+```ts
+function setHeight(node: HTMLElement) {
+  let someNode = node;
+  do someNode.style.height = "100px";
+  while ((someNode = someNode.parentNode));
+  // ^ First parse: this is an equality test?
+  // ^ Second parse: this is an assignment. Is that a mistake?
+  // ^ Third parse: oh, it's intended because of the extra brackets
+}
+```
+
+Always write assignments as a separate statement:
+
+```ts
+function setHeight(node: HTMLElement) {
+  let someNode = node;
+  while (someNode) {
+    someNode.style.height = "100px";
+    someNode = someNode.parentNode;
+  }
+}
+```
+
+It also permits us to use `while` instead of `do-while`, which is still a minor readability improvement.
 
 #### [`no-constant-condition`](https://eslint.org/docs/rules/no-constant-condition)
 
-TODO
+- Severity: error
+- Configuration:
+  - Disallow constant conditions in loops (`"always"`)
+
+Constant conditions that always evaluate to truthy or falsy can be refactoring artifacts. In addition, infinite loops are also forbidden to prompt developers to consider alternatives like explicit exit conditions instead of `break` statements, or `setInterval`.
+
+```ts
+// Instead of this:
+while (true) {
+  curNode = findNextNode(curNode);
+  if (isTargetNode(curNode)) break;
+}
+
+// Do this:
+do {
+  curNode = findNextNode(curNode);
+} while (!isTargetNode(curNode));
+```
 
 ### Loops
 
@@ -251,7 +306,9 @@ TODO
 
 #### [`no-continue`](https://eslint.org/docs/rules/no-continue)
 
-TODO
+- Severity: off
+
+TODO: find solid examples
 
 ### `switch-case`
 
@@ -320,7 +377,7 @@ In case where there's indeed a default case, we require it to be placed last. Th
 
 If a case contains lexical declarations, it must be wrapped in a block. This is because the `case` are more like labels and do not create their own scope. This may lead to unexpected bugs, especially if there's fallthrough.
 
-TODO
+TODO: examples?
 
 ## Functions
 
@@ -373,7 +430,11 @@ See [TypeScript](./typescript.md).
 
 #### [`no-caller`](https://eslint.org/docs/rules/no-caller)
 
-TODO
+- Severity: error
+
+From the ESLint docs:
+
+> The use of `arguments.caller` and `arguments.callee` make several code optimizations impossible. They have been deprecated in future versions of JavaScript and their use is forbidden in ECMAScript 5 while in strict mode.
 
 ### Return statements
 
@@ -408,13 +469,95 @@ Useless braces and `return`s can be artifacts from refactoring, which increases 
 
 TODO
 
+### When to create functions
+
+The guide is: **do not over-abstract**. For example, this kind of code produces unnecessary runtime overhead, and more importantly, mental burden:
+
+```ts
+function resolveTarget(filePath: string) {
+  // ^ What does `resolveTarget` do?
+  return filePath.endsWith(".js")
+    ? `./build/js/${filePath}`
+    : `./build/asset/${filePath}`;
+  // ^ It seems to return a different path when the extension is different, but
+  //   where is it useful?
+}
+
+async function copyFile(filePath: string) {
+  // ^ `copyFile` sounds like a really generic name. Is it used in multiple places?
+  //   Should I take caution when refactoring?
+  const targetPath = resolveTarget(filePath);
+  // ^ What does `resolveTarget` do again? *Going back to definition* Now I know
+  //   what it does, but the code is so long (not in this dumbed-down example),
+  //   I can't compare them side-by-side and understand exactly what the code
+  //   does step-by-step at a glance
+  await fs.copyFile(filePath, targetPath);
+  console.log(`Copied ${filePath}`);
+}
+
+await Promise.all(files.map(copyFile));
+// ^ Does `copyFile` only do `fs.copyFile`? *Going back to definition* No, it
+//   does much more. Of course I can name it as `copyFileToResolvedTargetAndLog`,
+//   but then what's the point of abstraction?
+```
+
+When you could just simply put everything into a single lambda and it still makes sense:
+
+```ts
+await Promise.all(files.map(async (filePath) => {
+  const targetPath = filePath.endsWith('.js')
+    ? `./build/js/${filePath}`
+    : `./build/asset/${filePath}`;
+  await fs.copyFile(filePath, targetPath);
+  console.log(`Copied ${filePath}`);
+})));
+```
+
+Keep in mind the rule of "code for the average-intelligent". When a sequence of operations is self-explanatory, you don't need to extract it into a separate function just to give it a name that mirrors exactly what's described with code.
+
+In addition, **do not export a function just to test it**.
+
+```ts title="copyFile.ts"
+// Is it used in multiple modules? Should I take caution when refactoring?
+// *Doing a global search* It's only used in this module and its accompanied
+// test file. But if I remove the `export`, I have to refactor the tests and
+// risk reduced test coverage. Yuck!
+export function resolveTarget(filePath: string) {
+  return filePath.endsWith(".js")
+    ? `./build/js/${filePath}`
+    : `./build/asset/${filePath}`;
+}
+```
+
+```ts title="copyFile.test.ts"
+import { resolveTarget } from "./copyFile";
+
+// Testing this function simply because tests are easy to write
+describe("resolveTarget", () => {
+  it("works", () => {
+    expect(resolveTarget("foo.js")).toEqual("./build/js/foo.js");
+  });
+});
+```
+
+Tests are made for public APIs (or at least the useful functions that other internal modules use), not for internal implementations. Implementations may be refactored at any time and intermediate functions come and go, so don't tie your tests to them. Mock side-effects like `fs.readFile` or provide fixtures instead of staying in the comfort zone of testing pure functions.
+
+Keep in mind that refactoring doesn't only mean changing the implementations of existing functions or modules, but also removing and adding them. It is critical to make clear which downstream dependents will be affected.
+
 ## Async operations
 
 ### Promises
 
 #### [`no-async-promise-executor`](https://eslint.org/docs/rules/no-async-promise-executor)
 
-TODO
+- Severity: error
+
+From the ESLint docs:
+
+> The executor function can also be an `async function`. However, this is usually a mistake, for a few reasons:
+>
+> - If an async executor function throws an error, the error will be lost and won't cause the newly-constructed `Promise` to reject. This could make it difficult to debug and handle some errors.
+> - If a Promise executor function is using `await`, this is usually a sign that it is not actually necessary to use the `new Promise` constructor, or the scope of the `new Promise` constructor can be reduced.
 
 ### Paralleling
 
@@ -534,7 +677,19 @@ TODO
 
 #### [`no-constructor-return`](https://eslint.org/docs/rules/no-constructor-return)
 
-TODO
+- Severity: error
+
+Constructors' return values are useless. You can't call it as a normal method, after all.
+
+```ts
+class A {
+  constructor() {
+    return "foo";
+  }
+}
+
+const a = new A().constructor(); // -> TypeError: Class constructor A cannot be invoked without 'new'
+```
 
 ### Members
 

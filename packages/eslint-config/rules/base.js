@@ -159,7 +159,7 @@ module.exports = {
 
     "no-compare-neg-zero": "error",
 
-    "no-cond-assign": "error",
+    "no-cond-assign": ["error", "always"],
 
     // Fixable, so better report this. Prettier doesn't fix it all the time
     "no-confusing-arrow": "error",
@@ -170,7 +170,7 @@ module.exports = {
     // Also checked by TypeScript
     "no-const-assign": "error",
 
-    "no-constant-condition": "error",
+    "no-constant-condition": ["error", { checkLoops: true }],
 
     "no-constructor-return": "error",
 

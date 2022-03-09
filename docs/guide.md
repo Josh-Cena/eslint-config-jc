@@ -14,6 +14,22 @@ We want our code to span as little area as possible, given the same set of forma
 - Fewer useless lines
 - More usage of new and concise syntax
 
+As a simple example, instead of this:
+
+```ts
+const parseResult = {
+  fileName,
+  path,
+  extension,
+};
+```
+
+Prefer this:
+
+```ts
+const parseResult = { fileName, path, extension };
+```
+
 A rule that marginally improves readability but bloats the code area will not be considered.
 
 ### Code for averagely intelligent people
