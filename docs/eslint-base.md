@@ -150,6 +150,69 @@ const a = 1;
 a = 2; // -> TypeError: Assignment to constant variable.
 ```
 
+### Regular expressions
+
+#### Prefer concise syntax
+
+There are many ways to represent the same regular expression. Instead of this:
+
+```ts
+const rule = {
+  test: /\.(?:js|ts|jsx|tsx)/i,
+};
+```
+
+Prefer this:
+
+```ts
+const rule = {
+  test: /\.[jt]sx?/i,
+};
+```
+
+Regular expressions are _not_ intended to be readable; they are designed for machine consumption. Convey the intent of a regular expression through test cases, not through making it verbose. Related to **code for the average-intelligent**.
+
+#### [`no-regex-spaces`](https://eslint.org/docs/rules/no-regex-spaces)
+
+- Severity: off
+
+Although we want to use concise syntax, multiple spaces in a regex is often useful to resemble constructs that readers are familiar with.
+
+```ts
+// Matches a well-formatted table row
+const match = tableRow.match(/\| Column      \| Another one \|/);
+```
+
+#### [`prefer-named-capture-group`](https://eslint.org/docs/rules/prefer-named-capture-group)
+
+- Severity: warning
+
+Named capture groups allow us to semantically identify each group. It also warns about those groups that should probably be explicitly marked as non-capturing groups.
+
+```ts
+const rule = {
+  // Is this capturing group actually useful? If I remove it, would it break
+  // consumer code?
+  test: /\.(jpe?g|png|webp)/i,
+};
+```
+
+Ultimately, this makes refactor less risky because addition of a capturing group does not shift the other indices.
+
+```diff
+- const commitPattern = /(.+),(.+)/;
++ const commitPattern = /(.+),(.+),(\d+)/;
+
+const date = commit.match(commitPattern)?.[1];
+// Oops, I need to also change `[1]` to `[2]`...
+```
+
+:::note
+
+Named capture groups isn't strongly typed in TypeScript. See [microsoft/TypeScript#32098](https://github.com/microsoft/TypeScript/issues/32098). In this case, prefer using a non-null assertion to convey developer intent.
+
+:::
+
 ### Globals
 
 #### [`no-console`](https://eslint.org/docs/rules/no-console)
@@ -233,8 +296,9 @@ From the ESLint docs:
 
 Assignments in conditionals are a common source of mistakes.
 
+<!-- prettier-ignore -->
 ```ts
-if ((res.status = 404)) {
+if (res.status = 404) {
   return "Not found";
 }
 // res.status becomes 404
@@ -308,7 +372,26 @@ TODO
 
 - Severity: off
 
-TODO: find solid examples
+`continue` is a way of early-bailing to avoid creating extra indentation. Instead of this:
+
+```ts
+for (const line of lines) {
+  if (line.trim().length > 0) {
+    // 20 lines of handling this line...
+  }
+}
+```
+
+Prefer this:
+
+```ts
+for (const line of lines) {
+  if (line.trim().length === 0) {
+    continue;
+  }
+  // 20 lines of handling this line...
+}
+```
 
 ### `switch-case`
 

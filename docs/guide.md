@@ -40,3 +40,7 @@ Our code is written for people of average intelligence and with reasonable exper
 - Not be afraid of preferring concise expressions and control flow instead of writing spaghetti code
 
 We will not enable most rules that forbid syntaxes claimed to be "confusing for some people".
+
+### Clear developer intent
+
+During refactor, a big hazard is unclarity of whether a specific construct is guarding against a potential edge-case, or simply being over-pessimistic. Do NOT program overly defensively—only when such edge-cases are actually reachable. For example, if there can only ever be three values passed to a switch-case, do not add a default case.
