@@ -42,8 +42,9 @@ const config = {
       navbar: {
         title: "JC-verse style guide",
         logo: {
-          alt: "JC-verse Logo",
-          src: "img/logo.svg",
+          alt: "Logo",
+          src: "img/logo-light.svg",
+          srcDark: "img/logo.svg",
         },
         items: [
           {
@@ -61,6 +62,11 @@ const config = {
       },
       footer: {
         style: "dark",
+        logo: {
+          alt: "JC-verse logo",
+          src: "img/logo.svg",
+          href: "https://github.com/jc-verse/js-style-guide",
+        },
         copyright: `Copyright © ${new Date().getFullYear()} JC-verse. Built with Docusaurus.`,
       },
       tableOfContents: {

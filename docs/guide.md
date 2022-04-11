@@ -24,6 +24,33 @@ Prettier config:
 }
 ```
 
+`.husky/pre-commit`:
+
+```bash
+#!/bin/sh
+. "$(dirname "$0")/_/husky.sh"
+
+yarn lint-staged --allow-empty
+```
+
+Package.json (you are strongly advised to use `husky` / `lint-staged`):
+
+```json
+{
+  "scripts": {
+    "format": "prettier -w .",
+    "lint": "eslint \"**/*.{js,ts,jsx,tsx}\"",
+    "prepare": "husky install"
+  }
+}
+```
+
+Run:
+
+```bash
+yarn add -D @typescript-eslint/eslint-plugin @typescript-eslint/parser eslint eslint-config-jc eslint-plugin-header eslint-plugin-import eslint-plugin-jsx-a11y eslint-plugin-react eslint-plugin-react-hooks husky lint-staged prettier typescript
+```
+
 ## Overarching principles
 
 ### Minimal code area
