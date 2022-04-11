@@ -5310,6 +5310,13 @@ __metadata:
     eslint-plugin-jsx-a11y: ^6.5.1
     eslint-plugin-react: ^7.29.4
     eslint-plugin-react-hooks: ^4.4.0
+  peerDependenciesMeta:
+    eslint-plugin-jsx-a11y:
+      optional: true
+    eslint-plugin-react:
+      optional: true
+    eslint-plugin-react-hooks:
+      optional: true
   languageName: unknown
   linkType: soft
 
