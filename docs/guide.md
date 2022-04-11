@@ -4,6 +4,26 @@ slug: /
 
 # Guide
 
+## How to use
+
+ESLint config:
+
+```json
+{
+  "root": true,
+  "extends": ["jc"]
+}
+```
+
+Prettier config:
+
+```json
+{
+  "bracketSameLine": true,
+  "trailingComma": "all"
+}
+```
+
 ## Overarching principles
 
 ### Minimal code area
