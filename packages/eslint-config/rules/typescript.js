@@ -133,7 +133,7 @@ module.exports = {
 
     "@typescript-eslint/no-require-imports": "error",
 
-    "@typescript-eslint/no-shadow": "error",
+    "@typescript-eslint/no-shadow": ["error", { ignoreOnInitialization: true }],
 
     "@typescript-eslint/no-this-alias": "warn",
 
