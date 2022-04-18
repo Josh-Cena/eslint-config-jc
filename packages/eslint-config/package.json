@@ -31,8 +31,8 @@
     "eslint-config-prettier": "^8.5.0"
   },
   "peerDependencies": {
-    "@typescript-eslint/eslint-plugin": "^5.18.0",
-    "@typescript-eslint/parser": "^5.18.0",
+    "@typescript-eslint/eslint-plugin": "^5.20.0",
+    "@typescript-eslint/parser": "^5.20.0",
     "eslint": "^8.13.0",
     "eslint-plugin-header": "^3.1.1",
     "eslint-plugin-import": "^2.26.0",
@@ -41,6 +41,9 @@
     "eslint-plugin-react-hooks": "^4.4.0"
   },
   "peerDependenciesMeta": {
+    "eslint-plugin-header": {
+      "optional": true
+    },
     "eslint-plugin-jsx-a11y": {
       "optional": true
     },
