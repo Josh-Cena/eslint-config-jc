@@ -18,10 +18,7 @@ ESLint config:
 Prettier config:
 
 ```json
-{
-  "bracketSameLine": true,
-  "trailingComma": "all"
-}
+"prettier-config-jc"
 ```
 
 `.husky/pre-commit`:

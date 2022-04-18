@@ -1,11 +1,12 @@
 {
   "name": "eslint-config-jc",
-  "version": "2.1.3",
+  "version": "2.2.0",
   "description": "Josh-Cena's personal coding style",
   "main": "index.js",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/jc-verse/eslint-config-jc.git"
+    "url": "git+https://github.com/jc-verse/js-style-guide.git",
+    "directory": "packages/eslint-config"
   },
   "keywords": [
     "eslint",
@@ -14,9 +15,9 @@
   "author": "Joshua Chen",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/jc-verse/eslint-config-jc/issues"
+    "url": "https://github.com/jc-verse/js-style-guide/issues"
   },
-  "homepage": "https://github.com/jc-verse/eslint-config-jc#readme",
+  "homepage": "https://jc-verse.github.io/js-style-guide/",
   "exports": {
     ".": "./index.js",
     "./base": "./rules/base.js",

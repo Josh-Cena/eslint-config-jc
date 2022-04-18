@@ -36,15 +36,6 @@ ESLint config:
 }
 ```
 
-Prettier config:
-
-```json
-{
-  "bracketSameLine": true,
-  "trailingComma": "all"
-}
-```
-
 ## Configuration philosophy
 
 When analyzing whether a rule should be `error`, `warn`, or `off`, the following assumptions are made:

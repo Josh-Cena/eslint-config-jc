@@ -9392,6 +9392,12 @@ __metadata:
   languageName: node
   linkType: hard
 
+"prettier-config-jc@workspace:packages/prettier-config":
+  version: 0.0.0-use.local
+  resolution: "prettier-config-jc@workspace:packages/prettier-config"
+  languageName: unknown
+  linkType: soft
+
 "prettier@npm:^2.6.2":
   version: 2.6.2
   resolution: "prettier@npm:2.6.2"
