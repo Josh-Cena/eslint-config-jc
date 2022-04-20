@@ -1,10 +1,21 @@
 {
   // This file is not used in compilation. It is here just for a nice editor experience.
-  "extends": "@tsconfig/docusaurus/tsconfig.json",
+  "extends": "tsconfig-jc",
   "compilerOptions": {
     "baseUrl": ".",
+    "noEmit": true,
     "target": "esnext",
-    "moduleResolution": "node",
-    "noImplicitReturns": true
+    "allowJs": true,
+    "esModuleInterop": true,
+    "jsx": "react",
+    "lib": ["DOM"],
+    "types": [
+      "node",
+      "@docusaurus/module-type-aliases",
+      "@docusaurus/theme-classic"
+    ],
+    "paths": {
+      "@site/*": ["./*"]
+    }
   }
 }

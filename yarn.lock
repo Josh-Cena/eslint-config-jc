@@ -5302,8 +5302,8 @@ __metadata:
   dependencies:
     eslint-config-prettier: ^8.5.0
   peerDependencies:
-    "@typescript-eslint/eslint-plugin": ^5.18.0
-    "@typescript-eslint/parser": ^5.18.0
+    "@typescript-eslint/eslint-plugin": ^5.20.0
+    "@typescript-eslint/parser": ^5.20.0
     eslint: ^8.13.0
     eslint-plugin-header: ^3.1.1
     eslint-plugin-import: ^2.26.0
@@ -5311,6 +5311,8 @@ __metadata:
     eslint-plugin-react: ^7.29.4
     eslint-plugin-react-hooks: ^4.4.0
   peerDependenciesMeta:
+    eslint-plugin-header:
+      optional: true
     eslint-plugin-jsx-a11y:
       optional: true
     eslint-plugin-react:
@@ -11307,6 +11309,12 @@ __metadata:
   checksum: d6c8564903ed00e5258bab92134b020724dbbe83148dc72e4bf6306c03ed8843efa1bcc773fa62410dd89161ecb067432dd5916501793508a9506cacbc408e25
   languageName: node
   linkType: hard
+
+"tsconfig-jc@workspace:packages/tsconfig":
+  version: 0.0.0-use.local
+  resolution: "tsconfig-jc@workspace:packages/tsconfig"
+  languageName: unknown
+  linkType: soft
 
 "tsconfig-paths@npm:^3.14.1":
   version: 3.14.1
