@@ -10,6 +10,10 @@
   },
   "author": "Joshua Chen",
   "license": "MIT",
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org"
+  },
   "bugs": {
     "url": "https://github.com/jc-verse/js-style-guide/issues"
   },
