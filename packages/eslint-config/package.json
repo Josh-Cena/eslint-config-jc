@@ -12,7 +12,7 @@
     "eslint",
     "eslint-config"
   ],
-  "author": "Joshua Chen",
+  "author": "Joshua Chen <sidachen2003@gmail.com>",
   "license": "MIT",
   "publishConfig": {
     "access": "public",

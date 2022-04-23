@@ -1,0 +1,34 @@
+{
+  "name": "create-jc-project",
+  "version": "2.2.0",
+  "description": "Quickly set up a Node.js project that contains all toolings you need",
+  "bin": "dist/index.js",
+  "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jc-verse/js-style-guide.git",
+    "directory": "packages/create-jc-project"
+  },
+  "author": "Joshua Chen <sidachen2003@gmail.com>",
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org"
+  },
+  "bugs": {
+    "url": "https://github.com/jc-verse/js-style-guide/issues"
+  },
+  "homepage": "https://jc-verse.github.io/js-style-guide/",
+  "scripts": {
+    "build": "tsc",
+    "watch": "tsc --watch"
+  },
+  "dependencies": {
+    "picocolors": "^1.0.0",
+    "prompts": "^2.4.2",
+    "tslib": "^2.4.0"
+  },
+  "devDependencies": {
+    "@types/prompts": "^2.0.14"
+  }
+}

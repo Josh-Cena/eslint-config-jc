@@ -1,0 +1,14 @@
+{
+  "extends": "tsconfig-jc",
+  "compilerOptions": {
+    "outDir": "dist",
+    "rootDir": "src",
+    "target": "es2021",
+    "lib": ["ESNext", "DOM"],
+    "declaration": false,
+    "declarationMap": false,
+    "jsx": "react",
+    "importHelpers": true,
+    "noEmitHelpers": true
+  }
+}

@@ -1,5 +1,6 @@
 {
   "name": "root",
+  "private": true,
   "license": "MIT",
   "workspaces": [
     "packages/*",
@@ -8,7 +9,9 @@
   "scripts": {
     "format": "prettier -w .",
     "lint": "eslint \"**/*.{js,ts,jsx,tsx}\"",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "build": "yarn workspaces foreach --no-private -t -v run build",
+    "publish": "yarn workspaces foreach --no-private npm publish"
   },
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^5.20.0",

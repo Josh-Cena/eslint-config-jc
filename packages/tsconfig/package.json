@@ -8,7 +8,7 @@
     "url": "git+https://github.com/jc-verse/js-style-guide.git",
     "directory": "packages/tsconfig"
   },
-  "author": "Joshua Chen",
+  "author": "Joshua Chen <sidachen2003@gmail.com>",
   "license": "MIT",
   "publishConfig": {
     "access": "public",
