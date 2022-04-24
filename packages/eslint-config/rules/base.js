@@ -4,6 +4,7 @@ module.exports = {
     commonjs: true,
     node: true,
   },
+  reportUnusedDisableDirectives: true,
   rules: {
     "accessor-pairs": [
       "error",

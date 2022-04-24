@@ -1,6 +1,5 @@
 module.exports = {
   root: true,
-  reportUnusedDisableDirectives: true,
   extends: [
     "prettier",
     "./rules/base.js",
