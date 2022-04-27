@@ -141,7 +141,7 @@ await Promise.all(
 );
 
 await Promise.all([
-  fs.writeFile("package.json", JSON.stringify(packageJSON, null, 2)),
+  fs.writeFile("package.json", `${JSON.stringify(packageJSON, null, 2)}\n`),
   fs.writeFile(
     "README.md",
     `# ${name}
@@ -150,7 +150,7 @@ ${description}
 
 ## Installation
 
-## How to use
+## Usage
 
 ## APIs
 `,
@@ -168,6 +168,7 @@ const dependencies = [
   "husky",
   "lint-staged",
   "prettier",
+  "prettier-config-jc",
   "tsconfig-jc",
   "typescript",
 ];
@@ -199,10 +200,11 @@ if (usingReact) {
   tsconfig.compilerOptions.jsx = "react";
 }
 
-await fs.writeFile(".eslintrc", JSON.stringify(eslintRC, null, 2));
-await fs.writeFile("tsconfig.json", JSON.stringify(tsconfig, null, 2));
+await fs.writeFile(".eslintrc", `${JSON.stringify(eslintRC, null, 2)}\n`);
+await fs.writeFile("tsconfig.json", `${JSON.stringify(tsconfig, null, 2)}\n`);
 
 // This often fails. Let's try multiple times.
 exec("yarn set version stable", { times: 3 });
 exec(`yarn add -D ${dependencies.sort().join(" ")}`);
+exec("git init");
 exec("yarn prepare");
