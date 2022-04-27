@@ -111,6 +111,8 @@ const packageJSON = {
   },
   homepage: "https://jc-verse.github.io/js-style-guide/",
   scripts: {
+    format: "prettier -w .",
+    lint: 'eslint "**/*.{js,ts,jsx,tsx}"',
     prepare: "husky install",
   },
 };
@@ -208,3 +210,5 @@ exec("yarn set version stable", { times: 3 });
 exec(`yarn add -D ${dependencies.sort().join(" ")}`);
 exec("git init");
 exec("yarn prepare");
+exec("git add .");
+exec("git commit -m 'initial commit'");
