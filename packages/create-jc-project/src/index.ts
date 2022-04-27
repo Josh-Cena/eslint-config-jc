@@ -103,13 +103,12 @@ const packageJSON = {
   },
   repository: {
     type: "git",
-    url: "git+https://github.com/jc-verse/js-style-guide.git",
-    directory: "packages/create-jc-project",
+    url: `git+https://github.com/jc-verse/${name}.git`,
   },
   bugs: {
-    url: "https://github.com/jc-verse/js-style-guide/issues",
+    url: `https://github.com/jc-verse/${name}/issues`,
   },
-  homepage: "https://jc-verse.github.io/js-style-guide/",
+  homepage: `https://jc-verse.github.io/${name}/`,
   scripts: {
     format: "prettier -w .",
     lint: 'eslint "**/*.{js,ts,jsx,tsx}"',
