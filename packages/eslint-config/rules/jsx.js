@@ -204,7 +204,7 @@ module.exports = {
 
     "react/jsx-curly-brace-presence": "error",
 
-    // js, jsx, tsx are all acceptable
+    // Js, jsx, tsx are all acceptable
     "react/jsx-filename-extension": "off",
 
     "react/jsx-fragments": "error",
@@ -216,13 +216,16 @@ module.exports = {
 
     "react/jsx-max-depth": "off",
 
-    "react/jsx-no-bind": "error",
+    "react/jsx-no-bind": ["error", { ignoreDOMComponents: true }],
 
     "react/jsx-no-comment-textnodes": "error",
 
     "react/jsx-no-constructed-context-values": "error",
 
     "react/jsx-no-duplicate-props": "error",
+
+    // We'll use strict-boolean-expressions instead
+    "react/jsx-no-leaked-render": "off",
 
     "react/jsx-no-literals": "off",
 
@@ -235,7 +238,7 @@ module.exports = {
 
     "react/jsx-no-useless-fragment": ["error", { allowExpressions: true }],
 
-    "react/jsx-pascal-case": "error",
+    "react/jsx-pascal-case": ["error", { allowAllCaps: true }],
 
     "react/jsx-props-no-spreading": "off",
 

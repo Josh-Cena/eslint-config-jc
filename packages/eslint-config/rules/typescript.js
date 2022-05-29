@@ -66,9 +66,6 @@ module.exports = {
 
     "@typescript-eslint/method-signature-style": ["error", "property"],
 
-    // TODO figure out how this should be configured
-    "@typescript-eslint/naming-convention": 0,
-
     "@typescript-eslint/no-array-constructor": "error",
 
     // This doesn't make much sense to me

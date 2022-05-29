@@ -35,9 +35,11 @@ module.exports = {
     // Properties are hard to check because they may come from other APIs
     camelcase: ["error", { properties: "never" }],
 
-    // Since we require comments to wrap at 80 characters, the next line will
-    // start with lowercase
-    "capitalized-comments": "off",
+    "capitalized-comments": [
+      "warn",
+      "always",
+      { ignoreConsecutiveComments: true },
+    ],
 
     // It's a way of allowing private methods. (`this.myPrivateMethod()`)
     "class-methods-use-this": "off",
@@ -70,7 +72,7 @@ module.exports = {
     // Shadowed by TS-ESLint rule
     "default-param-last": "off",
 
-    // e.g. `foo.bar` instead of `foo["bar"]`
+    // E.g. `foo.bar` instead of `foo["bar"]`
     "dot-notation": ["error", { allowKeywords: true }],
 
     eqeqeq: ["error", "always", { null: "ignore" }],
@@ -171,6 +173,8 @@ module.exports = {
     // Also checked by TypeScript
     "no-const-assign": "error",
 
+    "no-constant-binary-expression": "error",
+
     "no-constant-condition": ["error", { checkLoops: true }],
 
     "no-constructor-return": "error",
@@ -204,7 +208,7 @@ module.exports = {
     // This rule is also in plugin-imports
     "no-duplicate-imports": "off",
 
-    // else-if is able to save one line, and also makes the flow more natural.
+    // `else-if` is able to save one line, and also makes the flow more natural.
     "no-else-return": ["error", { allowElseIf: true }],
 
     // Empty catch is useful.
@@ -589,11 +593,13 @@ module.exports = {
         block: {
           balanced: true,
           exceptions: ["-", "+"],
-          markers: ["=", "!", ":", "::"], // space here to support sprockets directives and flow comment types
+          // Space here to support sprockets directives and flow comment types
+          markers: ["=", "!", ":", "::"],
         },
         line: {
           exceptions: ["-", "+"],
-          markers: ["=", "!", "/"], // space here to support sprockets directives, slash for TS /// comments
+          // Space here to support sprockets directives, slash for /// comments
+          markers: ["=", "!", "/"],
         },
       },
     ],
