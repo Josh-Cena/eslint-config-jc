@@ -1,6 +1,6 @@
 {
   "name": "prettier-config-jc",
-  "version": "2.2.0",
+  "version": "2.3.0",
   "description": "Josh-Cena's personal coding style",
   "main": "index.js",
   "repository": {
