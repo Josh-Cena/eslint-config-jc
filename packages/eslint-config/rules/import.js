@@ -20,7 +20,9 @@ module.exports = {
 
     "import/no-duplicates": "error",
 
-    "import/no-unresolved": ["error", { caseSensitive: true, commonjs: true }],
+    // This rule doesn't play well with TypeScript + ESM. TS is able to catch
+    // missing import anyways.
+    "import/no-unresolved": ["off", { caseSensitive: true, commonjs: true }],
 
     // Going one directory above ensures transpilation doesn't mess with paths
     "import/no-useless-path-segments": "off",

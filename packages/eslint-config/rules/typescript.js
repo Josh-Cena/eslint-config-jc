@@ -144,7 +144,14 @@ module.exports = {
       { allowTaggedTemplates: true },
     ],
 
-    "@typescript-eslint/no-unused-vars": "error",
+    "@typescript-eslint/no-unused-vars": [
+      "error",
+      {
+        args: "after-used",
+        ignoreRestSiblings: true,
+        vars: "all",
+      },
+    ],
 
     // This reports a lot of valid cases, e.g. function declarations
     // TypeScript does a much better job
