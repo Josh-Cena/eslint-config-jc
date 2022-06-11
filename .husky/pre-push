@@ -1,0 +1,12 @@
+#!/bin/sh
+
+. "$(dirname "$0")/_/husky.sh"
+
+echo $(ps -ocommand= -p $PPID)
+
+if [[ $(ps -ocommand= -p $PPID) =~ 'force|\-f' ]]; then
+  echo "Don't force-push"
+  exit 1
+fi
+
+exit 0
