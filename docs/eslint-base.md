@@ -221,7 +221,7 @@ Named capture groups isn't strongly typed in TypeScript. See [microsoft/TypeScri
 
 `console.log` is commonly left as debugging artifacts and can occasionally disrupt the console log formatting. For example, Webpack has the unified [logger interface](https://webpack.js.org/api/logging/) for emitting messages. Projects are encouraged to encapsulate their own logger instance as well for unified message formatting and semantics.
 
-However, in more casual projects without a wrapped logger, using `console.log` may be intentional. This rule can be overridden in userland.
+However, in more casual projects without a wrapped logger, using `console.log` may be intentional. This rule can be overridden in user-land.
 
 ### Naming conventions
 

@@ -38,7 +38,10 @@ module.exports = {
     "capitalized-comments": [
       "warn",
       "always",
-      { ignoreConsecutiveComments: true, ignorePattern: "prettier-ignore" },
+      {
+        ignoreConsecutiveComments: true,
+        ignorePattern: "prettier-ignore|cSpell:ignore",
+      },
     ],
 
     // It's a way of allowing private methods. (`this.myPrivateMethod()`)
@@ -350,6 +353,7 @@ module.exports = {
       "closed",
       "confirm",
       "defaultStatus",
+      // cSpell:ignore defaultstatus
       "defaultstatus",
       "event",
       "external",

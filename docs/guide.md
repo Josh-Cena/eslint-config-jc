@@ -87,4 +87,4 @@ We will not enable most rules that forbid syntaxes claimed to be "confusing for 
 
 ### Clear developer intent
 
-During refactor, a big hazard is unclarity of whether a specific construct is guarding against a potential edge-case, or simply being over-pessimistic. Do NOT program overly defensively—only when such edge-cases are actually reachable. For example, if there can only ever be three values passed to a switch-case, do not add a default case.
+During refactor, a big hazard is being unclear about whether a specific construct is guarding against a potential edge-case, or simply being over-pessimistic. Do NOT program overly defensively—only when such edge-cases are actually reachable. For example, if there can only ever be three values passed to a switch-case, do not add a default case.
