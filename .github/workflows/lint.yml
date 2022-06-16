@@ -1,6 +1,9 @@
-name: Publish GH Pages
+name: Lint
 
 on:
+  pull_request:
+    branches:
+      - master
   push:
     branches:
       - master
@@ -19,12 +22,8 @@ jobs:
 
       - name: Install dependencies
         run: yarn install --immutable
-      - name: Build website
-        run: yarn build
-        working-directory: ./website
-
-      - name: Deploy
-        uses: peaceiris/actions-gh-pages@v3
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./website/build
+      - name: Lint
+        run: |
+          yarn prettier --list-different .
+          yarn lint
+          yarn spellcheck

@@ -4,7 +4,6 @@ import pico from "picocolors";
 import fs from "node:fs/promises";
 import { fileURLToPath } from "node:url";
 import path from "node:path";
-// eslint-disable-next-line import/no-unresolved
 import { exec, outputFile, pathExists } from "./utils.js";
 
 if (process.argv.includes("--version") || process.argv.includes("-v")) {

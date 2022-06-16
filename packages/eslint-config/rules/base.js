@@ -38,7 +38,7 @@ module.exports = {
     "capitalized-comments": [
       "warn",
       "always",
-      { ignoreConsecutiveComments: true },
+      { ignoreConsecutiveComments: true, ignorePattern: "prettier-ignore" },
     ],
 
     // It's a way of allowing private methods. (`this.myPrivateMethod()`)

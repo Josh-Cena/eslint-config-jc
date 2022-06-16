@@ -9,6 +9,7 @@
   "scripts": {
     "format": "prettier -w .",
     "lint": "eslint \"**/*.{js,ts,jsx,tsx}\"",
+    "spellcheck": "cspell \"**\" --no-progress",
     "prepare": "husky install",
     "build": "yarn workspaces foreach --no-private -t -v run build",
     "publish": "yarn workspaces foreach --no-private npm publish"
