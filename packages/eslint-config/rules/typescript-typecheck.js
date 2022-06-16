@@ -91,7 +91,7 @@ module.exports = {
     // Implicit casting is fine.
     "@typescript-eslint/restrict-plus-operands": "off",
 
-    // Default options work fine. However, not allowing `never` is quite annoying
+    // Default options work fine. However, not allowing `never` is a pain
     "@typescript-eslint/restrict-template-expressions": [
       "warn",
       {

@@ -11,6 +11,13 @@ module.exports = {
         "@typescript-eslint/no-var-requires": "off",
       },
     },
+    {
+      files: ["**/*.{ts,tsx,cts,mts}"],
+      rules: {
+        // Use TypeScript's checker instead
+        "no-undef": "off",
+      },
+    },
   ],
   parser: "@typescript-eslint/parser",
   parserOptions: {
@@ -26,6 +33,11 @@ module.exports = {
     "@typescript-eslint/ban-ts-comment": "error",
 
     "@typescript-eslint/ban-types": "error",
+
+    "@typescript-eslint/consistent-generic-constructors": [
+      "error",
+      "constructor",
+    ],
 
     // Index signatures allows annotating the semantics of the key, while record
     // is more concise
