@@ -1,6 +1,6 @@
 {
   "name": "create-jc-project",
-  "version": "2.3.0",
+  "version": "2.3.1",
   "description": "Quickly set up a Node.js project that contains all toolings you need",
   "bin": "dist/index.js",
   "type": "module",
