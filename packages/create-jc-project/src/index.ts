@@ -24,7 +24,10 @@ const { name, description, usingReact } = await prompts(
       name: "name",
       message: "What should we call this project?",
       async validate(value) {
-        if (typeof value !== "string" || !/^[a-z-]+$/.test(value))
+        if (
+          typeof value !== "string" ||
+          !/^(?:@[a-z-]+\/)?[a-z-]+$/.test(value)
+        )
           return "Not a valid package name.";
         if (await pathExists(value)) return "The directory already exists.";
         return true;
@@ -64,6 +67,7 @@ const packageJSON = {
   scripts: {
     format: "prettier -w .",
     lint: 'eslint "**/*.{js,ts,jsx,tsx}"',
+    spellcheck: 'cspell "**" --no-progress',
     prepare: "husky install",
   },
 };
