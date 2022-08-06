@@ -4,6 +4,7 @@ backreference
 builtins
 camelcase
 cond
+deps
 dirents
 eqeqeq
 eslintcache

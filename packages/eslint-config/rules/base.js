@@ -168,8 +168,9 @@ module.exports = {
 
     "no-cond-assign": ["error", "always"],
 
-    // Fixable, so better report this. Prettier doesn't fix it all the time
-    "no-confusing-arrow": "error",
+    // This conflicts with Prettier, and syntax highlighting should be
+    // sufficient to catch this
+    "no-confusing-arrow": "off",
 
     // In projects with a wrapped logger, this can be enabled
     "no-console": 0,
@@ -529,7 +530,7 @@ module.exports = {
 
     "no-var": "error",
 
-    "no-void": "error",
+    "no-void": ["error", { allowAsStatement: true }],
 
     "no-warning-comments": "off",
 

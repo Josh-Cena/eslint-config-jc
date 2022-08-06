@@ -216,7 +216,7 @@ module.exports = {
 
     "react/jsx-max-depth": "off",
 
-    "react/jsx-no-bind": ["error", { ignoreDOMComponents: true }],
+    "react/jsx-no-bind": ["warn", { ignoreDOMComponents: true }],
 
     "react/jsx-no-comment-textnodes": "error",
 
