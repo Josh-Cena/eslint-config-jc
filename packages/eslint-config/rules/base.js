@@ -7,6 +7,7 @@ module.exports = {
   },
   reportUnusedDisableDirectives: true,
   rules: {
+    // https://jc-verse.github.io/js-style-guide/eslint-base/objects-classes#accessor-pairs
     "accessor-pairs": [
       "error",
       {
@@ -16,12 +17,14 @@ module.exports = {
       },
     ],
 
+    // https://jc-verse.github.io/js-style-guide/eslint-base/collections#array-callback-return
     "array-callback-return": [
       "error",
-      { allowImplicit: false, checkForEach: true },
+      { allowImplicit: false, checkForEach: false },
     ],
 
     // Only add braces with multiple statements
+    // https://jc-verse.github.io/js-style-guide/eslint-base/functions#arrow-body-style
     "arrow-body-style": [
       "error",
       "as-needed",
@@ -31,11 +34,14 @@ module.exports = {
     ],
 
     // We forbid using var altogether.
+    // https://jc-verse.github.io/js-style-guide/eslint-base/variables-expressions#block-scoped-var
     "block-scoped-var": "error",
 
     // Properties are hard to check because they may come from other APIs
+    // TODO
     camelcase: ["error", { properties: "never" }],
 
+    // https://jc-verse.github.io/js-style-guide/eslint-base/formatting#capitalized-comments
     "capitalized-comments": [
       "warn",
       "always",
@@ -45,42 +51,42 @@ module.exports = {
       },
     ],
 
-    // It's a way of allowing private methods. (`this.myPrivateMethod()`)
+    // https://jc-verse.github.io/js-style-guide/eslint-base/objects-classes#class-methods-use-this
     "class-methods-use-this": "off",
 
     // I don't understand the point of this rule at all ㄟ(▔,▔)ㄏ
+    // TODO
     complexity: "off",
 
-    // Requires return statements to either always or never specify values.
-    // TypeScript sometimes enforces this, but it can be stylistic as well.
+    // https://jc-verse.github.io/js-style-guide/eslint-base/functions#consistent-return
     "consistent-return": ["error", { treatUndefinedAsUnspecified: false }],
 
-    // Enforces consistent naming when capturing the current execution context.
-    // We warn against aliasing `this` altogether, but when we do, the name
-    // doesn't matter
+    // https://jc-verse.github.io/js-style-guide/eslint-base/functions#consistent-this
     "consistent-this": "off",
 
-    // Verifies calls of super() in constructors.
+    // https://jc-verse.github.io/js-style-guide/eslint-base/objects-classes#constructor-super
     "constructor-super": "error",
 
-    // Enforces curly braces only when the body of if/while/for/etc. gets
-    // complicated enough.
+    // https://jc-verse.github.io/js-style-guide/eslint-base/formatting#curly
     curly: ["warn", "multi-or-nest", "consistent"],
 
-    // TypeScript is able to capture most cases about forgotten default
-    // behaviors.
+    // https://jc-verse.github.io/js-style-guide/eslint-base/control-flow#default-case
     "default-case": "off",
 
+    // https://jc-verse.github.io/js-style-guide/eslint-base/control-flow#default-case-last
     "default-case-last": "error",
 
     // Shadowed by TS-ESLint rule
+    // https://jc-verse.github.io/js-style-guide/eslint-base/functions#default-param-last
     "default-param-last": "off",
 
-    // E.g. `foo.bar` instead of `foo["bar"]`
+    // https://jc-verse.github.io/js-style-guide/eslint-base/operators#dot-notation
     "dot-notation": ["error", { allowKeywords: true }],
 
+    // https://jc-verse.github.io/js-style-guide/eslint-base/operators#eqeqeq
     eqeqeq: ["error", "always", { null: "ignore" }],
 
+    // https://jc-verse.github.io/js-style-guide/eslint-base/control-flow#for-direction
     "for-direction": "error",
 
     // We rarely use function expressions.

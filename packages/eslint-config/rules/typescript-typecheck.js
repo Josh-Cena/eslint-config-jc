@@ -5,6 +5,8 @@ module.exports = {
     // Also enforced by --isolatedModules
     "@typescript-eslint/consistent-type-exports": "error",
 
+    "@typescript-eslint/dot-notation": "off",
+
     // TODO figure out how this should be configured
     "@typescript-eslint/naming-convention": 0,
 
