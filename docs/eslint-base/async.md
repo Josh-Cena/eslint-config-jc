@@ -60,10 +60,13 @@ function executeAsyncSequential<T>(arr: T[], action: (a: T) => Promise<void>) {
 }
 
 function findAsyncSequential<T>(arr: T[], matcher: (a: T) => Promise<boolean>) {
-  return arr.reduce(async (res, elem) => {
-    if (await res) return res;
-    if (await matcher(elem)) return elem;
-    return undefined;
-  }, Promise.resolve<T | undefined>(undefined));
+  const notFound = Symbol("not found");
+  return arr
+    .reduce<Promise<T | typeof notFound>>(async (res, elem) => {
+      if ((await res) !== notFound) return res;
+      if (await matcher(elem)) return await elem;
+      return notFound;
+    }, Promise.resolve(notFound))
+    .then((res) => (res === notFound ? undefined : res));
 }
 ```
