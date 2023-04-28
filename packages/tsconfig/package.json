@@ -1,6 +1,6 @@
 {
   "name": "tsconfig-jc",
-  "version": "2.3.0",
+  "version": "2.3.1",
   "description": "Josh-Cena's personal coding style",
   "main": "tsconfig.json",
   "repository": {

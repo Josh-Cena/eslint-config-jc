@@ -3,11 +3,11 @@
   "display": "JC-verse",
   "compilerOptions": {
     "module": "NodeNext",
+    "useDefineForClassFields": true,
 
     /* Strict Type-Checking Options */
     "allowUnreachableCode": false,
     "exactOptionalPropertyTypes": true,
-    "noFallthroughCasesInSwitch": true,
     "noImplicitOverride": true,
     "noImplicitReturns": true,
     // `process.env` is usually accessed as property
@@ -27,6 +27,7 @@
     "noUnusedLocals": false,
     "noUnusedParameters": false,
     "importsNotUsedAsValues": "remove",
+    "noFallthroughCasesInSwitch": false,
 
     /* Module Resolution */
     "moduleResolution": "NodeNext",
@@ -34,6 +35,7 @@
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
-    "isolatedModules": true
+    "isolatedModules": true,
+    "skipLibCheck": true
   }
 }
