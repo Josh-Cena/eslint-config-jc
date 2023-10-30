@@ -85,8 +85,6 @@ module.exports = {
 
     "@typescript-eslint/no-dupe-class-members": "error",
 
-    "@typescript-eslint/no-duplicate-imports": "error",
-
     // This can be useful for dynamic object transformations
     "@typescript-eslint/no-dynamic-delete": "off",
 
@@ -135,8 +133,6 @@ module.exports = {
 
     // It's useful.
     "@typescript-eslint/no-non-null-assertion": "off",
-
-    "@typescript-eslint/no-parameter-properties": "error",
 
     "@typescript-eslint/no-redeclare": "error",
 

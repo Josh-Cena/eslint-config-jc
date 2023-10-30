@@ -215,8 +215,7 @@ module.exports = {
 
     "no-duplicate-case": "error",
 
-    // Shadowed by TS-ESLint rule
-    // This rule is also in plugin-imports
+    // Shadowed by plugin-imports rule
     "no-duplicate-imports": "off",
 
     // `else-if` is able to save one line, and also makes the flow more natural.
