@@ -11,17 +11,15 @@ sidebar_position: 3
 - Severity: error
 - Configuration:
   - Always require `===` (`"always"`)
-  - Ignore the case of comparing to `null` (`null: "ignore"`)
+  - Require strict comparison with `null` (`null: "always"`)
 
 Regular equality can result in surprising results (e.g. `1 == "1"`). Although this is partly mitigated by TypeScript's type-checking, it can still become a pitfall on module boundaries without strict input validations.
 
-`null` is exempted from this rule. This is because `a == null` is idiomatically used to exclude both `null` and `undefined`.
+`null` is not exempted from this rule. We require you to explicitly check for `null` with `===` or `!==`, because without TypeScript, your code may not work against `document.all`. `a === null || a === undefined` is not exactly equivalent to `a == null`. If you find it too pedantic, consider toggling it to `null: "ignore"` yourself.
 
 ```ts twoslash
 function foo(a?: string | null) {
-  if (a == null) {
-    return "Nullish";
-  }
+  if (a === null || a === undefined) return "Nullish";
   return a; // Only strings are left here
 }
 ```
@@ -49,7 +47,7 @@ const bitwise = Traits.USEFUL | Traits.EFFICIENT | Traits.COOL;
 
 Comparing against negative zero is either a typo (an extra `-`) or is intended to be `Object.is`. In either case, such usage should be reported.
 
-## Object members
+## Objects
 
 ### [`dot-notation`](https://eslint.org/docs/rules/dot-notation)
 
@@ -62,3 +60,20 @@ From the ESLint docs:
 > the dot notation is often preferred because it is easier to read, less verbose, and works better with aggressive JavaScript minimizers.
 
 There's no exception to this rule. We turn off the `noPropertyAccessFromIndexSignature` TS option, and we don't use TS `private`/`protected` members, so there's no reason to use bracket notation.
+
+### [`new-cap`](https://eslint.org/docs/rules/new-cap)
+
+- Severity: error
+- Configuration:
+  - Require capitalized names to be called with `new` (`"capIsNew": true`)
+  - Require `new` to only be called on capitalized names (`"newIsCap": true`)
+  - Check properties too (`"properties": true`)
+
+This is purely a stylistic choice. Use capital iff you have a constructor. This is also checked by `naming-convention`. If you are using constructors generically, still use uppercase:
+
+```ts
+function clone(obj: object) {
+  const Ctor = obj.constructor?.[Symbol.species] ?? obj.constructor ?? Object;
+  return new Ctor();
+}
+```

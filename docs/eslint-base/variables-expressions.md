@@ -19,9 +19,15 @@ globalThis.globalVar = 1;
 
 - Severity: error
 
-Because `var`s are forbidden altogether, this rule is mostly moot.
+Because `var`s are forbidden altogether, this rule is mostly moot. In the rare case where you need to use `var` (such as to declare globals), such vars should not be deceptively inside a block.
 
 ## `let`/`const`
+
+### [`init-declarations`](https://eslint.org/docs/rules/init-declarations)
+
+- Severity: off
+
+See [TypeScript](../typescript.md).
 
 ### [`no-const-assign`](https://eslint.org/docs/rules/no-const-assign)
 
@@ -44,6 +50,25 @@ a = 2; // -> TypeError: Assignment to constant variable.
 Using
 
 ## Naming conventions
+
+### [`camelcase`](https://eslint.org/docs/rules/camelcase)
+
+- Severity: error
+- Configuration:
+  - Require destructured variables to be camelCase (`ignoreDestructuring: false`)
+  - Require global variables to be camelCase (`ignoreGlobals: false`)
+  - Require imported variables to be camelCase (`ignoreImports: false`)
+  - Ignore property names in object literals (`properties: "never"`)
+
+Until we fully use `@typescript-eslint/naming-convention`, we will still use this rule to enforce camelCase where possible. We don't check object properties because the object may be passed to a third-party library:
+
+```ts
+checkESLint({
+  config: {
+    camel_case: true,
+  },
+});
+```
 
 ## Regular expressions
 
@@ -109,6 +134,12 @@ Named capture groups isn't strongly typed in TypeScript. See [microsoft/TypeScri
 :::
 
 ## Globals
+
+### [`no-alert`](https://eslint.org/docs/rules/no-alert)
+
+- Severity: error
+
+There is no good reason to use `alert`/`confirm`/`prompt` in production. They are blocking and look too much like system dialogs.
 
 ### [`no-console`](https://eslint.org/docs/rules/no-console)
 

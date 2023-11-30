@@ -14,13 +14,17 @@ Unlike languages like Java where one-class-per-file is mandated, classes in JS a
 
 ### [`no-class-assign`](https://eslint.org/docs/rules/no-class-assign)
 
-TODO
+- Severity: error
 
-### [`lines-between-class-members`](https://eslint.org/docs/rules/lines-between-class-members)
+Under no circumstance should you be reassigning a binding introduced by a declaration—this makes the variable's type hard to reason about. Class declarations are already immutable inside the declaration, so it should be immutable outside too. One niche case where reassignment is intended is for "decorators":
 
-- Severity: off
+```ts
+class Foo {}
 
-Often times, it makes sense to group related methods or getter/setters together without any line breaks, because they look so similar. Note that zero/one line break are the only allowed separations in Prettier—two line breaks are collapsed to one. Therefore, maintaining the semantics of grouping is important.
+Foo = decorate(Foo);
+```
+
+But you should use actual decorators instead.
 
 ## Constructors
 
@@ -53,10 +57,6 @@ class Extended extends Base {
 
 Note that the error can also be prevented by returning an object from the constructor.
 
-### [`new-cap`](https://eslint.org/docs/rules/new-cap)
-
-TODO
-
 ### [`no-constructor-return`](https://eslint.org/docs/rules/no-constructor-return)
 
 - Severity: error
@@ -81,7 +81,7 @@ const a = new A().constructor(); // -> TypeError: Class constructor A cannot be 
 
 Unlike other languages like Java where every instance contains the static methods, static methods only exist on the class itself in JavaScript. This means it should rather be up to the developer to decide whether it should be a static or instance method, since there can be semantic differences.
 
-Often, a method that doesn't use `this` is used as a base implementation that requires overriding. Or, it's interacting with an external runtime system. (For example, `React.Component`'s `render()` method.) This rule is turned off both because of the number of false-positives (where instance methods are necessary) and because the semantic differences.
+Often, a method that doesn't use `this` is used as a base implementation that requires overriding. Or, it's interacting with an external runtime system. (For example, `React.Component`'s `render()` method.) This rule is turned off both because of the number of false-positives (where instance methods are necessary) and because of the semantic differences.
 
 ## Accessors
 

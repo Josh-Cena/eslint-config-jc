@@ -20,7 +20,11 @@ module.exports = {
     // https://jc-verse.github.io/js-style-guide/eslint-base/collections#array-callback-return
     "array-callback-return": [
       "error",
-      { allowImplicit: false, checkForEach: false },
+      {
+        allowImplicit: false,
+        checkForEach: false,
+        // Note: allowVoid: true is implied by checkForEach: false
+      },
     ],
 
     // Only add braces with multiple statements
@@ -38,8 +42,17 @@ module.exports = {
     "block-scoped-var": "error",
 
     // Properties are hard to check because they may come from other APIs
-    // TODO
-    camelcase: ["error", { properties: "never" }],
+    // https://jc-verse.github.io/js-style-guide/eslint-base/variables-expressions#camelcase
+    camelcase: [
+      "error",
+      {
+        allow: [],
+        ignoreDestructuring: false,
+        ignoreGlobals: false,
+        ignoreImports: false,
+        properties: "never",
+      },
+    ],
 
     // https://jc-verse.github.io/js-style-guide/eslint-base/formatting#capitalized-comments
     "capitalized-comments": [
@@ -47,6 +60,7 @@ module.exports = {
       "always",
       {
         ignoreConsecutiveComments: true,
+        ignoreInlineComments: false,
         ignorePattern: "prettier-ignore|cSpell:ignore",
       },
     ],
@@ -55,7 +69,7 @@ module.exports = {
     "class-methods-use-this": "off",
 
     // I don't understand the point of this rule at all ㄟ(▔,▔)ㄏ
-    // TODO
+    // https://jc-verse.github.io/js-style-guide/eslint-base/control-flow#complexity
     complexity: "off",
 
     // https://jc-verse.github.io/js-style-guide/eslint-base/functions#consistent-return
@@ -84,40 +98,46 @@ module.exports = {
     "dot-notation": ["error", { allowKeywords: true }],
 
     // https://jc-verse.github.io/js-style-guide/eslint-base/operators#eqeqeq
-    eqeqeq: ["error", "always", { null: "ignore" }],
+    eqeqeq: ["error", "always", { null: "always" }],
 
     // https://jc-verse.github.io/js-style-guide/eslint-base/control-flow#for-direction
     "for-direction": "error",
 
     // We rarely use function expressions.
+    // https://jc-verse.github.io/js-style-guide/eslint-base/functions#func-name-matching
     "func-name-matching": ["warn", "always"],
 
     // We rarely use function expressions.
-    "func-names": "warn",
+    // https://jc-verse.github.io/js-style-guide/eslint-base/functions#func-names
+    "func-names": ["warn", "as-needed"],
 
+    // https://jc-verse.github.io/js-style-guide/eslint-base/functions#func-style
     "func-style": ["warn", "declaration", { allowArrowFunctions: true }],
 
+    // https://jc-verse.github.io/js-style-guide/eslint-base/objects-classes#getter-return
     "getter-return": ["error", { allowImplicit: false }],
 
     // It's also common to have all getters in one place and setters in another.
+    // https://jc-verse.github.io/js-style-guide/eslint-base/objects-classes#grouped-accessor-pairs
     "grouped-accessor-pairs": "off",
 
     // We disallow using for-in altogether.
-    "guard-for-in": "error",
+    // https://jc-verse.github.io/js-style-guide/eslint-base/control-flow#guard-for-in
+    "guard-for-in": "off",
 
     // Shadowed by TS-ESLint rule
+    // https://jc-verse.github.io/js-style-guide/eslint-base/variables-expressions#init-declarations
     "init-declarations": "off",
 
-    // Too stylistic: doesn't matter
-    "lines-between-class-members": "off",
-
     // Doesn't make sense in JS.
+    // https://jc-verse.github.io/js-style-guide/eslint-base/objects-classes#max-classes-per-file
     "max-classes-per-file": "off",
 
-    // This is 0, so you can override this.
-    "max-depth": 0,
+    // https://jc-verse.github.io/js-style-guide/eslint-base/control-flow#max-depth
+    "max-depth": "off",
 
     // We only check comments, since code width is already enforced by Prettier
+    // https://jc-verse.github.io/js-style-guide/eslint-base/formatting#max-len
     "max-len": [
       "warn",
       {
@@ -129,56 +149,65 @@ module.exports = {
       },
     ],
 
-    // This is 0, so you can override this.
-    "max-lines": 0,
+    // https://jc-verse.github.io/js-style-guide/eslint-base/control-flow#max-lines
+    "max-lines": "off",
 
-    // This is 0, so you can override this.
-    "max-lines-per-function": 0,
+    // https://jc-verse.github.io/js-style-guide/eslint-base/functions#max-lines-per-function
+    "max-lines-per-function": "off",
 
-    // This is 0, so you can override this.
-    "max-nested-callbacks": 0,
+    // https://jc-verse.github.io/js-style-guide/eslint-base/functions#max-nested-callbacks
+    "max-nested-callbacks": "off",
 
-    // This is 0, so you can override this.
-    "max-params": 0,
+    // https://jc-verse.github.io/js-style-guide/eslint-base/functions#max-params
+    "max-params": "off",
 
-    // This is 0, so you can override this.
-    "max-statements": 0,
+    // https://jc-verse.github.io/js-style-guide/eslint-base/control-flow#max-statements
+    "max-statements": "off",
 
     // Single-line comments save lines.
+    // https://jc-verse.github.io/js-style-guide/eslint-base/formatting#multiline-comment-style
     "multiline-comment-style": ["error", "separate-lines"],
 
-    "new-cap": "error",
+    // https://jc-verse.github.io/js-style-guide/eslint-base/operators#new-cap
+    "new-cap": ["error", { capIsNew: false, newIsCap: true, properties: true }],
 
+    // https://jc-verse.github.io/js-style-guide/eslint-base/variables-expressions#no-alert
     "no-alert": "error",
 
     // Shadowed by TS-ESLint rule
+    // TODO
     "no-array-constructor": "off",
 
+    // https://jc-verse.github.io/js-style-guide/eslint-base/async#no-async-promise-executor
     "no-async-promise-executor": "error",
 
     // Whenever we write `await`, we actually want it to wait. We know what we
     // are doing.
+    // https://jc-verse.github.io/js-style-guide/eslint-base/async#no-await-in-loop
     "no-await-in-loop": "off",
 
     // It's cool and useful. Why not?
+    // https://jc-verse.github.io/js-style-guide/eslint-base/operators#no-bitwise
     "no-bitwise": "off",
 
+    // https://jc-verse.github.io/js-style-guide/eslint-base/functions#no-caller
     "no-caller": "error",
 
     // Requires `case x: {let a = 1;}`
+    // https://jc-verse.github.io/js-style-guide/eslint-base/control-flow#no-case-declarations
     "no-case-declarations": "error",
 
+    // https://jc-verse.github.io/js-style-guide/eslint-base/objects-classes#no-class-assign
     "no-class-assign": "error",
 
+    // https://jc-verse.github.io/js-style-guide/eslint-base/operators#no-compare-neg-zero
     "no-compare-neg-zero": "error",
 
-    "no-cond-assign": ["error", "always"],
-
-    // This conflicts with Prettier, and syntax highlighting should be
-    // sufficient to catch this
-    "no-confusing-arrow": "off",
+    // https://jc-verse.github.io/js-style-guide/eslint-base/control-flow#no-cond-assign
+    "no-cond-assign": ["error", "except-parens"],
 
     // In projects with a wrapped logger, this can be enabled
+    // https://jc-verse.github.io/js-style-guide/eslint-base/variables-expressions#no-console
     "no-console": 0,
 
     // Also checked by TypeScript

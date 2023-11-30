@@ -88,7 +88,19 @@ Keep in mind that refactoring doesn't only mean changing the implementations of 
   - Use function declaration over function expression (`"declaration"`)
   - Allow arrow functions when using expressions (`allowArrowFunctions: true`)
 
+We allow two kinds of functions: function declarations and arrow functions. There are some additional restrictions:
+
+- At the top level, do not use `const func = () => ...`. Always use `function func() { ... }`, unless you need to type the function as a whole. This makes the code visually more balanced. This restriction is relaxed in nested functions (especially event listeners in React components).
+- We allow function expressions in the rare case of declaring extra methods, such as `Foo.prototype.bar = function () { ... }`. This should be exceedingly rare but they are allowed by the rule nonetheless. However, if the "method" doesn't rely on `this`, prefer using arrow functions.
+- To declare function properties in an object literal, use the method syntax `{ foo() { ... } }` instead of arrow functions `{ foo: () => ... }` to make it appear shorter. Exceptions are allowed if using arrow functions allows using concise body which saves lines.
+
 ### [`func-names`](https://eslint.org/docs/rules/func-names)
+
+- Severity: warning
+- Configuration:
+  - Require function expressions to be named if one can't be inferred (`"as-needed"`)
+
+In the same vein as `func-name-matching`, this rule is to ensure the readability of the stack trace and the reliability of the `func.name` property.
 
 ### [`func-name-matching`](https://eslint.org/docs/rules/func-name-matching)
 
@@ -118,6 +130,18 @@ bar();
 
 The `longFoo` is ambiguous. Although there's also a source position in the stack trace, it's better if we can instantly recognize the offending code when handling bug reports containing stack traces.
 
+### [`max-lines-per-function`](https://eslint.org/docs/rules/max-lines-per-function)
+
+- Severity: off
+
+See our opinion on [complexity](./control-flow.md#complexity).
+
+### [`max-nested-callbacks`](https://eslint.org/docs/rules/max-nested-callbacks)
+
+- Severity: off
+
+See our opinion on [complexity](./control-flow.md#complexity).
+
 ## Parameters
 
 ### [`default-param-last`](https://eslint.org/docs/rules/default-param-last)
@@ -125,6 +149,12 @@ The `longFoo` is ambiguous. Although there's also a source position in the stack
 - Severity: off
 
 See [TypeScript](../typescript.md).
+
+### [`max-params`](https://eslint.org/docs/rules/max-params)
+
+- Severity: off
+
+See our opinion on [complexity](./control-flow.md#complexity). However, you should actively consider if you actually need many parameters. In the case when the number of parameters gets large, consider using an object instead.
 
 ### [`no-caller`](https://eslint.org/docs/rules/no-caller)
 
@@ -162,10 +192,6 @@ const peopleWithIDs = people.map((p, id) => ({ ...p, id }));
 ```
 
 Useless braces and `return`s can be artifacts from refactoring, which increases indentation and line count without much value. Enforcing implicit return also encourages future refactors to fit logic within one expression instead of using multiple assignments and control flow.
-
-### [`no-confusing-arrow`](https://eslint.org/docs/rules/no-confusing-arrow)
-
-TODO
 
 ## `this`
 

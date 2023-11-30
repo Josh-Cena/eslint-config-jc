@@ -90,6 +90,7 @@ if (!foo)
 - Configuration:
   - Always require capitalization (`"always"`)
   - Allow multi-line comments (`ignoreConsecutiveComments: true`)
+  - Do not ignore inline comments (`ignoreInlineComments: false`)
   - Ignore common ignore directives (`ignorePattern: "prettier-ignore|cSpell:ignore"`)
 
 Comments should be written in a prose-like format, with proper grammar and capitalization. Even for sentence fragments, capitalize the first word.

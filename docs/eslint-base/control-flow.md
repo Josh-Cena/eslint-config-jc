@@ -49,6 +49,17 @@ function setHeight(node: HTMLElement) {
 
 It also permits us to use `while` instead of `do-while`, which is still a minor readability improvement.
 
+There are some cases where assignments in conditionals are useful, such as to reduce code duplication:
+
+```ts
+let input;
+while ((input = getInput())) {
+  // ...
+}
+```
+
+In such cases, you can either disable the rule, or use an explicit equality check (`while ((input = getInput()) !== null)`). We don't make ESLint special-case this because Prettier automatically adds braces, which means it's not going to end up reporting anything.
+
 ### [`no-constant-condition`](https://eslint.org/docs/rules/no-constant-condition)
 
 - Severity: error
@@ -76,7 +87,7 @@ do {
 
 - Severity: error
 
-The for loop should always be iterating in the correct direction.
+The for loop should always be iterating in the correct direction, which means increment + check for upper bound, or decrement + check for lower bound.
 
 ```ts
 for (let i = 10; i >= 0; i++) console.log(i); // -> 10 11 12 13 ...
@@ -84,7 +95,9 @@ for (let i = 10; i >= 0; i++) console.log(i); // -> 10 11 12 13 ...
 
 ### [`guard-for-in`](https://eslint.org/docs/rules/guard-for-in)
 
-TODO
+- Severity: off
+
+We ban `for...in` loops altogether via `no-restricted-syntax`. In the rare case where you actually use `for...in`, we assume you know what you are doing and you actually intend to visit the prototype chain.
 
 ### [`no-continue`](https://eslint.org/docs/rules/no-continue)
 
@@ -181,3 +194,23 @@ In case where there's indeed a default case, we require it to be placed last. Th
 If a case contains lexical declarations, it must be wrapped in a block. This is because the `case` are more like labels and do not create their own scope. This may lead to unexpected bugs, especially if there's fallthrough.
 
 TODO: examples?
+
+## Complexity
+
+We don't think there's a single good metric of code complexity. We optimize for readability instead, and sometimes workarounds to "high complexity" code actually reduces readability by fragments the code into chunks that are hard to trace. Therefore, most of the rules aiming to limit complexity are disabled.
+
+### [`complexity`](https://eslint.org/docs/rules/complexity)
+
+- Severity: off
+
+### [`max-depth`](https://eslint.org/docs/rules/max-depth)
+
+- Severity: off
+
+### [`max-lines`](https://eslint.org/docs/rules/max-lines)
+
+- Severity: off
+
+### [`max-statements`](https://eslint.org/docs/rules/max-statements)
+
+- Severity: off
