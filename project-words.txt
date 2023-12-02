@@ -4,11 +4,13 @@ autofixer
 backreference
 builtins
 camelcase
+chunkname
 cond
 deps
 dirents
 eqeqeq
 eslintcache
+esmodule
 gridcell
 ified
 iife
