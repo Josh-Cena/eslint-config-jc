@@ -26,7 +26,7 @@ const { name, description, usingReact } = await prompts(
       async validate(value) {
         if (
           typeof value !== "string" ||
-          !/^(?:@[a-z-]+\/)?[a-z-]+$/.test(value)
+          !/^(?:@[a-z-]+\/)?[a-z-]+$/u.test(value)
         )
           return "Not a valid package name.";
         if (await pathExists(value)) return "The directory already exists.";
@@ -90,10 +90,8 @@ process.chdir(name);
 
 const templateRoot = fileURLToPath(new URL("../template", import.meta.url));
 await Promise.all(
-  (
-    await rReadDir(templateRoot)
-  ).map(([p, c]) =>
-    outputFile(path.relative(templateRoot, p).replace(/^_/, "."), c),
+  (await rReadDir(templateRoot)).map(([p, c]) =>
+    outputFile(path.relative(templateRoot, p).replace(/^_/u, "."), c),
   ),
 );
 

@@ -12,10 +12,15 @@ gridcell
 ified
 iife
 intelligents
+ints
 isnan
 jcify
 lintstagedrc
 listbox
+miswritten
+monkeypatch
+naïvely
+nonconstructor
 noninteractive
 nonoctal
 pico
@@ -27,6 +32,7 @@ proptypes
 radiogroup
 setstate
 shiki
+subclassing
 tabindex
 tablist
 tabpanel
@@ -36,3 +42,4 @@ treeitem
 twoslash
 typecheck
 webp
+writability

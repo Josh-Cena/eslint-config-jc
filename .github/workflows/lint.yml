@@ -8,20 +8,25 @@ on:
     branches:
       - master
 
+env:
+  # https://github.com/actions/setup-node/issues/899
+  SKIP_YARN_COREPACK_CHECK: 1
+
 jobs:
-  deploy:
+  lint:
     runs-on: ubuntu-latest
     concurrency:
       group: ${{ github.workflow }}-${{ github.ref }}
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - uses: actions/setup-node@v3
         with:
-          node-version: "18"
+          node-version: "20"
           cache: yarn
-
       - name: Install dependencies
-        run: yarn install --immutable
+        run: |
+          yarn set version stable
+          yarn install --immutable
       - name: Lint
         run: |
           yarn prettier --list-different .

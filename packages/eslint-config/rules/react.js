@@ -6,6 +6,10 @@ module.exports = {
   },
   plugins: ["react", "react-hooks"],
   rules: {
+    "react-hooks/exhaustive-deps": "error",
+
+    "react-hooks/rules-of-hooks": "error",
+
     "react/boolean-prop-naming": "off",
 
     "react/button-has-type": [
@@ -148,10 +152,6 @@ module.exports = {
     "react/style-prop-object": "error",
 
     "react/void-dom-elements-no-children": "error",
-
-    "react-hooks/exhaustive-deps": "error",
-
-    "react-hooks/rules-of-hooks": "error",
   },
   settings: {
     react: {
