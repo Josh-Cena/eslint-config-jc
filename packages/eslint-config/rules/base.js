@@ -277,8 +277,7 @@ module.exports = {
     // https://jc-verse.github.io/js-style-guide/eslint-base/control-flow#no-duplicate-case
     "no-duplicate-case": "error",
 
-    // Shadowed by plugin-imports rule
-    // TODO
+    // Shadowed by import/no-duplicates
     "no-duplicate-imports": "off",
 
     // `else-if` is able to save one line, and also makes the flow more natural.

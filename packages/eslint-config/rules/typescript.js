@@ -84,10 +84,7 @@ module.exports = {
     // https://jc-verse.github.io/js-style-guide/typescript/base#consistent-type-assertions
     "@typescript-eslint/consistent-type-assertions": [
       "error",
-      {
-        assertionStyle: "as",
-        objectLiteralTypeAssertions: "allow",
-      },
+      { assertionStyle: "as", objectLiteralTypeAssertions: "allow" },
     ],
 
     // We sometimes allow declaration merging
@@ -156,9 +153,7 @@ module.exports = {
     // https://jc-verse.github.io/js-style-guide/typescript/base#no-empty-interface
     "@typescript-eslint/no-empty-interface": [
       "error",
-      {
-        allowSingleExtends: true,
-      },
+      { allowSingleExtends: true },
     ],
 
     // https://jc-verse.github.io/js-style-guide/typescript/base#no-explicit-any
@@ -193,10 +188,7 @@ module.exports = {
     // https://jc-verse.github.io/js-style-guide/typescript/base#no-invalid-void-type
     "@typescript-eslint/no-invalid-void-type": [
       "warn",
-      {
-        allowAsThisParameter: false,
-        allowInGenericTypeArguments: true,
-      },
+      { allowAsThisParameter: false, allowInGenericTypeArguments: true },
     ],
 
     // We turn off the base rule too
@@ -259,10 +251,7 @@ module.exports = {
     // https://jc-verse.github.io/js-style-guide/typescript/base#no-this-alias
     "@typescript-eslint/no-this-alias": [
       "warn",
-      {
-        allowDestructuring: true,
-        allowedNames: [],
-      },
+      { allowDestructuring: true, allowedNames: [] },
     ],
 
     // Deprecated
@@ -325,10 +314,7 @@ module.exports = {
     // https://jc-verse.github.io/js-style-guide/typescript/base#parameter-properties
     "@typescript-eslint/parameter-properties": [
       "warn",
-      {
-        allow: [],
-        prefer: "class-property",
-      },
+      { allow: [], prefer: "class-property" },
     ],
 
     // https://jc-verse.github.io/js-style-guide/typescript/base#prefer-as-const
@@ -346,9 +332,7 @@ module.exports = {
     // https://jc-verse.github.io/js-style-guide/typescript/base#prefer-literal-enum-member
     "@typescript-eslint/prefer-literal-enum-member": [
       "warn",
-      {
-        allowBitwiseExpressions: true,
-      },
+      { allowBitwiseExpressions: true },
     ],
 
     // https://jc-verse.github.io/js-style-guide/typescript/base#prefer-namespace-keyword
@@ -362,11 +346,7 @@ module.exports = {
     // https://jc-verse.github.io/js-style-guide/typescript/base#triple-slash-reference
     "@typescript-eslint/triple-slash-reference": [
       "error",
-      {
-        lib: "never",
-        path: "never",
-        types: "prefer-import",
-      },
+      { lib: "never", path: "never", types: "prefer-import" },
     ],
 
     // We use strict TS options instead.
@@ -376,9 +356,7 @@ module.exports = {
     // https://jc-verse.github.io/js-style-guide/typescript/base#unified-signatures
     "@typescript-eslint/unified-signatures": [
       "warn",
-      {
-        ignoreDifferentlyNamedParameters: false,
-      },
+      { ignoreDifferentlyNamedParameters: false },
     ],
   },
 };
