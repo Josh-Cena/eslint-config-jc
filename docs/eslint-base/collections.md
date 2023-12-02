@@ -4,6 +4,8 @@ sidebar_position: 8
 
 # Collections
 
+This page introduces rules related to arrays and other structures.
+
 ## Arrays
 
 ### [`array-callback-return`](https://eslint.org/docs/rules/array-callback-return)

@@ -135,6 +135,7 @@ module.exports = {
     "id-match": "off",
 
     // Shadowed by TS-ESLint rule; this is for JS only
+    // Otherwise one can write `let a: string;` which can be problematic.
     // https://jc-verse.github.io/js-style-guide/eslint-base/variables-names#init-declarations
     "init-declarations": ["error", "always"],
 
@@ -356,7 +357,7 @@ module.exports = {
     // https://jc-verse.github.io/js-style-guide/eslint-base/variables-names#no-implied-eval
     "no-implied-eval": "error",
 
-    // TODO
+    // https://jc-verse.github.io/js-style-guide/eslint-base/modules#no-import-assign
     "no-import-assign": "error",
 
     // https://jc-verse.github.io/js-style-guide/eslint-base/formatting#no-inline-comments
@@ -370,8 +371,7 @@ module.exports = {
     // https://jc-verse.github.io/js-style-guide/eslint-base/literals#no-invalid-regexp
     "no-invalid-regexp": "error",
 
-    // Shadowed by TS-ESLint rule
-    // TODO
+    // https://jc-verse.github.io/js-style-guide/eslint-base/functions#no-invalid-this
     "no-invalid-this": "off",
 
     // Irregular whitespace anywhere is prone to errors if people want to
@@ -403,16 +403,14 @@ module.exports = {
     // https://jc-verse.github.io/js-style-guide/eslint-base/control-flow#no-lonely-if
     "no-lonely-if": "error",
 
-    // Shadowed by TS-ESLint rule
-    // TODO
+    // https://jc-verse.github.io/js-style-guide/eslint-base/functions#no-loop-func
     "no-loop-func": "off",
 
-    // Shadowed by TS-ESLint rule
-    // TODO
-    "no-loss-of-precision": "off",
+    // https://jc-verse.github.io/js-style-guide/eslint-base/literals#no-loss-of-precision
+    "no-loss-of-precision": "error",
 
-    // Shadowed by TS-ESLint rule
-    // TODO
+    // We prefer using comments in case the code is not self-explanatory
+    // https://jc-verse.github.io/js-style-guide/eslint-base/literals#no-magic-numbers
     "no-magic-numbers": "off",
 
     // https://jc-verse.github.io/js-style-guide/eslint-base/literals#no-misleading-character-class
@@ -484,9 +482,8 @@ module.exports = {
     // https://jc-verse.github.io/js-style-guide/eslint-base/variables-names#no-prototype-builtins
     "no-prototype-builtins": "error",
 
-    // Shadowed by TS-ESLint rule
-    // TODO
-    "no-redeclare": "off",
+    // https://jc-verse.github.io/js-style-guide/eslint-base/variables-names#no-redeclare
+    "no-redeclare": ["error", { builtinGlobals: true }],
 
     // Multiple spaces can resemble constructs that readers are familiar with
     // https://jc-verse.github.io/js-style-guide/eslint-base/literals#no-regex-spaces
@@ -615,9 +612,16 @@ module.exports = {
     // https://jc-verse.github.io/js-style-guide/eslint-base/objects-classes#no-setter-return
     "no-setter-return": "error",
 
-    // Shadowed by TS-ESLint rule
-    // TODO
-    "no-shadow": "off",
+    // https://jc-verse.github.io/js-style-guide/eslint-base/variables-names#no-shadow
+    "no-shadow": [
+      "warn",
+      {
+        allow: [],
+        builtinGlobals: true,
+        hoist: "all",
+        ignoreOnInitialization: true,
+      },
+    ],
 
     // https://jc-verse.github.io/js-style-guide/eslint-base/variables-names#no-shadow-restricted-names
     "no-shadow-restricted-names": "error",
@@ -685,9 +689,18 @@ module.exports = {
       { disallowArithmeticOperators: true },
     ],
 
-    // Shadowed by TS-ESLint rule
-    // TODO
-    "no-unused-expressions": "off",
+    // https://jc-verse.github.io/js-style-guide/eslint-base/control-flow#no-unused-expressions
+    "no-unused-expressions": [
+      "error",
+      {
+        // We allow logical operators to be used for control flow
+        allowShortCircuit: true,
+        // Tagged templates can have side effects, e.g. logging
+        allowTaggedTemplates: true,
+        allowTernary: true,
+        enforceForJSX: true,
+      },
+    ],
 
     // Also checked by TypeScript
     // https://jc-verse.github.io/js-style-guide/eslint-base/control-flow#no-unused-labels
@@ -697,13 +710,28 @@ module.exports = {
     // https://jc-verse.github.io/js-style-guide/eslint-base/objects-classes#no-unused-private-class-members
     "no-unused-private-class-members": "error",
 
-    // Shadowed by TS-ESLint rule
-    // TODO
-    "no-unused-vars": "off",
+    // Also checked by TypeScript
+    // https://jc-verse.github.io/js-style-guide/eslint-base/variables-names#no-unused-vars
+    "no-unused-vars": [
+      "error",
+      {
+        args: "after-used",
+        caughtErrors: "all",
+        ignoreRestSiblings: true,
+        vars: "all",
+      },
+    ],
 
-    // Shadowed by TS-ESLint rule
-    // TODO
-    "no-use-before-define": "off",
+    // https://jc-verse.github.io/js-style-guide/eslint-base/variables-names#no-use-before-define
+    "no-use-before-define": [
+      "error",
+      {
+        allowNamedExports: true,
+        classes: true,
+        functions: false,
+        variables: true,
+      },
+    ],
 
     // https://jc-verse.github.io/js-style-guide/eslint-base/literals#no-useless-backreference
     "no-useless-backreference": "error",

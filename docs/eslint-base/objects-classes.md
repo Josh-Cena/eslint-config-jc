@@ -4,6 +4,8 @@ sidebar_position: 7
 
 # Objects & classes
 
+This page introduces rules related to declaring objects and classes. It does not discuss about _using_ them.
+
 ## General
 
 ### [`max-classes-per-file`](https://eslint.org/docs/rules/max-classes-per-file)
@@ -152,7 +154,7 @@ Do not write constructors that are empty or only call `super()`. Such constructo
 
 - Severity: error
 - Related:
-  - `@typescript-eslint/no-dupe-class-members`
+  - [`@typescript-eslint/no-dupe-class-members`](../typescript/base.md#no-dupe-class-members)
   - `ts(2300): Duplicate identifier 'a'.`
   - `ts(2393): Duplicate function implementation.`
 

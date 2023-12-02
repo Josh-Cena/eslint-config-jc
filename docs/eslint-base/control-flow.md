@@ -4,6 +4,8 @@ sidebar_position: 5
 
 # Control flow
 
+This page introduces styles for all statements, such as `if-else`, loops, conditions, and general authoring of control flow.
+
 ## Blocks
 
 ### [`no-empty`](https://eslint.org/docs/rules/no-empty)
@@ -397,6 +399,23 @@ Throwing a string literal is never allowed because it doesn't contain the stack 
   - `ts(7027): Unreachable code detected.`
 
 Unreachable code is always a mistake. Furthermore, TypeScript gives up on control-flow analysis inside unreachable code, so you may get type errors that are not real.
+
+### [`no-unused-expressions`](https://eslint.org/docs/rules/no-unused-expressions)
+
+- Severity: error
+- Configuration:
+  - Allow short-circuiting operators (`allowShortCircuit: true`)
+  - Allow ternary expressions (`allowTernary: true`)
+  - Allow tagged templates (`allowTaggedTemplates: true`)
+  - Disallow unused JSX expressions (`enforceForJSX: true`)
+- Related:
+  - [`@typescript-eslint/no-unused-expressions`](../typescript/base.md#no-unused-expressions)
+
+Every expression statement must have some side-effect. We allow only the following expressions as statements:
+
+- Assignments
+- Calls (including `new`, tagged templates, and `import()`)
+- Logical operators (`&&`, `||`, `??`, `? :`) to substitute for control-flow statements like `if...else`
 
 ### [`no-with`](https://eslint.org/docs/rules/no-with)
 

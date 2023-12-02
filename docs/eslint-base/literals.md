@@ -4,7 +4,30 @@ sidebar_position: 2
 
 # Literals
 
+This page discusses styles for number, string, and regex literals, as well as template/symbol expressions.
+
 ## Number literals
+
+### [`no-loss-of-precision`](https://eslint.org/docs/rules/no-loss-of-precision)
+
+- Severity: error
+
+Do not use numbers literals that don't represent what they look like. For example, `5123000000000000000000000000001` does not represent that number. Note that this rule works automatically with literal types.
+
+### [`no-magic-numbers`](https://eslint.org/docs/rules/no-magic-numbers)
+
+- Severity: off
+
+You are free to use numbers as you see fit.
+
+```ts
+for (let i = 0; i < groups.length; i += 2) {
+  const x = groups[i];
+  const y = groups[i + 1];
+}
+```
+
+Use comments if the numbers are not self-explanatory.
 
 ### [`no-octal`](https://eslint.org/docs/rules/no-octal)
 

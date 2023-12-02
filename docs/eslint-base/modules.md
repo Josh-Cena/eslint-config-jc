@@ -4,9 +4,17 @@ sidebar_position: 10
 
 # Modules
 
+This page introduces rules related to modules, such as import/exports.
+
 ## Module names
 
 ## Imports
+
+### [`no-import-assign`](https://eslint.org/docs/rules/no-import-assign)
+
+- Severity: error
+
+Do not assign to imports. This is an error because imported bindings are readonly.
 
 ### [`no-restricted-imports`](https://eslint.org/docs/rules/no-restricted-imports)
 

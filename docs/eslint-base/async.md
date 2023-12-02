@@ -4,6 +4,8 @@ sidebar_position: 9
 
 # Async operations
 
+This page discusses best practices for writing promises and async/await and managing async operations.
+
 ## Promises
 
 ### [`no-async-promise-executor`](https://eslint.org/docs/rules/no-async-promise-executor)

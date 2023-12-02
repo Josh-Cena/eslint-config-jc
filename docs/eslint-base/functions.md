@@ -4,6 +4,8 @@ sidebar_position: 6
 
 # Functions
 
+This page concerns styles for authoring functions, including the syntax for function declarations, arrow functions, and methods.
+
 ## When to create functions
 
 The guide is: **do not over-abstract**. For example, this kind of code produces unnecessary runtime overhead, and more importantly, mental burden:
@@ -115,6 +117,12 @@ export default React.memo(Component);
 
 Block-scoped vars are already reported by [`block-scoped-var`](./variables-names.md#block-scoped-var). Function declarations inside blocks behave as expected in strict mode, so there's no good reason to forbid them.
 
+### [`no-loop-func`](https://eslint.org/docs/rules/no-loop-func)
+
+- Severity: off
+
+While this rule could prevent bugs in theory, we think in the vast majority of cases, a closure is actually intended to read the latest value instead of the value at the time the function was created. In addition, many functions are synchronously called (such as array methods) and the rule just false-positives. If stale references actually cause bugs, you should catch them through tests.
+
 ### [`prefer-arrow-callback`](https://eslint.org/docs/rules/prefer-arrow-callback)
 
 - Severity: error
@@ -190,7 +198,7 @@ We allow empty functions, because they are frequently needed for no-op callbacks
 
 - Severity: off
 - Related:
-  - `@typescript-eslint/default-param-last`
+  - [`@typescript-eslint/default-param-last`](../typescript/base.md#default-param-last)
   - `ts(1016): A required parameter cannot follow an optional parameter.`
 
 The base rule has too many false positives because in many cases, the parameters following the "default" are optional too, just without defaults. Even in JavaScript, we would use TS declarations to make sure we author sane APIs.
@@ -316,6 +324,8 @@ Useless braces and `return`s can be artifacts from refactoring, which increases 
 ### [`consistent-this`](https://eslint.org/docs/rules/consistent-this)
 
 - Severity: off
+- Related:
+  - [`@typescript-eslint/no-this-alias`](../typescript/base.md#no-this-alias)
 
 We warn against `this` aliasing altogether, but when it's inevitable (for example, you need two `this` values within one function), you should use a semantic name instead of `self` or `that`.
 
@@ -344,6 +354,21 @@ class Foo {
 - Severity: error
 
 You should only use `bind` (with one argument) when the `this` value is actually significant. Do not use it on arrow functions or functions that don't use `this`.
+
+### [`no-invalid-this`](https://eslint.org/docs/rules/no-invalid-this)
+
+- Severity: off
+- Related:
+  - [`@typescript-eslint/no-invalid-this`](../typescript/base.md#no-invalid-this)
+
+The base rule has too many false positives, because many callbacks are called with a valid `this`:
+
+```ts
+JSON.parse(str, function (key, value) {
+  if (typeof value !== "string") return value;
+  return value.replace(/\{\{name\}\}/g, this.name);
+});
+```
 
 ### [`no-useless-call`](https://eslint.org/docs/rules/no-useless-call)
 

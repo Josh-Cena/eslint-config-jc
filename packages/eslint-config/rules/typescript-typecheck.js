@@ -1,10 +1,18 @@
 module.exports = {
   rules: {
+    // https://jc-verse.github.io/js-style-guide/typescript/type-checked#await-thenable
     "@typescript-eslint/await-thenable": "error",
 
     // Also enforced by --isolatedModules
-    "@typescript-eslint/consistent-type-exports": "error",
+    // https://jc-verse.github.io/js-style-guide/typescript/type-checked#consistent-type-exports
+    "@typescript-eslint/consistent-type-exports": [
+      "error",
+      {
+        fixMixedExportsWithInlineTypeSpecifier: true,
+      },
+    ],
 
+    // https://jc-verse.github.io/js-style-guide/typescript/type-checked#dot-notation
     "@typescript-eslint/dot-notation": "off",
 
     // TODO figure out how this should be configured

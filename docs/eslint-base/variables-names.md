@@ -17,10 +17,11 @@ Because `var`s are forbidden altogether, this rule is mostly moot. In the rare c
 ### [`init-declarations`](https://eslint.org/docs/rules/init-declarations)
 
 - Severity: error
+- Disabled by the [typescript](../typescript/base.md) config
 - Configuration:
   - Require variables to be initialized (`"always"`)
 - Related:
-  - `@typescript-eslint/init-declarations`
+  - [`@typescript-eslint/init-declarations`](../typescript/base.md#init-declarations)
   - `ts(2454): Variable 'a' is used before being assigned.`
 
 We require variables to be initialized. Otherwise, it's possible to circumvent TypeScript:
@@ -58,6 +59,59 @@ a = 2; // -> TypeError: Assignment to constant variable.
 
 We have forbidden using `var`. `let` and `const` at the top level also behave weirdly due to TDZ. You should probably be modularizing your code anyway.
 
+### [`no-redeclare`](https://eslint.org/docs/rules/no-redeclare)
+
+- Severity: error
+- Configuration:
+  - Check redeclaration of globals (`builtinGlobals: false`)
+- Related:
+  - [`@typescript-eslint/no-redeclare`](../typescript/base.md#no-redeclare)
+
+Do not redeclare `var`/`function`. This is probably a mistake. Note that `let`/`const` cannot be redeclared and doing so is a syntax error in the first place.
+
+### [`no-shadow`](https://eslint.org/docs/rules/no-shadow)
+
+- Severity: warning
+- Configuration:
+  - Check shadowing of globals (`builtinGlobals: false`)
+  - Check shadowing of all variables declared in the outer scope (`hoist: "all"`)
+  - Allow shadowing of uninitialized variables (`ignoreOnInitialization: true`)
+
+We avoid shadowing because doing so is a refactoring hazard.
+
+```ts
+function foo(x) {
+  doSomething((x) => {
+    console.log(x); // What is this x meant to be?
+    // If I change the parameter name, should I change this too?
+  });
+}
+```
+
+The issue isn't better because the variable is only declared afterwards.
+
+```ts
+function foo() {
+  doSomething((x) => {
+    console.log(x); // What is this x meant to be?
+    // If I change the parameter name, should I change this too?
+  });
+  // If I move this declaration before doSomething(), there
+  // shouldn't be a difference
+  const x = 1;
+}
+```
+
+However, shadowing is allowed when the variable is initialized later. The following pattern is encouraged:
+
+```ts
+const x = (() => {
+  let x = 0;
+  // ...
+  return x;
+})();
+```
+
 ### [`no-var`](https://eslint.org/docs/rules/no-var)
 
 We disallow `var` statements. `var` is fully predated by `let`/`const` and its hoisting behavior makes code harder to debug. There's not a single reason to use `var` today. If you need to share one variable between two blocks, declare it in the upper scope. If you need to declare a global variable (which you probably shouldn't anyway), directly modify `globalThis` (which also works in modules).
@@ -72,6 +126,76 @@ globalThis.globalVar = 1;
 - Severity: off
 
 We _require_ variables to be initialized (through `init-declarations`). In case there's no reasonable default value, you should use explicit `undefined`.
+
+### [`no-unused-vars`](https://eslint.org/docs/rules/no-unused-vars)
+
+- Severity: error
+- Configuration:
+  - Check unused trailing function parameters (`args: "after-used"`)
+  - Check unused caught errors (`caughtErrors: "all"`)
+  - Ignore unused variables with rest element (`ignoreRestSiblings: true`)
+  - Check unused variables in the top-level scope (`vars: "all"`)
+- Related:
+  - [`@typescript-eslint/no-unused-vars`](../typescript/base.md#no-unused-vars)
+
+Unused variables are a sign of refactoring artifact and should be removed as early as possible. However, there are the following exceptions:
+
+```tsx
+// Satisfying a type signature
+const plugin: Plugin = (ast, options) => {
+  // Only use options, but ast has to be declared
+};
+
+// Removing properties from objects
+function Component(props: Props) {
+  const { someProp, ...rest } = props;
+  return <div {...rest} />;
+}
+```
+
+If you have an unused error variable, omit the catch binding.
+
+```ts
+try {
+  // ...
+} catch {
+  console.error("Failed");
+}
+```
+
+### [`no-use-before-define`](https://eslint.org/docs/rules/no-use-before-define)
+
+- Severity: warning
+- Configuration:
+  - Allow export declarations before declarations (`allowNamedExports: false`)
+  - Check class declarations (`classes: true`)
+  - Allow function declarations to be hoisted (`functions: true`)
+  - Check variable declarations (`variables: true`)
+
+You should generally avoid using variables before they are declared, as doing so leads to an error. For functions, you are free to let them get hoisted. In fact, we recommend the following style:
+
+```ts
+function doSomething() {
+  doA();
+  doB();
+  doC();
+
+  function doA() {}
+  function doB() {}
+  function doC() {}
+}
+```
+
+This rule has known false negatives:
+
+```ts
+function foo() {
+  console.log(x);
+}
+
+foo(); // Should not work
+const x = 1;
+```
 
 ### [`no-useless-rename`](https://eslint.org/docs/rules/no-useless-rename)
 

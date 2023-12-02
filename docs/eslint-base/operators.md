@@ -4,6 +4,8 @@ sidebar_position: 4
 
 # Operators
 
+This page discusses styles for all operators, including arithmetic, comparison, assignment, and other operators.
+
 ## Arithmetics
 
 ### [`no-bitwise`](https://eslint.org/docs/rules/no-bitwise)
