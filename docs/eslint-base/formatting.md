@@ -55,8 +55,7 @@ Arrow functions' parentheses are always required with the default `arrowParens: 
 
 ### [`curly`](https://eslint.org/docs/rules/curly)
 
-- Severity: warn
-- Configuration:
+- Severity: warning- Configuration:
   - Require omitting braces only when the body is a single-line statement (`"multi-or-nest"`)
   - Require `if` and `else` to have consistent curly braces (`"consistent"`)
 
@@ -86,8 +85,7 @@ if (!foo)
 
 ### [`capitalized-comments`](https://eslint.org/docs/rules/capitalized-comments)
 
-- Severity: warn
-- Configuration:
+- Severity: warning- Configuration:
   - Always require capitalization (`"always"`)
   - Allow multi-line comments (`ignoreConsecutiveComments: true`)
   - Do not ignore inline comments (`ignoreInlineComments: false`)
@@ -137,3 +135,63 @@ An exception to this rule is JSDoc comments.
  * @param foo - The foo
  */
 ```
+
+### [`no-inline-comments`](https://eslint.org/docs/rules/no-inline-comments)
+
+- Severity: off
+
+You should avoid using `/* ... */` style comments anywhere. However this rule also reports the following pattern:
+
+```ts
+const a = 1; // The purpose of a
+```
+
+which is actually encouraged. Therefore, you need to execute your own discretion.
+
+### [`no-warning-comments`](https://eslint.org/docs/rules/no-warning-comments)
+
+- Severity: off
+
+You are free to commit `FIXME` and `TODO` comments so they get fixed in an indefinite time in the future. If you want a way to track them, use an editor extension like TODO tree.
+
+### [`spaced-comment`](https://eslint.org/docs/rules/spaced-comment)
+
+- Severity: error
+- Configuration:
+  - Require a space after `//` (`"always"`)
+  - Require spaces padding for `/* */` (`block.balanced: true`)
+  - Allow no comment-pattern exceptions (`exceptions: []`)
+  - Allow the following to appear at the beginning of line comments without space: `"=", "!", "/"`
+  - Allow the following to appear at the beginning of block comments without space: `"=", "!", ":", "::"`
+
+You should always have a space after `//` and `/*`. This makes the text easier to read. The exceptions here are to support common patterns, such as `///` for TS triple-slash directives, and `/*::` for Flow type annotations.
+
+## Whitespace
+
+### [`no-irregular-whitespace`](https://eslint.org/docs/rules/no-irregular-whitespace)
+
+- Severity: error
+- Configuration:
+  - Allow irregular whitespace nowhere (`skipComments: false, skipJSXText: false, skipRegExps: false, skipStrings: false, skipTemplates: false`)
+
+Irregular whitespace is a common source of bugs. It's easy to accidentally copy a non-breaking space from a website, or to accidentally type a non-breaking space. In addition, code might subtly break if someone else tries to naïvely retype the code themselves instead of copy-pasting it.
+
+### [`no-unexpected-multiline`](https://eslint.org/docs/rules/no-unexpected-multiline)
+
+- Severity: error
+
+You may accidentally forget a semicolon and end up with code like:
+
+<!-- prettier-ignore -->
+```ts
+const hello = "world"
+[1, 2, 3].forEach(addNumber);
+```
+
+This rule prevents code that does not look idiomatic. Prettier may help by making the code more obvious:
+
+```ts
+const hello = "world"[(1, 2, 3)].forEach(addNumber);
+```
+
+But we believe more immediate feedback is better.

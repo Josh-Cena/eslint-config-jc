@@ -1,5 +1,5 @@
 ---
-sidebar_position: 5
+sidebar_position: 6
 ---
 
 # Functions
@@ -92,7 +92,39 @@ We allow two kinds of functions: function declarations and arrow functions. Ther
 
 - At the top level, do not use `const func = () => ...`. Always use `function func() { ... }`, unless you need to type the function as a whole. This makes the code visually more balanced. This restriction is relaxed in nested functions (especially event listeners in React components).
 - We allow function expressions in the rare case of declaring extra methods, such as `Foo.prototype.bar = function () { ... }`. This should be exceedingly rare but they are allowed by the rule nonetheless. However, if the "method" doesn't rely on `this`, prefer using arrow functions.
-- To declare function properties in an object literal, use the method syntax `{ foo() { ... } }` instead of arrow functions `{ foo: () => ... }` to make it appear shorter. Exceptions are allowed if using arrow functions allows using concise body which saves lines.
+- To declare function properties in an object literal, use the method syntax `{ foo() { ... } }` instead of arrow functions `{ foo: () => ... }` to make it appear shorter. Exceptions are allowed if using arrow functions allows using concise body which saves lines. This is enforced by [`object-shorthand`](./objects-classes.md#object-shorthand).
+
+### [`no-func-assign`](https://eslint.org/docs/rules/no-func-assign)
+
+- Severity: error
+- Related:
+  - `ts(2630): Cannot assign to 'a' because it is a function.`
+
+The reason is the same as [`no-class-assign`](./objects-classes.md#no-class-assign). If you want to wrap your function, create a new variable instead.
+
+```ts
+function Component() {}
+const ComponentMemo = React.memo(Component);
+// Or directly:
+export default React.memo(Component);
+```
+
+### [`no-inner-declarations`](https://eslint.org/docs/rules/no-inner-declarations)
+
+- Severity: off
+
+Block-scoped vars are already reported by [`block-scoped-var`](./variables-names.md#block-scoped-var). Function declarations inside blocks behave as expected in strict mode, so there's no good reason to forbid them.
+
+### [`prefer-arrow-callback`](https://eslint.org/docs/rules/prefer-arrow-callback)
+
+- Severity: error
+- Configuration:
+  - Do not allow named function expressions (`allowNamedFunctions: true`)
+  - Use arrow functions even when the function expression references `this` (`allowUnboundThis: true`)
+
+Always use arrow callbacks. If the callback relies on the `this` value or needs to be named, use a function declaration instead. Use of function expressions may be a sign of legacy code or unfamiliarity with the language.
+
+## Names
 
 ### [`func-names`](https://eslint.org/docs/rules/func-names)
 
@@ -130,6 +162,8 @@ bar();
 
 The `longFoo` is ambiguous. Although there's also a source position in the stack trace, it's better if we can instantly recognize the offending code when handling bug reports containing stack traces.
 
+## Bodies
+
 ### [`max-lines-per-function`](https://eslint.org/docs/rules/max-lines-per-function)
 
 - Severity: off
@@ -142,13 +176,24 @@ See our opinion on [complexity](./control-flow.md#complexity).
 
 See our opinion on [complexity](./control-flow.md#complexity).
 
-## Parameters
+### [`no-empty-function`](https://eslint.org/docs/rules/no-empty-function)
+
+- Severity: off
+- Related:
+  - `@typescript-eslint/no-empty-function`
+
+We allow empty functions, because they are frequently needed for no-op callbacks.
+
+## Parameters & arguments
 
 ### [`default-param-last`](https://eslint.org/docs/rules/default-param-last)
 
 - Severity: off
+- Related:
+  - `@typescript-eslint/default-param-last`
+  - `ts(1016): A required parameter cannot follow an optional parameter.`
 
-See [TypeScript](../typescript.md).
+The base rule has too many false positives because in many cases, the parameters following the "default" are optional too, just without defaults. Even in JavaScript, we would use TS declarations to make sure we author sane APIs.
 
 ### [`max-params`](https://eslint.org/docs/rules/max-params)
 
@@ -164,6 +209,73 @@ From the ESLint docs:
 
 > The use of `arguments.caller` and `arguments.callee` make several code optimizations impossible. They have been deprecated in future versions of JavaScript and their use is forbidden in ECMAScript 5 while in strict mode.
 
+### [`no-dupe-args`](https://eslint.org/docs/rules/no-dupe-args)
+
+- Severity: error
+- Related:
+  - `SyntaxError: Duplicate parameter name not allowed in this context`
+
+Duplicate parameter names are a syntax error in strict mode.
+
+### [`no-param-reassign`](https://eslint.org/docs/rules/no-param-reassign)
+
+- Severity: off
+
+We think it's fine to reassign parameters, particularly for normalization purposes, if you are interfacing with external code.
+
+```ts
+function add(a: number, b: number) {
+  a = Number(a); // Make sure `a` and `b` are actually numbers
+  b = Number(b);
+  return a + b;
+}
+```
+
+Do not reassign parameters if it drastically changes the semantics of the parameter. In TypeScript, you cannot change the type of the parameter, and you should strive to do the same in JavaScript.
+
+### [`prefer-rest-params`](https://eslint.org/docs/rules/prefer-rest-params)
+
+- Severity: error
+
+Use rest parameters instead of `arguments`. Rest parameters are more versatile because they are real arrays, and can be used in arrow functions.
+
+The only known exception is you want to use the arguments both named and as an array:
+
+```ts
+const p = new Proxy(
+  {},
+  {
+    get(target, prop, receiver) {
+      console.log(target === receiver);
+      return Reflect.get.apply(undefined, arguments);
+    },
+  },
+);
+```
+
+You can selectively choose to disable the rule in this case, or destructure the variables from the rest params:
+
+```ts
+const p = new Proxy(
+  {},
+  {
+    get(...args) {
+      const [target, prop, receiver] = args;
+      console.log(target === receiver);
+      return Reflect.get(...args);
+    },
+  },
+);
+```
+
+Note however that this changes the arity of the function, which may break some code.
+
+### [`prefer-spread`](https://eslint.org/docs/rules/prefer-spread)
+
+- Severity: error
+
+Use spread syntax instead of `Function.prototype.apply`. Note however that this rule does not flag patterns such as `Math.max.apply(undefined, args)`, although the `apply` is still redundant.
+
 ## Return statements
 
 ### [`consistent-return`](https://eslint.org/docs/rules/consistent-return)
@@ -175,6 +287,12 @@ From the ESLint docs:
   - `ts(7030): Not all code paths return a value.` (with [`noImplicitReturns`](https://www.typescriptlang.org/tsconfig#noImplicitReturns))
 
 We require all return statements to be either explicitly returning a value or implicitly returning `undefined` (in case of `void`-returning functions). Because most of our code is already type-checked by TypeScript, which surfaces the implicitly returned `undefined` in the return type, this rule is more for aesthetic purposes. It also helps us find all possible return values at a glance.
+
+### [`no-useless-return`](https://eslint.org/docs/rules/no-useless-return)
+
+- Severity: error
+
+Do not use `return` when it doesn't change the control flow of the function.
 
 ## Arrow functions
 
@@ -220,3 +338,15 @@ class Foo {
   }
 }
 ```
+
+### [`no-extra-bind`](https://eslint.org/docs/rules/no-extra-bind)
+
+- Severity: error
+
+You should only use `bind` (with one argument) when the `this` value is actually significant. Do not use it on arrow functions or functions that don't use `this`.
+
+### [`no-useless-call`](https://eslint.org/docs/rules/no-useless-call)
+
+- Severity: error
+
+Do not use `call` or `apply` when it doesn't change the `this` value of the function. Before spreading, you may have to use `foo.apply(undefined, args)`, but now you can simply use `foo(...args)` (although this is not checked by the rule).

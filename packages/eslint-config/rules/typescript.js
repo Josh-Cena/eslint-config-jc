@@ -57,7 +57,11 @@ module.exports = {
     // Note that currently autofixer doesn't fix this to inline type import
     "@typescript-eslint/consistent-type-imports": [
       "error",
-      { disallowTypeAnnotations: false, prefer: "type-imports" },
+      {
+        disallowTypeAnnotations: false,
+        fixStyle: "inline-type-imports",
+        prefer: "type-imports",
+      },
     ],
 
     "@typescript-eslint/default-param-last": "error",

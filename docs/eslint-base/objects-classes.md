@@ -1,5 +1,5 @@
 ---
-sidebar_position: 6
+sidebar_position: 7
 ---
 
 # Objects & classes
@@ -15,6 +15,8 @@ Unlike languages like Java where one-class-per-file is mandated, classes in JS a
 ### [`no-class-assign`](https://eslint.org/docs/rules/no-class-assign)
 
 - Severity: error
+- Related:
+  - `ts(2629): Cannot assign to 'A' because it is a class.`
 
 Under no circumstance should you be reassigning a binding introduced by a declaration—this makes the variable's type hard to reason about. Class declarations are already immutable inside the declaration, so it should be immutable outside too. One niche case where reassignment is intended is for "decorators":
 
@@ -25,6 +27,33 @@ Foo = decorate(Foo);
 ```
 
 But you should use actual decorators instead.
+
+### [`object-shorthand`](https://eslint.org/docs/rules/object-shorthand)
+
+- Severity: error
+- Configuration:
+  - Require all shorthands (`"always"`)
+  - Avoid arrow functions that use explicit `return` (`avoidExplicitReturnArrows: true`)
+  - Use shorthand even when the property requires quotes (`avoidQuotes: false`)
+  - Do not ignore "constructors" (`ignoreConstructors: false`)
+
+Use object shorthands (`{ a }` instead of `{ a: a }`) whenever possible. Also use methods instead of `function` expressions. You should also use methods instead of arrow functions, unless the latter results in shorter code (see also `func-style`), i.e. when you can use concise arrow body.
+
+If for some reason you need to declare a constructor in an object literal:
+
+```ts
+const obj = {
+  SomeClass: function () {},
+};
+```
+
+Consider either using a class declaration or a class expression instead.
+
+### [`prefer-object-spread`](https://eslint.org/docs/rules/prefer-object-spread)
+
+- Severity: error
+
+Use object spread (`{ ...a }`) instead of `Object.assign({}, ...)`.
 
 ## Constructors
 
@@ -72,6 +101,102 @@ class A {
 
 const a = new A().constructor(); // -> TypeError: Class constructor A cannot be invoked without 'new'
 ```
+
+If you return an object from the constructor, it will replace the `this` value and become the result of the `new` expression. This is very rarely what you want, because it usually breaks the semantics that `new A instanceof A`. In the case where this is intended, use a disable comment.
+
+```ts
+class A {
+  constructor() {
+    return {};
+  }
+}
+
+const a = new A();
+console.log(a instanceof A); // -> false
+```
+
+### [`no-this-before-super`](https://eslint.org/docs/rules/no-this-before-super)
+
+- Severity: error
+- Related:
+  - `ts(17009): 'super' must be called before accessing 'this' in the constructor of a derived class.`
+
+You cannot access `this` before calling `super()` in a constructor. This results in a runtime error. There are some edge cases, such as when the `super()` call is contained in a closure. Consider whether you actually need to do this.
+
+```ts twoslash
+// @errors: 2377 2337 17009
+
+const wrappedCall = (fn: () => void) => fn();
+
+class A extends Object {
+  constructor() {
+    wrappedCall(() => {
+      super();
+    });
+    console.log(this);
+  }
+}
+
+new A(); // Works in JS, but linters are unhappy
+```
+
+### [`no-useless-constructor`](https://eslint.org/docs/rules/no-useless-constructor)
+
+- Severity: error
+
+Do not write constructors that are empty or only call `super()`. Such constructors can be omitted. Even in TypeScript, we prefer to not change the constructor's visibility, or use parameter properties, so generally there shouldn't be many false positives.
+
+## Members
+
+### [`no-dupe-class-members`](https://eslint.org/docs/rules/no-dupe-class-members)
+
+- Severity: error
+- Related:
+  - `@typescript-eslint/no-dupe-class-members`
+  - `ts(2300): Duplicate identifier 'a'.`
+  - `ts(2393): Duplicate function implementation.`
+
+Duplicate class members overwrite each other and is likely a mistake. In TypeScript, you will want to use the extension rule in order to allow overloads.
+
+### [`no-dupe-keys`](https://eslint.org/docs/rules/no-dupe-keys)
+
+- Severity: error
+- Related:
+  - `ts(1117): An object literal cannot have multiple properties with the same name.`
+
+Duplicate keys in object literals overwrite each other and is likely a mistake. If you have some side effects that are hard to manage, consider evaluating all the side effects before creating the object literal.
+
+```js
+const obj = {
+  a: doSomething(),
+  b: doSomethingElse(),
+  a: doAnotherThing(),
+};
+```
+
+```ts
+doSomething();
+const b = doSomethingElse();
+const a = doAnotherThing();
+
+const obj = { a, b };
+```
+
+### [`no-unused-private-class-members`](https://eslint.org/docs/rules/no-unused-private-class-members)
+
+- Severity: error
+- Related:
+  - `ts(6133): '#a' is declared but its value is never read.`
+
+Unused private members are like unused local variables. They cannot be accessed from anywhere else.
+
+### [`no-useless-computed-key`](https://eslint.org/docs/rules/no-useless-computed-key)
+
+- Severity: error
+- Configuration:
+  - Check class members too (`enforceForClassMembers: true`)
+
+Don't use computed keys when the expression is a literal. An exception (also special cased by the rule) is when the key is `__proto__`, because `{ __proto__: x }` is not the same as `{ ["__proto__"]: x }`.
 
 ## Methods
 
@@ -209,3 +334,33 @@ class Foo {
   }
 }
 ```
+
+### [`no-setter-return`](https://eslint.org/docs/rules/no-setter-return)
+
+- Severity: error
+- Related:
+  - `ts(2408): Setters cannot return a value.`
+
+The return values of setters are ignored and are likely a mistake.
+
+## Other class elements
+
+### [`no-empty-static-block`](https://eslint.org/docs/rules/no-empty-static-block)
+
+- Severity: error
+
+Empty static blocks are useless and are a sign of refactoring artifacts.
+
+## Inheritance
+
+### [`no-extend-native`](https://eslint.org/docs/rules/no-extend-native)
+
+- Severity: error
+
+Do not monkeypatch native prototypes. There are too many examples of this causing problems. If you want to polyfill, use a library. Otherwise, use a utility function.
+
+You should generally avoid modifying the prototype of any object, including your own classes. If you want to add a method to a class, use inheritance.
+
+### Subclassing built-ins
+
+In short: don't. I'd love it if we are able to, but we live in a world where TC39 is actively messing up our experience, so to prevent more pain, use composition instead. Read [subclassing built-ins](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes/extends#subclassing_built-ins) (written by me) for more information.

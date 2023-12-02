@@ -1,5 +1,5 @@
 ---
-sidebar_position: 7
+sidebar_position: 8
 ---
 
 # Collections
@@ -28,3 +28,17 @@ Note that this rule can still false-positive when calling a method on a non-arra
 
 - The necessity of enforcing callback return values far outweighs the risk of false-positive.
 - Most APIs that are called `map` or `filter` are sanely designed and function in a similar fashion as array methods.
+
+### [`no-array-constructor`](https://eslint.org/docs/rules/no-array-constructor)
+
+- Severity: error
+- Related:
+  - `@typescript-eslint/no-array-constructor`
+
+We disallow the use of `Array()` because you should always prefer array literals. Even in the case of `Array<T>()`, you should generally use `[] as T[]` instead.
+
+### [`no-sparse-arrays`](https://eslint.org/docs/rules/no-sparse-arrays)
+
+- Severity: error
+
+Don't create sparse arrays. They are very hard to optimize and behave inconsistently with different array methods. This rule only checks array literals, but you should: (a) generally not use `Array(length)` (b) don't `delete` array indices (c) don't manually extend the `length` property.

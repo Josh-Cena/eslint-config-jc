@@ -38,11 +38,11 @@ module.exports = {
     ],
 
     // We forbid using var altogether.
-    // https://jc-verse.github.io/js-style-guide/eslint-base/variables-expressions#block-scoped-var
+    // https://jc-verse.github.io/js-style-guide/eslint-base/variables-names#block-scoped-var
     "block-scoped-var": "error",
 
     // Properties are hard to check because they may come from other APIs
-    // https://jc-verse.github.io/js-style-guide/eslint-base/variables-expressions#camelcase
+    // https://jc-verse.github.io/js-style-guide/eslint-base/variables-names#camelcase
     camelcase: [
       "error",
       {
@@ -125,9 +125,25 @@ module.exports = {
     // https://jc-verse.github.io/js-style-guide/eslint-base/control-flow#guard-for-in
     "guard-for-in": "off",
 
-    // Shadowed by TS-ESLint rule
-    // https://jc-verse.github.io/js-style-guide/eslint-base/variables-expressions#init-declarations
-    "init-declarations": "off",
+    // https://jc-verse.github.io/js-style-guide/eslint-base/variables-names#id-denylist
+    "id-denylist": "off",
+
+    // https://jc-verse.github.io/js-style-guide/eslint-base/variables-names#id-length
+    "id-length": "off",
+
+    // https://jc-verse.github.io/js-style-guide/eslint-base/variables-names#id-match
+    "id-match": "off",
+
+    // Shadowed by TS-ESLint rule; this is for JS only
+    // https://jc-verse.github.io/js-style-guide/eslint-base/variables-names#init-declarations
+    "init-declarations": ["error", "always"],
+
+    // https://jc-verse.github.io/js-style-guide/eslint-base/operators#logical-assignment-operators
+    "logical-assignment-operators": [
+      "error",
+      "always",
+      { enforceForIfStatements: true },
+    ],
 
     // Doesn't make sense in JS.
     // https://jc-verse.github.io/js-style-guide/eslint-base/objects-classes#max-classes-per-file
@@ -171,12 +187,12 @@ module.exports = {
     // https://jc-verse.github.io/js-style-guide/eslint-base/operators#new-cap
     "new-cap": ["error", { capIsNew: false, newIsCap: true, properties: true }],
 
-    // https://jc-verse.github.io/js-style-guide/eslint-base/variables-expressions#no-alert
+    // https://jc-verse.github.io/js-style-guide/eslint-base/variables-names#no-alert
     "no-alert": "error",
 
     // Shadowed by TS-ESLint rule
-    // TODO
-    "no-array-constructor": "off",
+    // https://jc-verse.github.io/js-style-guide/eslint-base/collections#no-array-constructor
+    "no-array-constructor": "error",
 
     // https://jc-verse.github.io/js-style-guide/eslint-base/async#no-async-promise-executor
     "no-async-promise-executor": "error",
@@ -203,172 +219,281 @@ module.exports = {
     // https://jc-verse.github.io/js-style-guide/eslint-base/operators#no-compare-neg-zero
     "no-compare-neg-zero": "error",
 
-    // https://jc-verse.github.io/js-style-guide/eslint-base/control-flow#no-cond-assign
+    // https://jc-verse.github.io/js-style-guide/eslint-base/operators#no-cond-assign
     "no-cond-assign": ["error", "except-parens"],
 
     // In projects with a wrapped logger, this can be enabled
-    // https://jc-verse.github.io/js-style-guide/eslint-base/variables-expressions#no-console
+    // https://jc-verse.github.io/js-style-guide/eslint-base/variables-names#no-console
     "no-console": 0,
 
     // Also checked by TypeScript
+    // https://jc-verse.github.io/js-style-guide/eslint-base/variables-names#no-const-assign
     "no-const-assign": "error",
 
+    // https://jc-verse.github.io/js-style-guide/eslint-base/operators#no-constant-binary-expression
     "no-constant-binary-expression": "error",
 
+    // https://jc-verse.github.io/js-style-guide/eslint-base/control-flow#no-constant-condition
     "no-constant-condition": ["error", { checkLoops: true }],
 
+    // https://jc-verse.github.io/js-style-guide/eslint-base/objects-classes#no-constructor-return
     "no-constructor-return": "error",
 
     // It's useful.
+    // https://jc-verse.github.io/js-style-guide/eslint-base/control-flow#no-continue
     "no-continue": "off",
 
     // Good to catch errors, but sometimes we actually want to match control
     // characters
+    // https://jc-verse.github.io/js-style-guide/eslint-base/literals#no-control-regex
     "no-control-regex": "warn",
 
     // I've personally never ever used this
+    // https://jc-verse.github.io/js-style-guide/eslint-base/control-flow#no-debugger
     "no-debugger": "error",
 
+    // This is also a syntax error in strict mode
+    // https://jc-verse.github.io/js-style-guide/eslint-base/operators#no-delete-var
     "no-delete-var": "error",
 
-    "no-div-regex": "error",
+    // This is a weird rule!
+    // https://jc-verse.github.io/js-style-guide/eslint-base/literals#no-div-regex
+    "no-div-regex": "off",
 
+    // https://jc-verse.github.io/js-style-guide/eslint-base/functions#no-dupe-args
     "no-dupe-args": "error",
 
     // Shadowed by TS-ESLint rule
-    "no-dupe-class-members": "off",
+    // https://jc-verse.github.io/js-style-guide/eslint-base/objects-classes#no-dupe-class-members
+    "no-dupe-class-members": "error",
 
+    // https://jc-verse.github.io/js-style-guide/eslint-base/control-flow#no-dupe-else-if
     "no-dupe-else-if": "error",
 
+    // https://jc-verse.github.io/js-style-guide/eslint-base/objects-classes#no-dupe-keys
     "no-dupe-keys": "error",
 
+    // https://jc-verse.github.io/js-style-guide/eslint-base/control-flow#no-duplicate-case
     "no-duplicate-case": "error",
 
     // Shadowed by plugin-imports rule
+    // TODO
     "no-duplicate-imports": "off",
 
     // `else-if` is able to save one line, and also makes the flow more natural.
+    // https://jc-verse.github.io/js-style-guide/eslint-base/control-flow#no-else-return
     "no-else-return": ["error", { allowElseIf: true }],
 
     // Empty catch is useful.
+    // https://jc-verse.github.io/js-style-guide/eslint-base/control-flow#no-empty
     "no-empty": ["error", { allowEmptyCatch: true }],
 
+    // https://jc-verse.github.io/js-style-guide/eslint-base/literals#no-empty-character-class
     "no-empty-character-class": "error",
 
     // Sometimes we do want no-ops.
+    // https://jc-verse.github.io/js-style-guide/eslint-base/functions#no-empty-function
     "no-empty-function": "off",
 
-    "no-empty-pattern": "error",
+    "no-empty-pattern": ["error", { allowObjectPatternsAsParameters: false }],
 
-    // In TS, it's a common way to narrow out both `null` and `undefined`.
-    "no-eq-null": "off",
+    // https://jc-verse.github.io/js-style-guide/eslint-base/objects-classes#no-empty-static-block
+    "no-empty-static-block": "error",
 
-    "no-eval": "error",
+    // This is also checked by eqeqeq
+    // https://jc-verse.github.io/js-style-guide/eslint-base/operators#no-eq-null
+    "no-eq-null": "error",
 
+    // Never use eval!
+    // https://jc-verse.github.io/js-style-guide/eslint-base/variables-names#no-eval
+    "no-eval": ["error", { allowIndirect: false }],
+
+    // https://jc-verse.github.io/js-style-guide/eslint-base/control-flow#no-ex-assign
     "no-ex-assign": "error",
 
-    "no-extend-native": "error",
+    // https://jc-verse.github.io/js-style-guide/eslint-base/variables-names#no-extend-native
+    "no-extend-native": ["error", { exceptions: [] }],
 
-    // Sometimes we want to enforce re-binding to tell ourselves that `this` is
-    // important.
-    "no-extra-bind": "warn",
+    // https://jc-verse.github.io/js-style-guide/eslint-base/functions#no-extra-bind
+    "no-extra-bind": "error",
 
-    "no-extra-boolean-cast": "error",
+    // https://jc-verse.github.io/js-style-guide/eslint-base/operators#no-extra-boolean-cast
+    "no-extra-boolean-cast": ["error", { enforceForLogicalOperands: true }],
+
+    // https://jc-verse.github.io/js-style-guide/eslint-base/control-flow#no-extra-label
+    "no-extra-label": "error",
 
     // A eslint-disable is as expressive as a special comment.
-    "no-fallthrough": "error",
+    // https://jc-verse.github.io/js-style-guide/eslint-base/control-flow#no-fallthrough
+    "no-fallthrough": [
+      "error",
+      { allowEmptyCase: true, commentPattern: undefined },
+    ],
 
+    // https://jc-verse.github.io/js-style-guide/eslint-base/functions#no-func-assign
     "no-func-assign": "error",
 
-    "no-implicit-coercion": "error",
+    // Handled by TS; there are far too many globals to list for ESLint
+    // https://jc-verse.github.io/js-style-guide/eslint-base/variables-names#no-global-assign
+    "no-global-assign": "off",
 
+    // Allow no implicit coercion
+    // https://jc-verse.github.io/js-style-guide/eslint-base/operators#no-implicit-coercion
+    "no-implicit-coercion": [
+      "error",
+      {
+        allow: [],
+        boolean: true,
+        disallowTemplateShorthand: true,
+        number: true,
+        string: true,
+      },
+    ],
+
+    // https://jc-verse.github.io/js-style-guide/eslint-base/variables-names#no-implicit-globals
+    "no-implicit-globals": ["error", { lexicalBindings: true }],
+
+    // https://jc-verse.github.io/js-style-guide/eslint-base/variables-names#no-implied-eval
     "no-implied-eval": "error",
 
+    // TODO
     "no-import-assign": "error",
 
-    "no-inner-declarations": "error",
+    // https://jc-verse.github.io/js-style-guide/eslint-base/formatting#no-inline-comments
+    "no-inline-comments": "off",
 
+    // `var`s in blocks are checked by block-scoped-var; functions in blocks
+    // behave as expected in strict mode.
+    // https://jc-verse.github.io/js-style-guide/eslint-base/functions#no-inner-declarations
+    "no-inner-declarations": "off",
+
+    // https://jc-verse.github.io/js-style-guide/eslint-base/literals#no-invalid-regexp
     "no-invalid-regexp": "error",
 
     // Shadowed by TS-ESLint rule
+    // TODO
     "no-invalid-this": "off",
 
-    "no-irregular-whitespace": "error",
+    // Irregular whitespace anywhere is prone to errors if people want to
+    // retype it
+    // https://jc-verse.github.io/js-style-guide/eslint-base/formatting#no-irregular-whitespace
+    "no-irregular-whitespace": [
+      "error",
+      {
+        skipComments: false,
+        skipJSXText: false,
+        skipRegExps: false,
+        skipStrings: false,
+        skipTemplates: false,
+      },
+    ],
 
+    // https://jc-verse.github.io/js-style-guide/eslint-base/variables-names#no-iterator
     "no-iterator": "error",
 
+    // https://jc-verse.github.io/js-style-guide/eslint-base/control-flow#no-label-var
     "no-label-var": "error",
 
-    "no-labels": "error",
+    // https://jc-verse.github.io/js-style-guide/eslint-base/control-flow#no-labels
+    "no-labels": "off",
 
+    // https://jc-verse.github.io/js-style-guide/eslint-base/control-flow#no-lone-blocks
     "no-lone-blocks": "error",
 
+    // https://jc-verse.github.io/js-style-guide/eslint-base/control-flow#no-lonely-if
     "no-lonely-if": "error",
 
     // Shadowed by TS-ESLint rule
+    // TODO
     "no-loop-func": "off",
 
     // Shadowed by TS-ESLint rule
+    // TODO
     "no-loss-of-precision": "off",
 
     // Shadowed by TS-ESLint rule
+    // TODO
     "no-magic-numbers": "off",
 
+    // https://jc-verse.github.io/js-style-guide/eslint-base/literals#no-misleading-character-class
     "no-misleading-character-class": "error",
 
-    // Operator precedence can be enforced with Prettier, and the rule is too
-    // hard to configure properly
-    "no-mixed-operators": "off",
+    // For aesthetic reasons, because Prettier formats chained assignments quite
+    // ugly.
+    // https://jc-verse.github.io/js-style-guide/eslint-base/operators#no-multi-assign
+    "no-multi-assign": ["error", { ignoreNonDeclaration: false }],
 
-    "no-multi-assign": "error",
-
+    // https://jc-verse.github.io/js-style-guide/eslint-base/literals#no-multi-str
     "no-multi-str": "error",
 
     // This is a useful rule, but too hard to enforce in practice. Sometimes
     // negated conditions actually make more sense
+    // https://jc-verse.github.io/js-style-guide/eslint-base/control-flow#no-negated-condition
     "no-negated-condition": "off",
 
     // Nested ternaries are formatted by Prettier and not hard to understand.
+    // https://jc-verse.github.io/js-style-guide/eslint-base/operators#no-nested-ternary
     "no-nested-ternary": "off",
 
     // Note that this rule can actually be useful if we are testing if a
     // constructor throws, the most representative case being `new URL()`
+    // https://jc-verse.github.io/js-style-guide/eslint-base/objects-classes#no-new
     "no-new": "off",
 
+    // https://jc-verse.github.io/js-style-guide/eslint-base/variables-names#no-new-func
     "no-new-func": "error",
 
-    "no-new-symbol": "error",
+    // https://jc-verse.github.io/js-style-guide/eslint-base/variables-names#no-new-native-nonconstructor
+    "no-new-native-nonconstructor": "error",
 
+    // Predated by no-new-native-nonconstructor and will be deprecated
+    "no-new-symbol": "off",
+
+    // https://jc-verse.github.io/js-style-guide/eslint-base/variables-names#no-new-wrappers
     "no-new-wrappers": "error",
 
+    // https://jc-verse.github.io/js-style-guide/eslint-base/literals#no-nonoctal-decimal-escape
     "no-nonoctal-decimal-escape": "error",
 
+    // https://jc-verse.github.io/js-style-guide/eslint-base/variables-names#no-obj-calls
     "no-obj-calls": "error",
 
+    // https://jc-verse.github.io/js-style-guide/eslint-base/variables-names#no-object-constructor
+    "no-object-constructor": "error",
+
+    // https://jc-verse.github.io/js-style-guide/eslint-base/literals#no-octal
     "no-octal": "error",
 
+    // https://jc-verse.github.io/js-style-guide/eslint-base/literals#no-octal-escape
     "no-octal-escape": "error",
 
     // If we reassign params, we actually need to.
+    // https://jc-verse.github.io/js-style-guide/eslint-base/functions#no-param-reassign
     "no-param-reassign": "off",
 
     // Plusplus is concise and useful.
+    // https://jc-verse.github.io/js-style-guide/eslint-base/operators#no-plusplus
     "no-plusplus": "off",
 
-    "no-promise-executor-return": "error",
+    // https://jc-verse.github.io/js-style-guide/eslint-base/async#no-promise-executor-return
+    "no-promise-executor-return": ["error", { allowVoid: false }],
 
+    // https://jc-verse.github.io/js-style-guide/eslint-base/variables-names#no-proto
     "no-proto": "error",
 
+    // https://jc-verse.github.io/js-style-guide/eslint-base/variables-names#no-prototype-builtins
     "no-prototype-builtins": "error",
 
     // Shadowed by TS-ESLint rule
+    // TODO
     "no-redeclare": "off",
 
     // Multiple spaces can resemble constructs that readers are familiar with
+    // https://jc-verse.github.io/js-style-guide/eslint-base/literals#no-regex-spaces
     "no-regex-spaces": "off",
 
-    // TypeScript allows this
-    "no-restricted-exports": "off",
+    // https://jc-verse.github.io/js-style-guide/eslint-base/modules#no-restricted-exports
+    "no-restricted-exports": 0,
 
     // Taken from airbnb
     "no-restricted-globals": [
@@ -444,24 +569,27 @@ module.exports = {
       "top",
     ],
 
-    // Copied from airbnb, removed for...of statement, added export all
+    // https://jc-verse.github.io/js-style-guide/eslint-base/modules#no-restricted-imports
+    "no-restricted-imports": 0,
+
+    // https://jc-verse.github.io/js-style-guide/eslint-base/variables-names#no-restricted-properties
+    "no-restricted-properties": 0,
+
     "no-restricted-syntax": [
       "warn",
+      // https://jc-verse.github.io/js-style-guide/eslint-base/control-flow#use-of-for-in
       {
         message:
-          "for..in loops iterate over the entire prototype chain, which is virtually never what you want. Use Object.{keys,values,entries}, and iterate over the resulting array.",
+          "for...in loops iterate over the entire prototype chain, which is virtually never what you want. Use Object.{keys,values,entries}, and iterate over the resulting array.",
         selector: "ForInStatement",
       },
+      // https://jc-verse.github.io/js-style-guide/eslint-base/operators#use-of-in
       {
         message:
-          "Labels are a form of GOTO; using them makes code confusing and hard to maintain and understand.",
-        selector: "LabeledStatement",
+          "The in operator checks properties in the entire prototype chain, which is easily hackable. Use Object.hasOwn instead, or refactor your object to a map.",
+        selector: "BinaryExpression[operator='in']",
       },
-      {
-        message:
-          "`with` is disallowed in strict mode because it makes code impossible to predict and optimize.",
-        selector: "WithStatement",
-      },
+      // https://jc-verse.github.io/js-style-guide/eslint-base/modules#use-of-export-
       {
         message:
           "Export all does't work well if imported in ESM due to how they are transpiled, and they can also lead to unexpected exposure of internal methods.",
@@ -469,154 +597,240 @@ module.exports = {
       },
     ],
 
-    "no-return-assign": "error",
+    // https://jc-verse.github.io/js-style-guide/eslint-base/variables-names#no-return-assign
+    "no-return-assign": ["error", "always"],
 
+    // https://jc-verse.github.io/js-style-guide/eslint-base/literals#no-script-url
     "no-script-url": "error",
 
-    "no-self-assign": "error",
+    // https://jc-verse.github.io/js-style-guide/eslint-base/operators#no-self-assign
+    "no-self-assign": ["error", { props: true }],
 
+    // https://jc-verse.github.io/js-style-guide/eslint-base/operators#no-self-compare
     "no-self-compare": "error",
 
-    "no-sequences": "error",
+    // https://jc-verse.github.io/js-style-guide/eslint-base/operators#no-sequences
+    "no-sequences": ["error", { allowInParentheses: false }],
 
+    // https://jc-verse.github.io/js-style-guide/eslint-base/objects-classes#no-setter-return
     "no-setter-return": "error",
 
     // Shadowed by TS-ESLint rule
+    // TODO
     "no-shadow": "off",
 
+    // https://jc-verse.github.io/js-style-guide/eslint-base/variables-names#no-shadow-restricted-names
     "no-shadow-restricted-names": "error",
 
+    // https://jc-verse.github.io/js-style-guide/eslint-base/collections#no-sparse-arrays
     "no-sparse-arrays": "error",
 
+    // https://jc-verse.github.io/js-style-guide/eslint-base/literals#no-template-curly-in-string
     "no-template-curly-in-string": "warn",
 
     // We like ternaries.
+    // https://jc-verse.github.io/js-style-guide/eslint-base/operators#no-ternary
     "no-ternary": "off",
 
+    // https://jc-verse.github.io/js-style-guide/eslint-base/objects-classes#no-this-before-super
     "no-this-before-super": "error",
 
+    // https://jc-verse.github.io/js-style-guide/eslint-base/control-flow#no-throw-literal
     "no-throw-literal": "error",
 
     // We also check for `typeof`, because it simply doesn't make sense
+    // https://jc-verse.github.io/js-style-guide/eslint-base/variables-names#no-undef
     "no-undef": ["error", { typeof: true }],
 
     // We require every variable to be explicitly initialized. See also
     // init-declarations
+    // https://jc-verse.github.io/js-style-guide/eslint-base/variables-names#no-undef-init
     "no-undef-init": "off",
 
     // Undefined is obviously useful
+    // https://jc-verse.github.io/js-style-guide/eslint-base/variables-names#no-undefined
     "no-undefined": "off",
 
     // Dangling underscores are often from other APIs
+    // https://jc-verse.github.io/js-style-guide/eslint-base/variables-names#no-underscore-dangle
     "no-underscore-dangle": "off",
 
     // Since we require semi, this shouldn't happen a lot
+    // https://jc-verse.github.io/js-style-guide/eslint-base/formatting#no-unexpected-multiline
     "no-unexpected-multiline": "error",
 
     // There can be false-positives, but it's more useful than not
+    // https://jc-verse.github.io/js-style-guide/eslint-base/control-flow#no-unmodified-loop-condition
     "no-unmodified-loop-condition": "error",
 
-    "no-unneeded-ternary": "error",
+    // https://jc-verse.github.io/js-style-guide/eslint-base/operators#no-unneeded-ternary
+    "no-unneeded-ternary": ["error", { defaultAssignment: false }],
 
     // Also checked by TypeScript
+    // https://jc-verse.github.io/js-style-guide/eslint-base/control-flow#no-unreachable
     "no-unreachable": "error",
 
-    "no-unreachable-loop": "error",
+    // https://jc-verse.github.io/js-style-guide/eslint-base/control-flow#no-unreachable-loop
+    "no-unreachable-loop": ["error", { ignore: [] }],
 
+    // https://jc-verse.github.io/js-style-guide/eslint-base/control-flow#no-unsafe-finally
     "no-unsafe-finally": "error",
 
-    "no-unsafe-negation": "error",
+    // https://jc-verse.github.io/js-style-guide/eslint-base/operators#no-unsafe-negation
+    "no-unsafe-negation": ["error", { enforceForOrderingRelations: true }],
 
-    "no-unsafe-optional-chaining": "error",
+    // https://jc-verse.github.io/js-style-guide/eslint-base/operators#no-unsafe-optional-chaining
+    "no-unsafe-optional-chaining": [
+      "error",
+      { disallowArithmeticOperators: true },
+    ],
 
     // Shadowed by TS-ESLint rule
+    // TODO
     "no-unused-expressions": "off",
 
+    // Also checked by TypeScript
+    // https://jc-verse.github.io/js-style-guide/eslint-base/control-flow#no-unused-labels
     "no-unused-labels": "error",
 
     // Also checked by TypeScript
+    // https://jc-verse.github.io/js-style-guide/eslint-base/objects-classes#no-unused-private-class-members
     "no-unused-private-class-members": "error",
 
     // Shadowed by TS-ESLint rule
+    // TODO
     "no-unused-vars": "off",
 
     // Shadowed by TS-ESLint rule
+    // TODO
     "no-use-before-define": "off",
 
-    "no-useless-backreference": "warn",
+    // https://jc-verse.github.io/js-style-guide/eslint-base/literals#no-useless-backreference
+    "no-useless-backreference": "error",
 
+    // https://jc-verse.github.io/js-style-guide/eslint-base/functions#no-useless-call
     "no-useless-call": "error",
 
+    // https://jc-verse.github.io/js-style-guide/eslint-base/control-flow#no-useless-catch
     "no-useless-catch": "error",
 
-    "no-useless-computed-key": "error",
+    // https://jc-verse.github.io/js-style-guide/eslint-base/objects-classes#no-useless-computed-key
+    "no-useless-computed-key": ["error", { enforceForClassMembers: true }],
 
+    // https://jc-verse.github.io/js-style-guide/eslint-base/literals#no-useless-concat
     "no-useless-concat": "error",
 
     // Shadowed by TS-ESLint rule
-    "no-useless-constructor": "off",
+    // https://jc-verse.github.io/js-style-guide/eslint-base/objects-classes#no-useless-constructor
+    "no-useless-constructor": "error",
 
+    // https://jc-verse.github.io/js-style-guide/eslint-base/literals#no-useless-escape
     "no-useless-escape": "error",
 
-    "no-useless-rename": "error",
+    // https://jc-verse.github.io/js-style-guide/eslint-base/variables-names#no-useless-rename
+    "no-useless-rename": [
+      "error",
+      { ignoreDestructuring: false, ignoreExport: false, ignoreImport: false },
+    ],
 
+    // https://jc-verse.github.io/js-style-guide/eslint-base/functions#no-useless-return
     "no-useless-return": "error",
 
+    // https://jc-verse.github.io/js-style-guide/eslint-base/variables-names#no-var
     "no-var": "error",
 
+    // https://jc-verse.github.io/js-style-guide/eslint-base/operators#no-void
     "no-void": ["error", { allowAsStatement: true }],
 
+    // https://jc-verse.github.io/js-style-guide/eslint-base/formatting#no-warning-comments
     "no-warning-comments": "off",
 
+    // https://jc-verse.github.io/js-style-guide/eslint-base/control-flow#no-with
     "no-with": "error",
 
-    "object-shorthand": ["error", "always"],
+    // https://jc-verse.github.io/js-style-guide/eslint-base/objects-classes#object-shorthand
+    "object-shorthand": [
+      "error",
+      "always",
+      {
+        avoidExplicitReturnArrows: true,
+        avoidQuotes: false,
+        ignoreConstructors: false,
+      },
+    ],
 
     // Too stylistic.
+    // https://jc-verse.github.io/js-style-guide/eslint-base/variables-names#one-var
     "one-var": "off",
 
-    // Taken care of by Prettier.
-    "one-var-declaration-per-line": "off",
-
+    // https://jc-verse.github.io/js-style-guide/eslint-base/operators#operator-assignment
     "operator-assignment": ["error", "always"],
 
-    "prefer-arrow-callback": "error",
+    // https://jc-verse.github.io/js-style-guide/eslint-base/functions#prefer-arrow-callback
+    "prefer-arrow-callback": [
+      "error",
+      { allowNamedFunctions: false, allowUnboundThis: true },
+    ],
 
-    "prefer-const": "error",
+    // https://jc-verse.github.io/js-style-guide/eslint-base/variables-names#prefer-const
+    "prefer-const": [
+      "error",
+      { destructuring: "any", ignoreReadBeforeAssign: false },
+    ],
 
+    // https://jc-verse.github.io/js-style-guide/eslint-base/variables-names#prefer-destructuring
+    "prefer-destructuring": [
+      "error",
+      { array: true, object: true },
+      { enforceForRenamedProperties: false },
+    ],
+
+    // https://jc-verse.github.io/js-style-guide/eslint-base/operators#prefer-exponentiation-operator
     "prefer-exponentiation-operator": "error",
 
+    // https://jc-verse.github.io/js-style-guide/eslint-base/literals#prefer-named-capture-group
     "prefer-named-capture-group": "warn",
 
+    // https://jc-verse.github.io/js-style-guide/eslint-base/literals#prefer-numeric-literals
     "prefer-numeric-literals": "error",
 
+    // https://jc-verse.github.io/js-style-guide/eslint-base/variables-names#prefer-object-has-own
     "prefer-object-has-own": "error",
 
+    // https://jc-verse.github.io/js-style-guide/eslint-base/objects-classes#prefer-object-spread
     "prefer-object-spread": "error",
 
-    "prefer-promise-reject-errors": "error",
+    // https://jc-verse.github.io/js-style-guide/eslint-base/async#prefer-promise-reject-errors
+    "prefer-promise-reject-errors": ["error", { allowEmptyReject: false }],
 
+    // https://jc-verse.github.io/js-style-guide/eslint-base/literals#prefer-regex-literals
+    "prefer-regex-literals": ["error", { disallowRedundantWrapping: true }],
+
+    // https://jc-verse.github.io/js-style-guide/eslint-base/functions#prefer-rest-params
     "prefer-rest-params": "error",
 
+    // https://jc-verse.github.io/js-style-guide/eslint-base/functions#prefer-spread
     "prefer-spread": "error",
 
+    // https://jc-verse.github.io/js-style-guide/eslint-base/literals#prefer-template
     "prefer-template": "error",
 
-    // Enforced by Prettier
-    "quote-props": "off",
-
-    // Not worth enforcing.
-    radix: "off",
+    // https://jc-verse.github.io/js-style-guide/eslint-base/literals#radix
+    radix: ["error", "always"],
 
     // There can be false-positives
+    // https://jc-verse.github.io/js-style-guide/eslint-base/async#require-atomic-updates
     "require-atomic-updates": "warn",
 
     // This can also be a way to help future refactors, where one of the
     // constituents is planned to be made async
+    // https://jc-verse.github.io/js-style-guide/eslint-base/async#require-await
     "require-await": "warn",
 
-    "require-unicode-regexp": "off",
+    // https://jc-verse.github.io/js-style-guide/eslint-base/literals#require-unicode-regexp
+    "require-unicode-regexp": "error",
 
+    // https://jc-verse.github.io/js-style-guide/eslint-base/async#require-yield
     "require-yield": "warn",
 
     "sort-imports": "off",
@@ -626,18 +840,19 @@ module.exports = {
     "sort-vars": "off",
 
     // Copied from airbnb
+    // https://jc-verse.github.io/js-style-guide/eslint-base/formatting#spaced-comment
     "spaced-comment": [
       "error",
       "always",
       {
         block: {
           balanced: true,
-          exceptions: ["-", "+"],
+          exceptions: [],
           // Space here to support sprockets directives and flow comment types
           markers: ["=", "!", ":", "::"],
         },
         line: {
-          exceptions: ["-", "+"],
+          exceptions: [],
           // Space here to support sprockets directives, slash for /// comments
           markers: ["=", "!", "/"],
         },
@@ -645,16 +860,25 @@ module.exports = {
     ],
 
     // We don't write much plain JS, but this is good enough
-    strict: "error",
+    // https://jc-verse.github.io/js-style-guide/eslint-base/modules#strict
+    strict: ["error", "global"],
 
+    // https://jc-verse.github.io/js-style-guide/eslint-base/literals#symbol-description
     "symbol-description": "error",
 
-    "use-isnan": "error",
+    // https://jc-verse.github.io/js-style-guide/eslint-base/operators#use-isnan
+    "use-isnan": [
+      "error",
+      { enforceForIndexOf: true, enforceForSwitchCase: true },
+    ],
 
-    "valid-typeof": "error",
+    // https://jc-verse.github.io/js-style-guide/eslint-base/operators#valid-typeof
+    "valid-typeof": ["error", { requireStringLiterals: true }],
 
-    "vars-on-top": "off",
+    // https://jc-verse.github.io/js-style-guide/eslint-base/variables-names#vars-on-top
+    "vars-on-top": "error",
 
+    // https://jc-verse.github.io/js-style-guide/eslint-base/operatorss#yoda
     yoda: ["error", "never", { exceptRange: true }],
   },
 };

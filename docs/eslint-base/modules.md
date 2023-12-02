@@ -1,0 +1,37 @@
+---
+sidebar_position: 10
+---
+
+# Modules
+
+## Module names
+
+## Imports
+
+### [`no-restricted-imports`](https://eslint.org/docs/rules/no-restricted-imports)
+
+- Severity: can be enabled
+
+You may want to configure this yourself if you want to ban certain identifiers or certain modules. A typical use case is to restrict the use of `lodash` in favor of native operations.
+
+## Exports
+
+### [`no-restricted-exports`](https://eslint.org/docs/rules/no-restricted-exports)
+
+- Severity: can be enabled
+
+You may want to configure this yourself if you want to ban certain identifiers.
+
+### Use of `export *`
+
+We ban the use of wildcard exports. This is because
+
+## Strict mode
+
+### [`strict`](https://eslint.org/docs/rules/strict)
+
+- Severity: error
+- Configuration:
+  - Require strict mode (`"global"`)
+
+All files should be in strict mode. They should probably also be modules.

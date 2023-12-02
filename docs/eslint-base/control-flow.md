@@ -1,70 +1,46 @@
 ---
-sidebar_position: 4
+sidebar_position: 5
 ---
 
 # Control flow
 
-## Conditionals
+## Blocks
 
-### [`no-cond-assign`](https://eslint.org/docs/rules/no-cond-assign)
+### [`no-empty`](https://eslint.org/docs/rules/no-empty)
 
 - Severity: error
 - Configuration:
-  - Always disallow assignments in conditions (`"always"`)
+  - Allow empty catch blocks (`allowEmptyCatch: true`)
 
-Assignments in conditionals are a common source of mistakes.
+Empty blocks are useless and are a sign of refactoring artifacts. The only exception is empty `catch` blocks, which are used to ignore errors. However this should be rare too, and you should generally add a comment explaining why the error is ignored. This rule doesn't prevent an empty statement from being used, so you can still do this:
 
-<!-- prettier-ignore -->
 ```ts
-if (res.status = 404) {
-  return "Not found";
-}
-// res.status becomes 404
+for (let a = 0; a < 10; a++);
 ```
 
-There is never a case where putting assignments in conditionals does not significantly subtract from readability.
+Although TypeScript doesn't allow the following when you want an `unless` construct:
 
-```ts
-function setHeight(node: HTMLElement) {
-  let someNode = node;
-  do someNode.style.height = "100px";
-  while ((someNode = someNode.parentNode));
-  // ^ First parse: this is an equality test?
-  // ^ Second parse: this is an assignment. Is that a mistake?
-  // ^ Third parse: oh, it's intended because of the extra brackets
+```ts twoslash
+// @errors: 1313
+if (Math.random() > 0.5);
+else {
+  // do something when the condition is false
 }
 ```
 
-Always write assignments as a separate statement:
+### [`no-lone-blocks`](https://eslint.org/docs/rules/no-lone-blocks)
 
-```ts
-function setHeight(node: HTMLElement) {
-  let someNode = node;
-  while (someNode) {
-    someNode.style.height = "100px";
-    someNode = someNode.parentNode;
-  }
-}
-```
+- Severity: error
 
-It also permits us to use `while` instead of `do-while`, which is still a minor readability improvement.
+This rule only reports where the block is absolutely unnecessary (when it does not contain lexical declarations). Removing the block will be able to reduce indentation and lines.
 
-There are some cases where assignments in conditionals are useful, such as to reduce code duplication:
-
-```ts
-let input;
-while ((input = getInput())) {
-  // ...
-}
-```
-
-In such cases, you can either disable the rule, or use an explicit equality check (`while ((input = getInput()) !== null)`). We don't make ESLint special-case this because Prettier automatically adds braces, which means it's not going to end up reporting anything.
+## Conditionals
 
 ### [`no-constant-condition`](https://eslint.org/docs/rules/no-constant-condition)
 
 - Severity: error
 - Configuration:
-  - Disallow constant conditions in loops (`"always"`)
+  - Disallow constant conditions in loops (`checkLoops: true`)
 
 Constant conditions that always evaluate to truthy or falsy can be refactoring artifacts. In addition, infinite loops are also forbidden to prompt developers to consider alternatives like explicit exit conditions instead of `break` statements, or `setInterval`.
 
@@ -79,6 +55,87 @@ while (true) {
 do {
   curNode = findNextNode(curNode);
 } while (!isTargetNode(curNode));
+```
+
+In the very rare case where you do need an infinite loop (such as when the program is a message loop), use a disable comment. Note that `for (;;)` is also a viable workaround where really intended.
+
+### [`no-negated-condition`](https://eslint.org/docs/rules/no-negated-condition)
+
+- Severity: off
+
+You should generally avoid using negative conditions when the two cases have equal weight:
+
+```ts
+if (!isFoo) {
+  // 10 lines
+} else {
+  // 10 lines
+}
+```
+
+However, in the case where one case is either much more common or much shorter, put the shorter case first, so it can get out of readers' minds early:
+
+```ts
+if (!isReady) {
+  // 5 lines
+} else {
+  // 50 lines
+}
+```
+
+But in this case, consider whether you can use early return, so you can omit the `else` block altogether.
+
+## `if-else`
+
+### [`no-dupe-else-if`](https://eslint.org/docs/rules/no-dupe-else-if)
+
+- Severity: error
+
+It is probably a mistake, or at least extremely confusing, to have the same condition written twice. If each condition leads to a side effect, consider restructuring your code.
+
+```ts
+let a = 1;
+if (a++ === 3) {
+  // a was originally 3
+} else if (a++ === 3) {
+  // a was originally 2
+} else if (a++ === 3) {
+  // a was originally 1
+} else {
+  // ...
+}
+```
+
+```ts
+let a = 1;
+let hasFound = false;
+while (a++ <= 3 && !hasFound) {
+  if (a === 3) hasFound = true;
+}
+```
+
+### [`no-else-return`](https://eslint.org/docs/rules/no-else-return)
+
+- Severity: error
+- Configuration:
+  - Allow `else if` after the previous block ends with `return` (`allowElseIf: true`)
+
+Using `return` at the top level instead of within `else` allows you to write with less indentation. It also prevents accidental unreachable code. `else if` is allowed because it leads to fewer lines compared to two separate `if` statements, and also makes the flow clearer.
+
+### [`no-lonely-if`](https://eslint.org/docs/rules/no-lonely-if)
+
+- Severity: error
+
+Do not use an `if` statement as the only statement in an `else` block. Use `else if` instead.
+
+```ts
+if (something) {
+  // ...
+} else {
+  if (somethingElse) {
+    // ...
+  }
+}
 ```
 
 ## Loops
@@ -117,12 +174,28 @@ Prefer this:
 
 ```ts
 for (const line of lines) {
-  if (line.trim().length === 0) {
-    continue;
-  }
+  if (line.trim().length === 0) continue;
   // 20 lines of handling this line...
 }
 ```
+
+### [`no-unmodified-loop-condition`](https://eslint.org/docs/rules/no-unmodified-loop-condition)
+
+- Severity: error
+
+Unmodified loop conditions are usually a mistake. Note that this rule may have false-positives but the chances are low.
+
+### [`no-unreachable-loop`](https://eslint.org/docs/rules/no-unreachable-loop)
+
+- Severity: error
+- Configuration:
+  - Allow no exceptions (`ignore: []`)
+
+Do not write loops that only run once. Either use an `if` statement instead or put the `break` inside a conditional.
+
+### Use of `for-in`
+
+We ban `for...in` loops altogether via `no-restricted-syntax`. This is because it traverses the prototype chain, which is almost never what you want. Usually, you should refactor `for (const key in obj)` to `for (const key of Object.keys(obj))`, or consider if you meant `for-of` in the first place.
 
 ## `switch-case`
 
@@ -194,6 +267,144 @@ In case where there's indeed a default case, we require it to be placed last. Th
 If a case contains lexical declarations, it must be wrapped in a block. This is because the `case` are more like labels and do not create their own scope. This may lead to unexpected bugs, especially if there's fallthrough.
 
 TODO: examples?
+
+### [`no-duplicate-case`](https://eslint.org/docs/rules/no-duplicate-case)
+
+- Severity: error
+
+See [`no-dupe-else-if`](#no-dupe-else-if).
+
+### [`no-fallthrough`](https://eslint.org/docs/rules/no-fallthrough)
+
+- Severity: error
+- Configuration:
+  - Allow empty cases to fall through (`allowEmptyCase: true`)
+  - Do not allow comments (`commentPattern: undefined`)
+
+It is a common error to forget `break`. In cases where you do want to fall through, use a disable comment, which is just as expressive as a custom comment like `// fallthrough`.
+
+```ts
+switch (a) {
+  case 1:
+    console.log();
+  // eslint-disable-next-line no-fallthrough
+  case 2:
+}
+```
+
+## `try-catch`
+
+### [`no-ex-assign`](https://eslint.org/docs/rules/no-ex-assign)
+
+- Severity: error
+
+There aren't many good reasons for re-assigning `err` in a `catch` block. In TypeScript, its type is always `unknown`, so even if you normalize its type in value-land, you still have to cast it to a more specific type to use it.
+
+```ts twoslash
+try {
+  // ...
+} catch (err) {
+  err = new Error(String(err)); // err is still unknown
+  // ^?
+}
+```
+
+Just create a new variable instead.
+
+### [`no-unsafe-finally`](https://eslint.org/docs/rules/no-unsafe-finally)
+
+- Severity: error
+
+Do not use control-flow statements (`return` or `throw` in particular) in a `finally` block. This overwrites the completion value of the `try` block.
+
+Note that errors may still be thrown from the `finally` block but the possibility is low. When this happens, it usually means something very bad had happened and is not up to the developer to handle anyway.
+
+```ts
+try {
+  // ...
+} finally {
+  closeFile(); // May still throw if the file fails to close
+}
+```
+
+### [`no-useless-catch`](https://eslint.org/docs/rules/no-useless-catch)
+
+- Severity: error
+
+Do not use `try-catch` blocks that only re-throw the caught error. This is a sign of refactoring artifacts.
+
+```ts
+try {
+  // ...
+} catch (e) {
+  // Maybe you intend to have some additional handling here?
+  throw e;
+}
+```
+
+## Labels
+
+### [`no-extra-label`](https://eslint.org/docs/rules/no-extra-label)
+
+- Severity: error
+
+Only use a label when it can break out of nested loops. Do not use labels if the `break`/`continue` functions correctly without them.
+
+### [`no-label-var`](https://eslint.org/docs/rules/no-label-var)
+
+- Severity: error
+
+Do not give a label the same name as a variable. This is potentially confusing.
+
+### [`no-labels`](https://eslint.org/docs/rules/no-labels)
+
+- Severity: off
+
+We allow labels. They are useful for breaking out of nested loops. However, we ban unnecessary labels with `no-extra-label` and unused labels with `no-unused-labels`, which should eliminate most of the problems with accidental labels.
+
+### [`no-unused-labels`](https://eslint.org/docs/rules/no-unused-labels)
+
+- Severity: error
+- Related:
+  - `ts(7028): Unused label.`
+
+Do not declare labels that are not used. This is the same mistake as declaring unused variables, and is potentially worse because labels are very rare, and unused labels are usually signs of miswritten code, such as `() => { a: 1 }` where `a` is parsed as a label.
+
+## Other statements
+
+### [`no-debugger`](https://eslint.org/docs/rules/no-debugger)
+
+- Severity: error
+
+You should never have `debugger` statements in production code.
+
+### [`no-throw-literal`](https://eslint.org/docs/rules/no-throw-literal)
+
+- Severity: error
+
+You should always throw one of the following:
+
+1. Newly created `Error` instances
+2. In the case of re-throwing: the caught error
+3. In the case of an API returning an error wrapped in a result: the expression representing that error (usually `result.error`, etc.)
+
+Throwing a string literal is never allowed because it doesn't contain the stack trace and other APIs expecting `Error` instances may not function correctly. There are some API designs that require using `throw` (like `throw redirect(301)`) but such cases are extremely rare.
+
+### [`no-unreachable`](https://eslint.org/docs/rules/no-unreachable)
+
+- Severity: error
+- Related:
+  - `ts(7027): Unreachable code detected.`
+
+Unreachable code is always a mistake. Furthermore, TypeScript gives up on control-flow analysis inside unreachable code, so you may get type errors that are not real.
+
+### [`no-with`](https://eslint.org/docs/rules/no-with)
+
+- Severity: error
+- Related:
+  - `ts(1101): 'with' statements are not allowed in strict mode.`
+
+`with` is forbidden in strict mode. It is also forbidden in TypeScript and causes TypeScript to give up on any type checking.
 
 ## Complexity
 

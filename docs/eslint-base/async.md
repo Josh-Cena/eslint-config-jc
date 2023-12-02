@@ -1,5 +1,5 @@
 ---
-sidebar_position: 8
+sidebar_position: 9
 ---
 
 # Async operations
@@ -16,6 +16,48 @@ From the ESLint docs:
 >
 > - If an async executor function throws an error, the error will be lost and won't cause the newly-constructed `Promise` to reject. This could make it difficult to debug and handle some errors.
 > - If a Promise executor function is using `await`, this is usually a sign that it is not actually necessary to use the `new Promise` constructor, or the scope of the `new Promise` constructor can be reduced.
+
+### [`no-promise-executor-return`](https://eslint.org/docs/rules/no-promise-executor-return)
+
+- Severity: error
+- Configuration:
+  - Do not allow returning a `void` expression (`allowVoid: false`)
+
+The executor's return value is ignored and you may be confusing it with the `resolve` function. Do not use concise arrow functions with promise executors, because it usually does not make the code much shorter.
+
+### [`prefer-promise-reject-errors`](https://eslint.org/docs/rules/prefer-promise-reject-errors)
+
+- Severity: error
+- Configuration:
+  - Do not allow rejecting with nothing (`allowEmptyReject: false`)
+
+Just like you should always `throw` an `Error` instance, you should always `reject` with an `Error` instance. This means when people use `try...catch` with `await`, they can catch the error and handle it properly.
+
+## Async functions
+
+### [`require-await`](https://eslint.org/docs/rules/require-await)
+
+- Severity: warning
+
+You should not define an `async` function that does not `await` anything. This means the users have to unnecessarily `await` to get the return value.
+
+This is only a warning, because there are many cases where the lack of `await` is intentional:
+
+- The function is a stub and will be implemented later.
+- It's a callback function and the caller will `await` it. You want to remind readers that `await` is allowed in this function.
+- The caller explicitly _requires_ a `Promise` instance to be returned.
+- The function calls another function that is planned to become async in the future.
+- The function is a method that derives from an async base method.
+
+You can use your discretion to disable this rule in these cases.
+
+## Generator functions
+
+### [`require-yield`](https://eslint.org/docs/rules/require-yield)
+
+- Severity: warn
+
+For the same reasons as `require-await`, this is only set to a warning because there are cases where a generator function is semantically more appropriate.
 
 ## Paralleling
 
@@ -70,3 +112,11 @@ function findAsyncSequential<T>(arr: T[], matcher: (a: T) => Promise<boolean>) {
     .then((res) => (res === notFound ? undefined : res));
 }
 ```
+
+## Racing
+
+### [`require-atomic-updates`](https://eslint.org/docs/rules/require-atomic-updates)
+
+- Severity: warning
+
+You should generally avoid side effects. When side effects are unavoidable, make sure that only one function is able to update the variable. This rule is helpful, but there can be false-positives, because it can only enforce defensive coding but not locate any actual offenders.
