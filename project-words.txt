@@ -20,6 +20,7 @@ isnan
 jcify
 lintstagedrc
 listbox
+lookarounds
 miswritten
 monkeypatch
 naïvely
@@ -27,6 +28,7 @@ nocheck
 nonconstructor
 noninteractive
 nonoctal
+nums
 pico
 picocolors
 plusplus
