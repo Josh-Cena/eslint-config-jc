@@ -1,9 +1,7 @@
 module.exports = {
   plugins: ["regexp"],
   rules: {
-    // This rule is unactionable because /T{4}/ cannot be changed to /T{0,4}/
-    // even when T matches the empty string.
-    "regexp/confusing-quantifier": "off",
+    "regexp/confusing-quantifier": "error",
 
     "regexp/control-character-escape": "error",
 

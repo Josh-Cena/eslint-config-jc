@@ -12,29 +12,17 @@ module.exports = {
 
     "react/boolean-prop-naming": "off",
 
-    "react/button-has-type": [
-      "error",
-      {
-        button: true,
-        reset: false, // MDN: This behavior tends to annoy users
-        submit: true,
-      },
-    ],
-
-    // Checked by TypeScript
-    "react/default-props-match-prop-types": "off",
-
     // Sometimes we do need `props` as a whole, e.g. for spreading
     "react/destructuring-assignment": "off",
 
     // Isn't useful
-    "react/display-name": ["off", { ignoreTranspilerName: false }],
+    "react/display-name": "off",
 
-    // Checked by TypeScript
-    "react/forbid-foreign-prop-types": "error",
+    "react/forbid-component-props": 0,
 
-    // Checked by TypeScript
-    "react/forbid-prop-types": "off",
+    "react/forbid-dom-props": 0,
+
+    "react/forbid-elements": 0,
 
     // Note that it false-positives for `const Foo: Comp = () => <></>`
     "react/function-component-definition": [
@@ -45,23 +33,40 @@ module.exports = {
       },
     ],
 
-    // TODO unreleased feature
-    // 'react/hook-use-state': 'warn',
+    "react/hook-use-state": ["error", { allowDestructuredState: true }],
 
-    // 'react/iframe-missing-sandbox': 'error',
+    "react/jsx-fragments": ["error", "syntax"],
 
-    // We don't use class components much.
-    "react/no-access-state-in-setstate": "error",
+    // There can be false positives, such as an array that's not used as a
+    // single child
+    "react/jsx-key": [
+      "error",
+      {
+        checkFragmentShorthand: true,
+        // https://github.com/jsx-eslint/eslint-plugin-react/issues/2830
+        checkKeyMustBeforeSpread: true,
+        warnOnDuplicates: true,
+      },
+    ],
 
-    // Enforced by Prettier
-    "react/no-adjacent-inline-elements": "off",
+    "react/jsx-no-bind": [
+      "warn",
+      {
+        allowArrowFunctions: false,
+        allowBind: false,
+        allowFunctions: false,
+        ignoreDOMComponents: true,
+        ignoreRefs: true,
+      },
+    ],
+
+    "react/jsx-no-constructed-context-values": "error",
+
+    // We usually use automatic runtime
+    "react/jsx-uses-react": 0,
 
     // In some cases this is fine (e.g. static websites)
-    "react/no-array-index-key": "error",
-
-    "react/no-arrow-function-lifecycle": "error",
-
-    "react/no-children-prop": "error",
+    "react/no-array-index-key": "warn",
 
     "react/no-danger": "warn",
 
@@ -69,16 +74,10 @@ module.exports = {
 
     "react/no-deprecated": "error",
 
-    "react/no-did-mount-set-state": "error",
-
-    "react/no-did-update-set-state": "error",
-
-    "react/no-direct-mutation-state": "error",
-
+    // Deprecated API
     "react/no-find-dom-node": "error",
 
-    "react/no-invalid-html-attribute": "error",
-
+    // Deprecated API
     "react/no-is-mounted": "error",
 
     // It's useful for encapsulation.
@@ -86,77 +85,35 @@ module.exports = {
 
     "react/no-namespace": "error",
 
-    "react/no-redundant-should-component-update": "error",
+    "react/no-object-type-as-default-prop": "warn",
 
+    // ReactDOM.render itself is deprecated
     "react/no-render-return-value": "error",
 
-    "react/no-set-state": "off",
-
-    "react/no-string-refs": "error",
+    "react/no-string-refs": ["error", { noTemplateLiterals: true }],
 
     "react/no-this-in-sfc": "error",
 
     "react/no-typos": "error",
 
-    // The original text allows for things like spellchecking and searching
-    "react/no-unescaped-entities": "off",
-
-    "react/no-unknown-property": "error",
-
-    "react/no-unsafe": "error",
-
-    "react/no-unstable-nested-components": ["error", { allowAsProps: true }],
-
-    "react/no-unused-class-component-methods": "error",
-
-    // Checked by TypeScript
-    "react/no-unused-prop-types": "off",
-
-    "react/no-unused-state": "error",
-
-    "react/no-will-update-set-state": "error",
-
-    "react/prefer-es6-class": "error",
-
-    // Checked by TypeScript
-    "react/prefer-exact-props": "off",
+    "react/no-unstable-nested-components": ["warn", { allowAsProps: true }],
 
     "react/prefer-read-only-props": "warn",
 
-    "react/prefer-stateless-function": "error",
-
-    // Checked by TypeScript
-    "react/prop-types": "off",
-
     // Checked by TypeScript; we may also use JSX runtime
     "react/react-in-jsx-scope": "off",
-
-    // Checked by TypeScript
-    "react/require-default-props": "off",
-
-    // We mostly use function components, and this optimization is not critical
-    "react/require-optimization": "off",
-
-    "react/require-render-return": "error",
-
-    "react/self-closing-comp": "error",
-
-    "react/sort-comp": "off",
-
-    "react/sort-prop-types": "off",
 
     "react/state-in-constructor": "error",
 
     "react/static-property-placement": "off",
 
+    // Also checked by TypeScript
     "react/style-prop-object": "error",
-
-    "react/void-dom-elements-no-children": "error",
   },
   settings: {
     react: {
       pragma: "React",
-      version: "17",
+      version: "18",
     },
   },
 };

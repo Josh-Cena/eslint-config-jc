@@ -29,6 +29,8 @@
     "./import": "./rules/import.js",
     "./jsx": "./rules/jsx.js",
     "./react": "./rules/react.js",
+    "./react-class-comps": "./rules/react-class-comps.js",
+    "./react-prop-types": "./rules/react-prop-types.js",
     "./typescript": "./rules/typescript.js",
     "./typescript-typecheck": "./rules/typescript-typecheck.js"
   },

@@ -1,5 +1,5 @@
 module.exports = {
-  plugins: ["jsx-a11y"],
+  plugins: ["jsx-a11y", "react"],
   rules: {
     // JSX a11y rules are taken from airbnb, not adjusted yet
     "jsx-a11y/alt-text": [
@@ -13,7 +13,22 @@ module.exports = {
       },
     ],
 
-    "jsx-a11y/anchor-has-content": ["error", { components: [] }],
+    "jsx-a11y/anchor-ambiguous-text": [
+      "warn",
+      {
+        // Default
+        words: ["click here", "here", "link", "a link", "learn more"],
+      },
+    ],
+
+    "jsx-a11y/anchor-has-content": [
+      "error",
+      {
+        aspects: ["noHref", "invalidHref", "preferButton"],
+        components: ["Link"],
+        specialLink: ["to"],
+      },
+    ],
 
     "jsx-a11y/anchor-is-valid": [
       "error",
@@ -34,12 +49,7 @@ module.exports = {
 
     "jsx-a11y/aria-unsupported-elements": "error",
 
-    "jsx-a11y/autocomplete-valid": [
-      "off",
-      {
-        inputComponents: [],
-      },
-    ],
+    "jsx-a11y/autocomplete-valid": ["off", { inputComponents: [] }],
 
     "jsx-a11y/click-events-have-key-events": "error",
 
@@ -73,7 +83,7 @@ module.exports = {
       },
     ],
 
-    "jsx-a11y/heading-has-content": ["error", { components: [""] }],
+    "jsx-a11y/heading-has-content": ["error", { components: [] }],
 
     "jsx-a11y/html-has-lang": "error",
 
@@ -81,7 +91,20 @@ module.exports = {
 
     "jsx-a11y/img-redundant-alt": "error",
 
-    "jsx-a11y/interactive-supports-focus": "error",
+    "jsx-a11y/interactive-supports-focus": [
+      "error",
+      {
+        tabbable: [
+          "button",
+          "checkbox",
+          "link",
+          "searchbox",
+          "spinbutton",
+          "switch",
+          "textbox",
+        ],
+      },
+    ],
 
     "jsx-a11y/label-has-associated-control": [
       "error",
@@ -105,24 +128,38 @@ module.exports = {
       },
     ],
 
-    "jsx-a11y/mouse-events-have-key-events": "error",
+    "jsx-a11y/mouse-events-have-key-events": [
+      "error",
+      {
+        hoverInHandlers: [
+          "onMouseOver",
+          "onMouseEnter",
+          "onPointerOver",
+          "onPointerEnter",
+        ],
+        hoverOutHandlers: [
+          "onMouseOut",
+          "onMouseLeave",
+          "onPointerOut",
+          "onPointerLeave",
+        ],
+      },
+    ],
 
     "jsx-a11y/no-access-key": "error",
 
-    "jsx-a11y/no-autofocus": ["error", { ignoreNonDOM: true }],
+    "jsx-a11y/no-aria-hidden-on-focusable": "error",
+
+    "jsx-a11y/no-autofocus": ["error", { ignoreNonDOM: false }],
 
     "jsx-a11y/no-distracting-elements": [
       "error",
-      {
-        elements: ["marquee", "blink"],
-      },
+      { elements: ["marquee", "blink"] },
     ],
 
     "jsx-a11y/no-interactive-element-to-noninteractive-role": [
       "error",
-      {
-        tr: ["none", "presentation"],
-      },
+      { tr: ["none", "presentation"] },
     ],
 
     "jsx-a11y/no-noninteractive-element-interactions": [
@@ -169,6 +206,7 @@ module.exports = {
     "jsx-a11y/no-noninteractive-tabindex": [
       "error",
       {
+        allowExpressionValues: true,
         roles: ["tabpanel"],
         tags: [],
       },
@@ -176,11 +214,17 @@ module.exports = {
 
     "jsx-a11y/no-onchange": "off",
 
-    "jsx-a11y/no-redundant-roles": "error",
+    "jsx-a11y/no-redundant-roles": [
+      "error",
+      {
+        nav: ["navigation"],
+      },
+    ],
 
     "jsx-a11y/no-static-element-interactions": [
       "error",
       {
+        allowExpressionValues: true,
         handlers: [
           "onClick",
           "onMouseDown",
@@ -192,6 +236,8 @@ module.exports = {
       },
     ],
 
+    "jsx-a11y/prefer-tag-over-role": "error",
+
     "jsx-a11y/role-has-required-aria-props": "error",
 
     "jsx-a11y/role-supports-aria-props": "error",
@@ -200,29 +246,69 @@ module.exports = {
 
     "jsx-a11y/tabindex-no-positive": "error",
 
+    "react/button-has-type": [
+      "error",
+      {
+        button: true,
+        reset: false, // MDN: This behavior tends to annoy users
+        submit: true,
+      },
+    ],
+
+    "react/iframe-missing-sandbox": "error",
+
     "react/jsx-boolean-value": ["error", "never"],
 
-    "react/jsx-curly-brace-presence": "error",
+    "react/jsx-child-element-spacing": "warn",
 
-    // Js, jsx, tsx are all acceptable
+    // Formatting
+    "react/jsx-closing-bracket-location": "off",
+
+    // Formatting
+    "react/jsx-closing-tag-location": "off",
+
+    "react/jsx-curly-brace-presence": [
+      "error",
+      // Maybe one day we can use propElementValues: "never"...
+      { children: "never", propElementValues: "ignore", props: "never" },
+    ],
+
+    // Formatting
+    "react/jsx-curly-newline": "off",
+
+    // Formatting
+    "react/jsx-curly-spacing": "off",
+
+    // Formatting
+    "react/jsx-equals-spacing": "off",
+
+    // .js, .jsx, .tsx are all acceptable
     "react/jsx-filename-extension": "off",
 
-    "react/jsx-fragments": "error",
+    // Formatting
+    "react/jsx-first-prop-new-line": "off",
 
+    // Too stylistic
     "react/jsx-handler-names": "off",
 
-    // Airbnb says there can be false positives
-    "react/jsx-key": "error",
+    // Formatting
+    "react/jsx-indent": "off",
 
+    // Formatting
+    "react/jsx-indent-props": "off",
+
+    // Too stylistic
     "react/jsx-max-depth": "off",
 
-    "react/jsx-no-bind": ["warn", { ignoreDOMComponents: true }],
+    // Formatting
+    "react/jsx-max-props-per-line": "off",
+
+    // Formatting
+    "react/jsx-newline": "off",
 
     "react/jsx-no-comment-textnodes": "error",
 
-    "react/jsx-no-constructed-context-values": "error",
-
-    "react/jsx-no-duplicate-props": "error",
+    "react/jsx-no-duplicate-props": ["error", { ignoreCase: false }],
 
     // We'll use strict-boolean-expressions instead
     "react/jsx-no-leaked-render": "off",
@@ -231,23 +317,69 @@ module.exports = {
 
     "react/jsx-no-script-url": "error",
 
-    "react/jsx-no-target-blank": "error",
+    "react/jsx-no-target-blank": [
+      "error",
+      {
+        allowReferrer: false,
+        enforceDynamicLinks: "always",
+        forms: true,
+        links: true,
+        warnOnSpreadAttributes: true,
+      },
+    ],
 
     // Also checked by TypeScript
-    "react/jsx-no-undef": "error",
+    "react/jsx-no-undef": ["error", { allowGlobals: true }],
 
     "react/jsx-no-useless-fragment": ["error", { allowExpressions: true }],
 
-    "react/jsx-pascal-case": ["error", { allowAllCaps: true }],
+    // Formatting
+    "react/jsx-one-expression-per-line": "off",
 
+    "react/jsx-pascal-case": [
+      "error",
+      {
+        allowAllCaps: true,
+        allowLeadingUnderscore: false,
+        allowNamespace: true,
+      },
+    ],
+
+    // Formatting
+    "react/jsx-props-no-multi-spaces": "off",
+
+    // We like spreading
     "react/jsx-props-no-spreading": "off",
 
-    "react/jsx-sort-default-props": "off",
+    "react/jsx-sort-props": 0,
 
-    "react/jsx-sort-props": "off",
-
-    "react/jsx-uses-react": "warn",
+    // Formatting
+    "react/jsx-tag-spacing": "off",
 
     "react/jsx-uses-vars": "warn",
+
+    // Formatting
+    "react/jsx-wrap-multilines": "off",
+
+    // Too stylistic
+    "react/no-adjacent-inline-elements": "off",
+
+    "react/no-children-prop": ["error", { allowFunctions: false }],
+
+    "react/no-invalid-html-attribute": "error",
+
+    // The original text allows for things like spellchecking and searching
+    "react/no-unescaped-entities": "off",
+
+    "react/no-unknown-property": [
+      "error",
+      {
+        // TODO: not released: requireDataLowercase: true,
+      },
+    ],
+
+    "react/self-closing-comp": ["error", { component: true, html: true }],
+
+    "react/void-dom-elements-no-children": "error",
   },
 };

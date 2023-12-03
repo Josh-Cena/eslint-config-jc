@@ -7,6 +7,9 @@ module.exports = {
     "./rules/typescript.js",
     "./rules/import.js",
     "./rules/react.js",
+    // Not included by default
+    // "./rules/react-class-comps.js",
+    // "./rules/react-prop-types.js",
     "./rules/jsx.js",
   ],
 };
