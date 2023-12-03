@@ -73,7 +73,7 @@ Do not redeclare `var`/`function`. This is probably a mistake. Note that `let`/`
 
 - Severity: warning
 - Configuration:
-  - Check shadowing of globals (`builtinGlobals: false`)
+  - Ignore shadowing of globals (`builtinGlobals: true`)
   - Check shadowing of all variables declared in the outer scope (`hoist: "all"`)
   - Allow shadowing of uninitialized variables (`ignoreOnInitialization: true`)
 
@@ -111,6 +111,8 @@ const x = (() => {
   return x;
 })();
 ```
+
+We allow shadowing globals—this is for a pragmatic concern. There are some extremely generically named globals like `name` and `Plugin` which we don't want to prevented from being used as local variables. However, you should probably avoid using names like `fetch`.
 
 ### [`no-var`](https://eslint.org/docs/rules/no-var)
 

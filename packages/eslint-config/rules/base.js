@@ -616,7 +616,7 @@ module.exports = {
       "warn",
       {
         allow: [],
-        builtinGlobals: true,
+        builtinGlobals: false,
         hoist: "all",
         ignoreOnInitialization: true,
       },

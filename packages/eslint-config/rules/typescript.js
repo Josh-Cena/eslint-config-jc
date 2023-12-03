@@ -240,7 +240,7 @@ module.exports = {
       "warn",
       {
         allow: [],
-        builtinGlobals: true,
+        builtinGlobals: false,
         hoist: "all",
         ignoreFunctionTypeParameterNameValueShadow: false,
         ignoreOnInitialization: true,

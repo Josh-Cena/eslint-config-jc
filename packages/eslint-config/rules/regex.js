@@ -25,6 +25,8 @@ module.exports = {
 
     "regexp/no-contradiction-with-assertion": "error",
 
+    // eslint-disable-next-line sort-keys
+    "no-control-regex": "off",
     "regexp/no-control-character": "error",
 
     "regexp/no-dupe-characters-character-class": "error",
@@ -152,7 +154,7 @@ module.exports = {
 
     // eslint-disable-next-line sort-keys
     "prefer-named-capture-group": "off",
-    "regexp/prefer-named-capture-group": "error",
+    "regexp/prefer-named-capture-group": "warn",
 
     "regexp/prefer-named-replacement": "error",
 

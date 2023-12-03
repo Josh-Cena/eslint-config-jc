@@ -125,7 +125,11 @@ Regular expressions are _not_ intended to be readable; they are designed for mac
 
 ### [`no-control-regex`](https://eslint.org/docs/rules/no-control-regex)
 
-- Severity: warning Control characters are rarely used in regular expressions because they are rarely present in string literals at all. It's only set to warning so you should not fear disabling the rule where needed.
+- Severity: warning
+- Related:
+  - `regexp/no-control-character`
+
+Control characters are rarely used in regular expressions because they are rarely present in string literals at all. It's only set to warning so you should not fear disabling the rule where needed.
 
 ### [`no-div-regex`](https://eslint.org/docs/rules/no-div-regex)
 
@@ -136,18 +140,24 @@ This is an extremely weird rule that forbids `=` at the immediate beginning of a
 ### [`no-empty-character-class`](https://eslint.org/docs/rules/no-empty-character-class)
 
 - Severity: error
+- Related:
+  - `regexp/no-empty-character-class`
 
 Empty character classes cause the regex to never match.
 
 ### [`no-invalid-regexp`](https://eslint.org/docs/rules/no-invalid-regexp)
 
 - Severity: error
+- Related:
+  - `regexp/no-invalid-regexp`
 
 Write valid regular expressions. The only case where you might want to add a disable comment is when you are using novel syntax not supported by ESLint.
 
 ### [`no-misleading-character-class`](https://eslint.org/docs/rules/no-misleading-character-class)
 
 - Severity: error
+- Related:
+  - `regexp/no-misleading-unicode-character`
 
 Do not write character classes that contain grapheme clusters or astral characters in general. Common ways to fix this are:
 
@@ -158,6 +168,8 @@ Do not write character classes that contain grapheme clusters or astral characte
 ### [`no-regex-spaces`](https://eslint.org/docs/rules/no-regex-spaces)
 
 - Severity: off
+- Related:
+  - `regexp/prefer-quantifier`
 
 Although we want to use concise syntax, multiple spaces in a regex is often useful to resemble constructs that readers are familiar with.
 
@@ -169,12 +181,16 @@ const match = tableRow.match(/\| Column      \| Another one \|/);
 ### [`no-useless-backreference`](https://eslint.org/docs/rules/no-useless-backreference)
 
 - Severity: error
+- Related:
+  - `regexp/no-useless-backreference`
 
 Do not write backreferences that always resolve to the empty string.
 
 ### [`prefer-named-capture-group`](https://eslint.org/docs/rules/prefer-named-capture-group)
 
 - Severity: warning
+- Related:
+  - `regexp/prefer-named-capture-group`
 
 Named capture groups allow us to semantically identify each group. It also warns about those groups that should probably be explicitly marked as non-capturing groups.
 
@@ -221,6 +237,8 @@ new RegExp("https://jc-verse.github.io/js-style-guide/eslint-base/literals");
 ### [`require-unicode-regexp`](https://eslint.org/docs/rules/require-unicode-regexp)
 
 - Severity: error
+- Related:
+  - `regexp/require-unicode-regexp`
 
 Always use the `u` or `v` flag. This does not just enable additional features; it also disables legacy features, like strict mode for regexes. See [deprecated regex features](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Deprecated_and_obsolete_features#regexp).
 
