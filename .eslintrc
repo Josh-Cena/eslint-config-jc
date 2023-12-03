@@ -1,5 +1,5 @@
 {
-  "extends": ["jc"],
+  "extends": ["jc", "jc/typescript-typecheck", "jc/node"],
   "parserOptions": {
     "project": true
   },

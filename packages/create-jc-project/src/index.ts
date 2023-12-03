@@ -17,34 +17,47 @@ if (process.argv.includes("--version") || process.argv.includes("-v")) {
 }
 
 console.log(pico.cyan("Starting to scaffold new JC project..."));
-const { name, description, usingReact } = await prompts(
-  [
-    {
-      type: "text",
-      name: "name",
-      message: "What should we call this project?",
-      async validate(value) {
-        if (
-          typeof value !== "string" ||
-          !/^(?:@[a-z-]+\/)?[a-z-]+$/u.test(value)
-        )
-          return "Not a valid package name.";
-        if (await pathExists(value)) return "The directory already exists.";
-        return true;
+function parseValidRes(r: { [key: string]: unknown }) {
+  if (
+    typeof r.name !== "string" ||
+    typeof r.description !== "string" ||
+    typeof r.usingReact !== "boolean"
+  ) {
+    console.log(pico.red("Invalid input."));
+    process.exit(1);
+  }
+  return r as { name: string; description: string; usingReact: boolean };
+}
+const { name, description, usingReact } = parseValidRes(
+  await prompts(
+    [
+      {
+        type: "text",
+        name: "name",
+        message: "What should we call this project?",
+        async validate(value) {
+          if (
+            typeof value !== "string" ||
+            !/^(?:@[a-z-]+\/)?[a-z-]+$/u.test(value)
+          )
+            return "Not a valid package name.";
+          if (await pathExists(value)) return "The directory already exists.";
+          return true;
+        },
       },
-    },
-    {
-      type: "text",
-      name: "description",
-      message: "Brief description?",
-    },
-    {
-      type: "confirm",
-      name: "usingReact",
-      message: "Using React?",
-    },
-  ],
-  { onCancel: () => process.exit(0) },
+      {
+        type: "text",
+        name: "description",
+        message: "Brief description?",
+      },
+      {
+        type: "confirm",
+        name: "usingReact",
+        message: "Using React?",
+      },
+    ],
+    { onCancel: () => process.exit(0) },
+  ),
 );
 const packageJSON = {
   name,
@@ -76,10 +89,10 @@ async function rReadDir(dir: string): Promise<[string, Buffer][]> {
   const dirents = await fs.readdir(dir, { withFileTypes: true });
   const files = await Promise.all(
     dirents.map(async (dirent) => {
-      const res = path.join(dir, dirent.name);
+      const subDir = path.join(dir, dirent.name);
       return dirent.isDirectory()
-        ? rReadDir(res)
-        : [[res, await fs.readFile(res)] as [string, Buffer]];
+        ? rReadDir(subDir)
+        : [[subDir, await fs.readFile(subDir)] as [string, Buffer]];
     }),
   );
   return files.flat();

@@ -17,7 +17,9 @@ export function exec(
       if (((e): e is SpawnSyncReturns<string> => true)(err)) {
         if (err.stdout) console.log(err.stdout);
         if (err.stderr) console.log(err.stderr);
-        console.log(pico.red(`Command exited with code ${err.status}.`));
+        console.log(
+          pico.red(`Command exited with code ${err.status ?? "unknown"}.`),
+        );
         if (index < times - 1) console.log(pico.cyan("Retrying..."));
       }
       return false;

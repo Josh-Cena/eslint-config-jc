@@ -27,6 +27,7 @@
     "./base": "./rules/base.js",
     "./regex": "./rules/regex.js",
     "./import": "./rules/import.js",
+    "./node": "./rules/node.js",
     "./jsx": "./rules/jsx.js",
     "./react": "./rules/react.js",
     "./react-class-comps": "./rules/react-class-comps.js",
