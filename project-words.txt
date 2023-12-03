@@ -23,6 +23,7 @@ listbox
 lookarounds
 miswritten
 monkeypatch
+multilines
 naïvely
 nocheck
 nonconstructor
@@ -41,12 +42,15 @@ readonliness
 redeclaration
 redeclared
 redeclaring
+searchbox
 setstate
 shiki
+spinbutton
 subclassing
 tabindex
 tablist
 tabpanel
+textbox
 textnodes
 treegrid
 treeitem
