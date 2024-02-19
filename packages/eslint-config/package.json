@@ -1,6 +1,6 @@
 {
   "name": "eslint-config-jc",
-  "version": "4.2.1",
+  "version": "4.3.0",
   "description": "Josh-Cena's personal coding style",
   "main": "index.js",
   "repository": {
@@ -36,24 +36,28 @@
     "./typescript-typecheck": "./rules/typescript-typecheck.js"
   },
   "dependencies": {
-    "eslint-config-prettier": "^9.0.0"
+    "eslint-config-prettier": "^9.1.0"
   },
   "peerDependencies": {
-    "@typescript-eslint/eslint-plugin": "^6.13.1",
-    "@typescript-eslint/parser": "^6.13.1",
-    "eslint": "^8.54.0",
+    "@typescript-eslint/eslint-plugin": "^7.0.1",
+    "@typescript-eslint/parser": "^7.0.1",
+    "eslint": "^8.56.0",
     "eslint-plugin-header": "^3.1.1",
-    "eslint-plugin-import": "^2.29.0",
+    "eslint-plugin-import": "^2.29.1",
     "eslint-plugin-jsx-a11y": "^6.8.0",
+    "eslint-plugin-n": "^16.6.2",
     "eslint-plugin-react": "^7.33.2",
     "eslint-plugin-react-hooks": "^4.6.0",
-    "eslint-plugin-regexp": "^2.1.1"
+    "eslint-plugin-regexp": "^2.2.0"
   },
   "peerDependenciesMeta": {
     "eslint-plugin-header": {
       "optional": true
     },
     "eslint-plugin-jsx-a11y": {
+      "optional": true
+    },
+    "eslint-plugin-n": {
       "optional": true
     },
     "eslint-plugin-react": {
