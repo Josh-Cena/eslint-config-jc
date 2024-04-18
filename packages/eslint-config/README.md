@@ -4,16 +4,44 @@ My personal coding style.
 
 This is designed to be a replacement for `eslint:recommended`, `plugin:react-hooks/recommended`, `plugin:@typescript-eslint/recommended`, and of course, everyone's favorite `airbnb`. It also extends `prettier`.
 
+## Installation
+
+```sh
+yarn add -D eslint-config-jc
+```
+
+No need to install any other plugins. You should probably also have the following dependencies:
+
+- `eslint`
+- `typescript-eslint` (for authoring the config)
+
 ## Configuration
 
-ESLint config:
+`eslint.config.mjs`:
 
-```json
-{
-  "root": true,
-  "extends": ["jc"]
-}
+```js
+import jcRules from "eslint-config-jc";
+import tseslint from "typescript-eslint";
+
+export default tseslint.config(
+  ...jcRules({
+    // options
+  }),
+  {
+    // Your overrides here
+  },
+);
 ```
+
+The `jcRules` function has the following options:
+
+- `react`: enable React and JSX rules (also loads browser globals)
+- `typescriptTypeCheck`: enabled type-checked rules
+- `node`: enable Node.js rules (also loads Node globals)
+- `reactClassComp`: enable rules for class components (you probably don't need this)
+- `reactPropTypes`: enable rules for prop types (you probably don't need this)
+
+Each option can be set to `true` to enable, or an array of paths used for the `files` ESLint option.
 
 ## Configuration philosophy
 
