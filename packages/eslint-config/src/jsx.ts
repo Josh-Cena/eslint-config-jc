@@ -1,5 +1,12 @@
-module.exports = {
-  plugins: ["jsx-a11y", "react"],
+import jsxA11yPlugin from "eslint-plugin-jsx-a11y";
+import reactPlugin from "eslint-plugin-react";
+import tseslint from "typescript-eslint";
+
+export default tseslint.config({
+  plugins: {
+    "jsx-a11y": jsxA11yPlugin,
+    react: reactPlugin,
+  },
   rules: {
     // JSX a11y rules are taken from airbnb, not adjusted yet
     "jsx-a11y/alt-text": [
@@ -382,4 +389,4 @@ module.exports = {
 
     "react/void-dom-elements-no-children": "error",
   },
-};
+});

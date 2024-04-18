@@ -1,4 +1,6 @@
-module.exports = {
+import tseslint from "typescript-eslint";
+
+export default tseslint.config({
   rules: {
     "react/default-props-match-prop-types": "off",
 
@@ -18,4 +20,4 @@ module.exports = {
 
     "react/sort-prop-types": "off",
   },
-};
+});

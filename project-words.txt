@@ -12,6 +12,7 @@ eqeqeq
 eslintcache
 esmodule
 gridcell
+hashbang
 ified
 iife
 intelligents
@@ -54,6 +55,8 @@ textbox
 textnodes
 treegrid
 treeitem
+tses
+tseslint
 twoslash
 typecheck
 typedefs

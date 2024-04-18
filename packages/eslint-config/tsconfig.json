@@ -1,0 +1,8 @@
+{
+  "extends": "tsconfig-jc",
+  "compilerOptions": {
+    "declaration": true,
+    "rootDir": "./src",
+    "outDir": "./dist"
+  }
+}

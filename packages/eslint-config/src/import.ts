@@ -1,5 +1,10 @@
-module.exports = {
-  plugins: ["import"],
+import importPlugin from "eslint-plugin-import";
+import tseslint from "typescript-eslint";
+
+export default tseslint.config({
+  plugins: {
+    import: importPlugin,
+  },
   rules: {
     // We use @typescript-eslint/no-import-type-side-effects
     "import/consistent-type-specifier-style": "off",
@@ -131,4 +136,4 @@ module.exports = {
       },
     },
   },
-};
+});

@@ -8,28 +8,19 @@
   ],
   "scripts": {
     "format": "prettier -w .",
-    "lint": "eslint \"**/*.{js,ts,jsx,tsx}\"",
+    "lint": "eslint .",
     "spellcheck": "cspell \"**\" --no-progress",
     "prepare": "husky install",
     "build": "yarn workspaces foreach --no-private -t -v run build",
     "publish": "yarn workspaces foreach --no-private npm publish"
   },
   "devDependencies": {
-    "@typescript-eslint/eslint-plugin": "^7.0.1",
-    "@typescript-eslint/parser": "^7.0.1",
-    "cspell": "^8.4.0",
-    "eslint": "^8.56.0",
-    "eslint-plugin-header": "^3.1.1",
-    "eslint-plugin-import": "^2.29.1",
-    "eslint-plugin-jsx-a11y": "^6.8.0",
-    "eslint-plugin-n": "^16.6.2",
-    "eslint-plugin-react": "^7.33.2",
-    "eslint-plugin-react-hooks": "^4.6.0",
-    "eslint-plugin-regexp": "^2.2.0",
+    "cspell": "^8.7.0",
+    "eslint": "^8.57.0",
     "husky": "^8.0.3",
     "lint-staged": "^15.2.2",
     "prettier": "^3.2.5",
-    "typescript": "~5.3.3"
+    "typescript": "~5.4.5"
   },
-  "packageManager": "yarn@4.0.2"
+  "packageManager": "yarn@4.1.1"
 }

@@ -1,4 +1,6 @@
-module.exports = {
+import tseslint from "typescript-eslint";
+
+export default tseslint.config({
   rules: {
     "react/no-access-state-in-setstate": "error",
 
@@ -38,4 +40,4 @@ module.exports = {
 
     "react/static-property-placement": ["error", "static public field"],
   },
-};
+});

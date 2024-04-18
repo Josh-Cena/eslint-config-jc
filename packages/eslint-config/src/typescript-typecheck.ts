@@ -1,4 +1,6 @@
-module.exports = {
+import tseslint from "typescript-eslint";
+
+export default tseslint.config({
   rules: {
     // https://jc-verse.github.io/js-style-guide/typescript/type-checked#await-thenable
     "@typescript-eslint/await-thenable": "error",
@@ -121,4 +123,4 @@ module.exports = {
     // Not very useful in practice... A lot of false-positives
     "@typescript-eslint/unbound-method": "off",
   },
-};
+});

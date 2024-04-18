@@ -1,5 +1,10 @@
-module.exports = {
-  plugins: ["regexp"],
+import regexPlugin from "eslint-plugin-regexp";
+import tseslint from "typescript-eslint";
+
+export default tseslint.config({
+  plugins: {
+    regexp: regexPlugin,
+  },
   rules: {
     "regexp/confusing-quantifier": "error",
 
@@ -25,7 +30,7 @@ module.exports = {
 
     "regexp/no-contradiction-with-assertion": "error",
 
-    // eslint-disable-next-line sort-keys
+     
     "no-control-regex": "off",
     "regexp/no-control-character": "error",
 
@@ -44,7 +49,7 @@ module.exports = {
 
     "regexp/no-empty-capturing-group": "error",
 
-    // eslint-disable-next-line sort-keys
+     
     "no-empty-character-class": "off",
     "regexp/no-empty-character-class": "error",
 
@@ -58,7 +63,7 @@ module.exports = {
 
     "regexp/no-extra-lookaround-assertions": "error",
 
-    // eslint-disable-next-line sort-keys
+     
     "no-invalid-regexp": "off",
     "regexp/no-invalid-regexp": "error",
 
@@ -73,7 +78,7 @@ module.exports = {
       { reportBacktrackingEnds: true },
     ],
 
-    // eslint-disable-next-line sort-keys
+     
     "no-misleading-character-class": "off",
     "regexp/no-misleading-unicode-character": ["error", { fixable: false }],
 
@@ -107,7 +112,7 @@ module.exports = {
 
     "regexp/no-useless-assertions": "error",
 
-    // eslint-disable-next-line sort-keys
+     
     "no-useless-backreference": "off",
     "regexp/no-useless-backreference": "error",
 
@@ -152,7 +157,7 @@ module.exports = {
 
     "regexp/prefer-named-backreference": "error",
 
-    // eslint-disable-next-line sort-keys
+     
     "prefer-named-capture-group": "off",
     "regexp/prefer-named-capture-group": "warn",
 
@@ -185,7 +190,7 @@ module.exports = {
     "regexp/prefer-w": "error",
 
     "require-unicode-regexp": "off",
-    // eslint-disable-next-line sort-keys
+     
     "regexp/require-unicode-regexp": "error",
 
     // Maybe in the future?
@@ -205,4 +210,4 @@ module.exports = {
 
     "regexp/use-ignore-case": "error",
   },
-};
+});

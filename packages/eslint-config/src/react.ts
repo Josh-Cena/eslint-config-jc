@@ -1,10 +1,19 @@
-module.exports = {
-  parserOptions: {
-    ecmaFeatures: {
-      jsx: true,
+import reactPlugin from "eslint-plugin-react";
+import reactHooksPlugin from "eslint-plugin-react-hooks";
+import tseslint from "typescript-eslint";
+import globals from "globals";
+
+export default tseslint.config({
+  languageOptions: {
+    globals: {
+      ...globals.browser,
+      ...globals.node,
     },
   },
-  plugins: ["react", "react-hooks"],
+  plugins: {
+    react: reactPlugin,
+    "react-hooks": reactHooksPlugin,
+  },
   rules: {
     "react-hooks/exhaustive-deps": "error",
 
@@ -116,4 +125,4 @@ module.exports = {
       version: "18",
     },
   },
-};
+});

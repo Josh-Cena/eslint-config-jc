@@ -1,8 +1,8 @@
 {
   "name": "eslint-config-jc",
-  "version": "4.3.0",
+  "version": "5.0.0",
   "description": "Josh-Cena's personal coding style",
-  "main": "index.js",
+  "type": "module",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/jc-verse/js-style-guide.git",
@@ -23,48 +23,27 @@
   },
   "homepage": "https://jc-verse.github.io/js-style-guide/",
   "exports": {
-    ".": "./index.js",
-    "./base": "./rules/base.js",
-    "./regex": "./rules/regex.js",
-    "./import": "./rules/import.js",
-    "./node": "./rules/node.js",
-    "./jsx": "./rules/jsx.js",
-    "./react": "./rules/react.js",
-    "./react-class-comps": "./rules/react-class-comps.js",
-    "./react-prop-types": "./rules/react-prop-types.js",
-    "./typescript": "./rules/typescript.js",
-    "./typescript-typecheck": "./rules/typescript-typecheck.js"
+    ".": "./dist/index.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "prepublishOnly": "yarn build"
   },
   "dependencies": {
-    "eslint-config-prettier": "^9.1.0"
-  },
-  "peerDependencies": {
-    "@typescript-eslint/eslint-plugin": "^7.0.1",
-    "@typescript-eslint/parser": "^7.0.1",
-    "eslint": "^8.56.0",
+    "@typescript-eslint/eslint-plugin": "^7.7.0",
+    "@typescript-eslint/parser": "^7.7.0",
+    "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-header": "^3.1.1",
     "eslint-plugin-import": "^2.29.1",
     "eslint-plugin-jsx-a11y": "^6.8.0",
-    "eslint-plugin-n": "^16.6.2",
-    "eslint-plugin-react": "^7.33.2",
+    "eslint-plugin-n": "^17.2.1",
+    "eslint-plugin-react": "^7.34.1",
     "eslint-plugin-react-hooks": "^4.6.0",
-    "eslint-plugin-regexp": "^2.2.0"
+    "eslint-plugin-regexp": "^2.5.0",
+    "globals": "^15.0.0",
+    "typescript-eslint": "^7.7.0"
   },
-  "peerDependenciesMeta": {
-    "eslint-plugin-header": {
-      "optional": true
-    },
-    "eslint-plugin-jsx-a11y": {
-      "optional": true
-    },
-    "eslint-plugin-n": {
-      "optional": true
-    },
-    "eslint-plugin-react": {
-      "optional": true
-    },
-    "eslint-plugin-react-hooks": {
-      "optional": true
-    }
+  "devDependencies": {
+    "@types/eslint-config-prettier": "^6.11.3"
   }
 }

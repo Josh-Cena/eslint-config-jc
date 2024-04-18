@@ -1,5 +1,18 @@
-module.exports = {
-  plugins: ["n"],
+import nPlugin from "eslint-plugin-n";
+import tseslint from "typescript-eslint";
+import globals from "globals";
+
+export default tseslint.config({
+  languageOptions: {
+    globals: {
+      ...globals.node,
+      ...globals.nodeBuiltin,
+    },
+  },
+  plugins: {
+    // @ts-expect-error: weird error, idk
+    n: nPlugin,
+  },
   rules: {
     // Callback-related
     "n/callback-return": "off",
@@ -14,6 +27,9 @@ module.exports = {
 
     // Callback-related
     "n/handle-callback-err": "off",
+
+    // Errors on TypeScript bin
+    "n/hashbang": "off",
 
     // Callback-related
     "n/no-callback-literal": "off",
@@ -77,8 +93,5 @@ module.exports = {
     "n/prefer-promises/fs": "error",
 
     "n/process-exit-as-throw": "warn",
-
-    // Errors on TypeScript bin
-    "n/shebang": "off",
   },
-};
+});

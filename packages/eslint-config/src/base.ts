@@ -1,11 +1,6 @@
-module.exports = {
-  env: {
-    browser: true,
-    commonjs: true,
-    es6: true,
-    node: true,
-  },
-  reportUnusedDisableDirectives: true,
+import tseslint from "typescript-eslint";
+
+export default tseslint.config({
   rules: {
     // https://jc-verse.github.io/js-style-guide/eslint-base/objects-classes#accessor-pairs
     "accessor-pairs": [
@@ -908,4 +903,4 @@ module.exports = {
     // https://jc-verse.github.io/js-style-guide/eslint-base/operatorss#yoda
     yoda: ["error", "never", { exceptRange: true }],
   },
-};
+});
