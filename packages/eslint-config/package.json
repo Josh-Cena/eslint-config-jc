@@ -1,6 +1,6 @@
 {
   "name": "eslint-config-jc",
-  "version": "5.0.1",
+  "version": "5.1.0",
   "description": "Josh-Cena's personal coding style",
   "type": "module",
   "repository": {
@@ -23,7 +23,13 @@
   },
   "homepage": "https://jc-verse.github.io/js-style-guide/",
   "exports": {
-    ".": "./dist/index.js"
+    ".": "./dist/index.js",
+    "./react": "./dist/react.js",
+    "./jsx": "./dist/jsx.js",
+    "./typescript-typecheck": "./dist/typescript-typecheck.js",
+    "./node": "./dist/node.js",
+    "./react-class-comps": "./dist/react-class-comps.js",
+    "./react-prop-types": "./dist/react-prop-types.js"
   },
   "scripts": {
     "build": "tsc",
