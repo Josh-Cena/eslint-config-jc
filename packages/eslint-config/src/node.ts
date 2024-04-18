@@ -10,7 +10,6 @@ export default tseslint.config({
     },
   },
   plugins: {
-    // @ts-expect-error: weird error, idk
     n: nPlugin,
   },
   rules: {
