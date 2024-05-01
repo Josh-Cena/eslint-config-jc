@@ -87,6 +87,8 @@ export default tseslint.config({
 
     "n/prefer-global/url-search-params": ["error", "always"],
 
+    "n/prefer-node-protocol": "error",
+
     "n/prefer-promises/dns": "error",
 
     "n/prefer-promises/fs": "error",

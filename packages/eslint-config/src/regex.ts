@@ -30,7 +30,6 @@ export default tseslint.config({
 
     "regexp/no-contradiction-with-assertion": "error",
 
-     
     "no-control-regex": "off",
     "regexp/no-control-character": "error",
 
@@ -49,7 +48,6 @@ export default tseslint.config({
 
     "regexp/no-empty-capturing-group": "error",
 
-     
     "no-empty-character-class": "off",
     "regexp/no-empty-character-class": "error",
 
@@ -63,7 +61,6 @@ export default tseslint.config({
 
     "regexp/no-extra-lookaround-assertions": "error",
 
-     
     "no-invalid-regexp": "off",
     "regexp/no-invalid-regexp": "error",
 
@@ -78,7 +75,6 @@ export default tseslint.config({
       { reportBacktrackingEnds: true },
     ],
 
-     
     "no-misleading-character-class": "off",
     "regexp/no-misleading-unicode-character": ["error", { fixable: false }],
 
@@ -108,11 +104,15 @@ export default tseslint.config({
 
     "regexp/no-trivially-nested-quantifier": "error",
 
-    "regexp/no-unused-capturing-group": "warn",
+    "regexp/no-unused-capturing-group": [
+      "warn",
+      {
+        allowNamed: false,
+      },
+    ],
 
     "regexp/no-useless-assertions": "error",
 
-     
     "no-useless-backreference": "off",
     "regexp/no-useless-backreference": "error",
 
@@ -157,7 +157,6 @@ export default tseslint.config({
 
     "regexp/prefer-named-backreference": "error",
 
-     
     "prefer-named-capture-group": "off",
     "regexp/prefer-named-capture-group": "warn",
 
@@ -190,7 +189,7 @@ export default tseslint.config({
     "regexp/prefer-w": "error",
 
     "require-unicode-regexp": "off",
-     
+
     "regexp/require-unicode-regexp": "error",
 
     // Maybe in the future?
@@ -207,6 +206,19 @@ export default tseslint.config({
     "regexp/strict": "error",
 
     "regexp/unicode-escape": ["error", "unicodeEscape"],
+
+    "regexp/unicode-property": [
+      "error",
+      {
+        generalCategory: "never",
+        key: "short",
+        property: {
+          binary: "long",
+          generalCategory: "long",
+          script: "long",
+        },
+      },
+    ],
 
     "regexp/use-ignore-case": "error",
   },

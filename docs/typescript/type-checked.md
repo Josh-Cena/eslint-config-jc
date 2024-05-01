@@ -22,6 +22,12 @@ Never use bracket notation to access properties. In TypeScript, we don't use `pr
 
 You should only await on values that may be thenable. A value that is definitely not thenable should not be awaited because it makes the code harder to track and also defers all remaining code to the next tick.
 
+### [`use-unknown-in-catch-callback-variables`](https://typescript-eslint.io/rules/use-unknown-in-catch-callback-variables/)
+
+- Severity: error
+
+Caught errors should always use `unknown` instead of `any`. While `try...catch` is already enforced by the `useUnknownInCatchVariables` option, `Promise#catch` can only be checked by the linter.
+
 ## Modules
 
 ### [`consistent-type-exports`](https://typescript-eslint.io/rules/consistent-type-exports/)

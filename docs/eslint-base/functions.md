@@ -296,6 +296,8 @@ Use spread syntax instead of `Function.prototype.apply`. Note however that this 
 
 We require all return statements to be either explicitly returning a value or implicitly returning `undefined` (in case of `void`-returning functions). Because most of our code is already type-checked by TypeScript, which surfaces the implicitly returned `undefined` in the return type, this rule is more for aesthetic purposes. It also helps us find all possible return values at a glance.
 
+`return voidFunction()` is also not allowed. Use `voidFunction(); return;` instead. This makes it easier to tell if a function is returning a value or not. For this reason, we turn off the typescript-eslint rule `@typescript-eslint/consistent-return`, because it needs type information and is not useful for our style.
+
 ### [`no-useless-return`](https://eslint.org/docs/rules/no-useless-return)
 
 - Severity: error

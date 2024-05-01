@@ -5,6 +5,9 @@ export default tseslint.config({
     // https://jc-verse.github.io/js-style-guide/typescript/type-checked#await-thenable
     "@typescript-eslint/await-thenable": "error",
 
+    // Not worth turning on
+    "@typescript-eslint/consistent-return": "off",
+
     // Also enforced by --isolatedModules
     // https://jc-verse.github.io/js-style-guide/typescript/type-checked#consistent-type-exports
     "@typescript-eslint/consistent-type-exports": [
@@ -93,7 +96,10 @@ export default tseslint.config({
 
     "@typescript-eslint/prefer-return-this-type": "warn",
 
-    "@typescript-eslint/prefer-string-starts-ends-with": "warn",
+    "@typescript-eslint/prefer-string-starts-ends-with": [
+      "warn",
+      { allowSingleElementEquality: "never" },
+    ],
 
     // Not useful. Sometimes we intentionally make the function non-async.
     "@typescript-eslint/promise-function-async": "off",
@@ -108,6 +114,7 @@ export default tseslint.config({
       "warn",
       {
         allowAny: false,
+        allowArray: false,
         allowBoolean: false,
         allowNullish: false,
         allowNumber: true,
@@ -122,5 +129,7 @@ export default tseslint.config({
 
     // Not very useful in practice... A lot of false-positives
     "@typescript-eslint/unbound-method": "off",
+
+    "@typescript-eslint/use-unknown-in-catch-callback-variables": "error",
   },
 });

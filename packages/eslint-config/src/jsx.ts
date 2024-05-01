@@ -264,7 +264,11 @@ export default tseslint.config({
 
     "react/iframe-missing-sandbox": "error",
 
-    "react/jsx-boolean-value": ["error", "never"],
+    "react/jsx-boolean-value": [
+      "error",
+      "never",
+      { assumeUndefinedIsFalse: false },
+    ],
 
     "react/jsx-child-element-spacing": "warn",
 
@@ -381,7 +385,7 @@ export default tseslint.config({
     "react/no-unknown-property": [
       "error",
       {
-        // TODO: not released: requireDataLowercase: true,
+        requireDataLowercase: true,
       },
     ],
 

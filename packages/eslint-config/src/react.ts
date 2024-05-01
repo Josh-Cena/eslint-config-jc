@@ -21,6 +21,14 @@ export default tseslint.config({
 
     "react/boolean-prop-naming": "off",
 
+    "react/checked-requires-onchange-or-readonly": [
+      "error",
+      {
+        ignoreExclusiveCheckedAttribute: false,
+        ignoreMissingProperties: false,
+      },
+    ],
+
     // Sometimes we do need `props` as a whole, e.g. for spreading
     "react/destructuring-assignment": "off",
 
