@@ -130,6 +130,6 @@ export default tseslint.config({
     // Not very useful in practice... A lot of false-positives
     "@typescript-eslint/unbound-method": "off",
 
-    "@typescript-eslint/use-unknown-in-catch-callback-variables": "error",
+    "@typescript-eslint/use-unknown-in-catch-callback-variable": "error",
   },
 });

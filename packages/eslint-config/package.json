@@ -1,6 +1,6 @@
 {
   "name": "eslint-config-jc",
-  "version": "5.2.0",
+  "version": "5.2.1",
   "description": "Josh-Cena's personal coding style",
   "type": "module",
   "repository": {
