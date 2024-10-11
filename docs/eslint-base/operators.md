@@ -158,7 +158,7 @@ Despite not using type information, this rule does its best at reliably testing 
 
 - Severity: error
 - Configuration:
-  - Check logical expressions too (`"enforceForLogicalOperands": true`)
+  - Check logical expressions too (`enforceForInnerExpressions: true`)
 
 Do not cast to booleans when values are already in a boolean context.
 

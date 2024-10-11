@@ -10,6 +10,7 @@ export default tseslint.config({
     },
   },
   plugins: {
+    // @ts-expect-error: TODO make an issue
     n: nPlugin,
   },
   rules: {

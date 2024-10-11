@@ -55,7 +55,8 @@ Arrow functions' parentheses are always required with the default `arrowParens: 
 
 ### [`curly`](https://eslint.org/docs/rules/curly)
 
-- Severity: warning- Configuration:
+- Severity: warning
+- Configuration:
   - Require omitting braces only when the body is a single-line statement (`"multi-or-nest"`)
   - Require `if` and `else` to have consistent curly braces (`"consistent"`)
 
@@ -85,7 +86,8 @@ if (!foo)
 
 ### [`capitalized-comments`](https://eslint.org/docs/rules/capitalized-comments)
 
-- Severity: warning- Configuration:
+- Severity: warning
+- Configuration:
   - Always require capitalization (`"always"`)
   - Allow multi-line comments (`ignoreConsecutiveComments: true`)
   - Do not ignore inline comments (`ignoreInlineComments: false`)

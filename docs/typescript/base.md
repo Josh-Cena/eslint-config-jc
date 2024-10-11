@@ -14,15 +14,6 @@ sidebar_position: 3
 
 We require `T[]` syntax for arrays. This is a matter of consistency. Even for very, very complex types, we still require putting `[]` at the end, instead of using `Array<>`. If the rule provides more customization, such as allowing `(T | U)[]`, we may reconsider.
 
-### [`ban-types`](https://typescript-eslint.io/rules/ban-types)
-
-- Severity: error
-- Configuration:
-  - Extend defaults (`extendDefaults: true`)
-  - Unban `{}` (`types: { "{}": false }`)
-
-The types listed in the default options are either dangerous or misleading. The only exception is `{}`, which in our eyes is safe to use. It may not behave as one expects, but it doesn't hinder type safety. It is also used by TypeScript in utility types.
-
 ### [`consistent-indexed-object-style`](https://typescript-eslint.io/rules/consistent-indexed-object-style)
 
 - Severity: error
@@ -106,13 +97,17 @@ We don't mind whether `interface` or `type` is used. Generally:
 
 See the base rule for more information. This extension rule prevents false positives for TypeScript-specific syntax so it is safe to use in JavaScript files too.
 
-### [`no-empty-interface`](https://typescript-eslint.io/rules/no-empty-interface)
+### [`no-empty-object-type`](https://typescript-eslint.io/rules/no-empty-object-type)
 
-- Severity: error
+- Severity: warning
 - Configuration:
-  - Allow extended interfaces to be empty (`allowSingleExtends: true`)
+  - Allow extended interfaces to be empty (`allowInterfaces: "with-single-extends"`)
+  - Do not allow empty object literal types (`allowObjectTypes: "never"`)
+  - No exceptions proposed, but you can add your own (`allowWithName: undefined`)
 
 Empty interfaces are a form of `{}`, which match any non-nullish type. However, we allow `interface X extends Y {}` as a way to alias interfaces, because then we can declaration-merge `X`.
+
+It is only set to warning because there are cases where empty object types are useful, when you actually mean any non-nullish object. It's only an FYI for you to consider alternatives.
 
 ### [`no-redeclare`](https://typescript-eslint.io/rules/no-redeclare)
 
@@ -430,13 +425,6 @@ Do not write `import { type X } from "..."`. Instead, always use `import type` i
 
 Do not use `require` in TypeScript because if you use `const x = require(...)` then there will be no types. `import x = require(...)` is fully obscure with `esModuleInterop`. However, you may use `require` in JavaScript if you are authoring CommonJS.
 
-### [`no-var-requires`](https://typescript-eslint.io/rules/no-var-requires)
-
-- Severity: error
-- Disabled in JavaScript
-
-Same as above, you should not use `require` in TypeScript.
-
 ## Exports
 
 ### [`no-useless-empty-export`](https://typescript-eslint.io/rules/no-useless-empty-export)
@@ -575,12 +563,6 @@ Use `x as const` instead of `x as x` when `x` is a literal. This is because `as 
 
 You should never use `@ts-ignore` or `@ts-nocheck`. They completely turn off the checker and have no sense of granularity. `@ts-expect-error` is better because it requires an error to be present, but it is still dangerous an should only be applied when there cannot be any other type errors.
 
-### [`prefer-ts-expect-error`](https://typescript-eslint.io/rules/prefer-ts-expect-error)
-
-- Severity: error
-
-Use `@ts-expect-error` instead of `@ts-ignore` or `@ts-nocheck`. This rule can auto-fix `@ts-ignore` to `@ts-expect-error`.
-
 ### [`triple-slash-reference`](https://typescript-eslint.io/rules/triple-slash-reference)
 
 - Severity: error
@@ -608,7 +590,7 @@ for (const key of Object.keys(obj)) {
 
 ### [`no-this-alias`](https://typescript-eslint.io/rules/no-this-alias)
 
-- Severity: warn
+- Severity: warning
 - Configuration:
   - Allow destructuring values from `this` (`allowDestructuring: true`)
   - Do not allow any particular alias (`allowedNames: []`)

@@ -313,7 +313,7 @@ export default tseslint.config({
     "no-extra-bind": "error",
 
     // https://jc-verse.github.io/js-style-guide/eslint-base/operators#no-extra-boolean-cast
-    "no-extra-boolean-cast": ["error", { enforceForLogicalOperands: true }],
+    "no-extra-boolean-cast": ["error", { enforceForInnerExpressions: true }],
 
     // https://jc-verse.github.io/js-style-guide/eslint-base/control-flow#no-extra-label
     "no-extra-label": "error",
@@ -726,6 +726,9 @@ export default tseslint.config({
         variables: true,
       },
     ],
+
+    // https://jc-verse.github.io/js-style-guide/eslint-base/variables-names#no-useless-assignment
+    "no-useless-assignment": "error",
 
     // https://jc-verse.github.io/js-style-guide/eslint-base/literals#no-useless-backreference
     "no-useless-backreference": "error",

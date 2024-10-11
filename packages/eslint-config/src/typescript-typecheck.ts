@@ -36,6 +36,8 @@ export default tseslint.config({
       },
     ],
 
+    "@typescript-eslint/no-deprecated": "warn",
+
     "@typescript-eslint/no-floating-promises": [
       "warn",
       {
@@ -56,7 +58,7 @@ export default tseslint.config({
 
     "@typescript-eslint/no-unnecessary-condition": [
       "error",
-      { allowConstantLoopConditions: true },
+      { allowConstantLoopConditions: true, checkTypePredicates: true },
     ],
 
     // Enums & namespaces aren't allowed anyway.

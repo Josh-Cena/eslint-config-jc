@@ -199,6 +199,12 @@ foo(); // Should not work
 const x = 1;
 ```
 
+### [`no-useless-assignment`](https://eslint.org/docs/rules/no-useless-assignment)
+
+- Severity: error
+
+Don't initialize a variable with a value that is immediately reassigned with something else.
+
 ### [`no-useless-rename`](https://eslint.org/docs/rules/no-useless-rename)
 
 - Severity: error

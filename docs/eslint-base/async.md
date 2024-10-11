@@ -57,7 +57,7 @@ You can use your discretion to disable this rule in these cases.
 
 ### [`require-yield`](https://eslint.org/docs/rules/require-yield)
 
-- Severity: warn
+- Severity: warning
 
 For the same reasons as `require-await`, this is only set to a warning because there are cases where a generator function is semantically more appropriate.
 

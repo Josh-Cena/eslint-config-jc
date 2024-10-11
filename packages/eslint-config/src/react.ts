@@ -41,6 +41,8 @@ export default tseslint.config({
 
     "react/forbid-elements": 0,
 
+    "react/forward-ref-uses-ref": "error",
+
     // Note that it false-positives for `const Foo: Comp = () => <></>`
     "react/function-component-definition": [
       "warn",

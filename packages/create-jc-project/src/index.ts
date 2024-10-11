@@ -8,7 +8,7 @@ import { exec, outputFile, pathExists } from "./utils.js";
 
 if (process.argv.includes("--version") || process.argv.includes("-v")) {
   console.log(
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment, @typescript-eslint/prefer-ts-expect-error
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore: package.json is fine to be outside
     (await import("../package.json", { assert: { type: "json" } })).default
       .version,

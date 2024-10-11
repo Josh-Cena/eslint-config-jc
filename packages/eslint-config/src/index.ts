@@ -17,7 +17,7 @@ import reactPropTypesRules from "./react-prop-types.js";
 
 function expandConfig(
   config: TSESLint.FlatConfig.ConfigArray,
-  enabled: undefined | boolean | TSESLint.FlatConfig.FileSpec[],
+  enabled: undefined | boolean | (string[] | string)[],
 ): TSESLint.FlatConfig.ConfigArray {
   if (enabled === true) return config;
   if (!enabled) return [];
@@ -34,11 +34,11 @@ export default function configCreator({
   reactClassComp,
   reactPropTypes,
 }: {
-  react?: boolean | TSESLint.FlatConfig.FileSpec[];
-  typescriptTypeCheck?: boolean | TSESLint.FlatConfig.FileSpec[];
-  node?: boolean | TSESLint.FlatConfig.FileSpec[];
-  reactClassComp?: boolean | TSESLint.FlatConfig.FileSpec[];
-  reactPropTypes?: boolean | TSESLint.FlatConfig.FileSpec[];
+  react?: boolean | (string[] | string)[];
+  typescriptTypeCheck?: boolean | (string[] | string)[];
+  node?: boolean | (string[] | string)[];
+  reactClassComp?: boolean | (string[] | string)[];
+  reactPropTypes?: boolean | (string[] | string)[];
 } = {}): TSESLint.FlatConfig.ConfigArray {
   return tseslint.config(
     {

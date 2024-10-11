@@ -362,6 +362,8 @@ export default tseslint.config({
     // We like spreading
     "react/jsx-props-no-spreading": "off",
 
+    "react/jsx-props-no-spread-multi": "error",
+
     "react/jsx-sort-props": 0,
 
     // Formatting

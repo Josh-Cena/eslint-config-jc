@@ -81,7 +81,9 @@ Do not use `javascript:` URLs. They are a form of `eval`.
 
 ### [`no-template-curly-in-string`](https://eslint.org/docs/rules/no-template-curly-in-string)
 
-- Severity: warning Usually, using the `${}` syntax in a string literal is a mistake. However, it's not a deadly error, so we only set it to warning.
+- Severity: warning
+
+Usually, using the `${}` syntax in a string literal is a mistake. However, it's not a deadly error, so we only set it to warning.
 
 ### [`no-useless-concat`](https://eslint.org/docs/rules/no-useless-concat)
 
@@ -156,6 +158,8 @@ Write valid regular expressions. The only case where you might want to add a dis
 ### [`no-misleading-character-class`](https://eslint.org/docs/rules/no-misleading-character-class)
 
 - Severity: error
+- Configuration:
+  - Allow character classes to use surrogate pairs if they are escaped (`allowEscape: true`)
 - Related:
   - `regexp/no-misleading-unicode-character`
 

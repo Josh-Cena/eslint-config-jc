@@ -33,17 +33,6 @@ export default tseslint.config(
       // https://jc-verse.github.io/js-style-guide/typescript/base#ban-tslint-comment
       "@typescript-eslint/ban-tslint-comment": "error",
 
-      // https://jc-verse.github.io/js-style-guide/typescript/base#ban-types
-      "@typescript-eslint/ban-types": [
-        "error",
-        {
-          extendDefaults: true,
-          types: {
-            "{}": false,
-          },
-        },
-      ],
-
       // https://jc-verse.github.io/js-style-guide/typescript/base#class-literal-property-style
       "@typescript-eslint/class-literal-property-style": ["warn", "getters"],
 
@@ -98,7 +87,7 @@ export default tseslint.config(
 
       "init-declarations": "off",
       // https://jc-verse.github.io/js-style-guide/typescript/base#init-declarations
-       
+
       "@typescript-eslint/init-declarations": ["error", "always"],
 
       // We turn off the base rule too
@@ -121,21 +110,24 @@ export default tseslint.config(
 
       "no-dupe-class-members": "off",
       // https://jc-verse.github.io/js-style-guide/typescript/base#no-dupe-class-members
-       
+
       "@typescript-eslint/no-dupe-class-members": "error",
 
       // This can be useful for dynamic object transformations
       // https://jc-verse.github.io/js-style-guide/typescript/base#no-dynamic-delete
       "@typescript-eslint/no-dynamic-delete": "off",
 
+      // https://jc-verse.github.io/js-style-guide/typescript/base#no-empty-object-type
+      "@typescript-eslint/no-empty-object-type": [
+        "warn",
+        {
+          allowInterfaces: "with-single-extends",
+          allowObjectTypes: "never",
+        },
+      ],
+
       // We turn off the base rule too
       "@typescript-eslint/no-empty-function": "off",
-
-      // https://jc-verse.github.io/js-style-guide/typescript/base#no-empty-interface
-      "@typescript-eslint/no-empty-interface": [
-        "error",
-        { allowSingleExtends: true },
-      ],
 
       // https://jc-verse.github.io/js-style-guide/typescript/base#no-explicit-any
       "@typescript-eslint/no-explicit-any": "warn",
@@ -175,9 +167,6 @@ export default tseslint.config(
       // We turn off the base rule too
       "@typescript-eslint/no-loop-func": "off",
 
-      // To be deprecated
-      "@typescript-eslint/no-loss-of-precision": "off",
-
       // We turn off the base rule too
       "@typescript-eslint/no-magic-numbers": "off",
 
@@ -200,7 +189,7 @@ export default tseslint.config(
 
       "no-redeclare": "off",
       // https://jc-verse.github.io/js-style-guide/typescript/base#no-redeclare
-       
+
       "@typescript-eslint/no-redeclare": [
         "error",
         {
@@ -216,7 +205,7 @@ export default tseslint.config(
 
       "no-shadow": "off",
       // https://jc-verse.github.io/js-style-guide/typescript/base#no-shadow
-       
+
       "@typescript-eslint/no-shadow": [
         "warn",
         {
@@ -243,7 +232,7 @@ export default tseslint.config(
 
       "no-unused-expressions": "off",
       // https://jc-verse.github.io/js-style-guide/typescript/base#no-unused-expressions
-       
+
       "@typescript-eslint/no-unused-expressions": [
         "error",
         {
@@ -256,7 +245,7 @@ export default tseslint.config(
 
       "no-unused-vars": "off",
       // https://jc-verse.github.io/js-style-guide/typescript/base#no-unused-vars
-       
+
       "@typescript-eslint/no-unused-vars": [
         "error",
         {
@@ -268,7 +257,7 @@ export default tseslint.config(
       ],
 
       "no-use-before-define": "off",
-       
+
       "@typescript-eslint/no-use-before-define": [
         "error",
         {
@@ -283,14 +272,11 @@ export default tseslint.config(
       ],
 
       "no-useless-constructor": "off",
-       
+
       "@typescript-eslint/no-useless-constructor": "error",
 
       // https://jc-verse.github.io/js-style-guide/typescript/base#no-useless-empty-export
       "@typescript-eslint/no-useless-empty-export": "error",
-
-      // https://jc-verse.github.io/js-style-guide/typescript/base#no-var-requires
-      "@typescript-eslint/no-var-requires": "error",
 
       // https://jc-verse.github.io/js-style-guide/typescript/base#parameter-properties
       "@typescript-eslint/parameter-properties": [
@@ -319,9 +305,6 @@ export default tseslint.config(
       // https://jc-verse.github.io/js-style-guide/typescript/base#prefer-namespace-keyword
       "@typescript-eslint/prefer-namespace-keyword": "error",
 
-      // https://jc-verse.github.io/js-style-guide/typescript/base#prefer-ts-expect-error
-      "@typescript-eslint/prefer-ts-expect-error": "error",
-
       "@typescript-eslint/sort-type-constituents": 0,
 
       // https://jc-verse.github.io/js-style-guide/typescript/base#triple-slash-reference
@@ -347,7 +330,6 @@ export default tseslint.config(
       "@typescript-eslint/default-param-last": "off",
       "@typescript-eslint/explicit-module-boundary-types": "off",
       "@typescript-eslint/no-require-imports": "off",
-      "@typescript-eslint/no-var-requires": "off",
     },
   },
   {
